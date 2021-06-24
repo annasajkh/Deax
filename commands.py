@@ -151,7 +151,7 @@ async def _say(ctx, text):
         tts = gTTS(text)
         tts.save("result.mp3")
 
-        await ctx.reply(file=discord.File("sound.mp3"))
+        await ctx.reply(file=discord.File("result.mp3"))
 
         os.remove("result.mp3")
 
