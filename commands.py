@@ -137,7 +137,7 @@ async def _urbandict(ctx, xterm):
         result = urban_client.get_definition(xterm)
 
         if len(result) == 0:
-            await ctx.reply("sorry i can't find any information about" + xterm)
+            await ctx.reply(f"sorry i can't find any information about \"{xterm}\"")
         else:
             await ctx.reply(result[random.randrange(0,len(result))].definition.replace("[","").replace("]",""))
     
