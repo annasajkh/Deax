@@ -48,12 +48,12 @@ async def _urbansay(ctx, xterm):
         result = urban_client.get_definition(xterm)
 
         if len(result) == 0:
-            await ctx.reply("sorry i can't find any information about" + xterm)
+            await ctx.reply(f"sorry i can't find any information about \"{xterm}\"")
         else:
             tts = gTTS(result[random.randrange(0,len(result))].definition.replace("[","").replace("]",""))
             tts.save("result.mp3")
 
-            await ctx.reply(file=discord.File("sound.mp3"))
+            await ctx.reply(file=discord.File("result.mp3"))
 
             os.remove("result.mp3")
 
