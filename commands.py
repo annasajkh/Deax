@@ -56,8 +56,9 @@ async def _help(ctx):
             await ctx.send("get ready for some cum")
             await asyncio.sleep(3)
 
-            for i in range(30):
+            for i in range(20):
                 await ctx.send("cum\n")
+                await asyncio.sleep(1)
         else:
             await ctx.send(("scroll\n" * 40)+ str(num))
 
