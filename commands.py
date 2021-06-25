@@ -31,7 +31,7 @@ async def _wiki(ctx, *, text):
     try:
         result = fandom.page(text)
 
-        embed = discord.Embed(title=result.title,description=result.content, color=Color.gold(), url=result.url)
+        embed = discord.Embed(title=result.title,description=result.content,url=result.url, color=Color.gold())
         await ctx.reply(embed=embed)
 
     except Exception as e:
