@@ -34,17 +34,20 @@ async def _audio(ctx, *, text):
     try:
         link = "http://www.youtube.com" + YoutubeSearch(text, max_results=1).to_dict()[0]["url_suffix"]
 
-        await ctx.reply(link)
-
         ydl_opts = {
-            "format":"bestaudio/best"
+            "format":"bestaudio/best",
+            "postprocessors":[{
+                "key": "FFmpegExtractAudio",
+                "preferredcodec":"mp3",
+                "preferredquality":"192",
+            }]
         }
 
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             ydl.download([link])
 
 
-        for audio in glob.glob("*.webm"):
+        for audio in glob.glob("*.mp3"):
             await ctx.reply(file=discord.File(audio))
             os.remove(audio)
 
