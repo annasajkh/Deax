@@ -43,13 +43,13 @@ async def _wiki(ctx, *, text):
         summary = textwrap.wrap(wikipedia.summary(text),2048)
 
         embed = discord.Embed(description=summary[0], color=Color.gold())
+        await ctx.reply(embed=embed)
 
         summary.pop(0)
 
         for text in summary:
-            embed.add_field(name="",value=text)
-
-        await ctx.reply(embed=embed)
+            embed = discord.Embed(description=text, color=Color.gold())
+            await ctx.reply(embed=embed)
 
     except Exception as e:
         await ctx.reply(e)
