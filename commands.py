@@ -27,9 +27,10 @@ async def _help(ctx):
         await ctx.reply(e)
 
 @bot.command(name="fandom")
-async def _wiki(ctx, *, text):
+async def _wiki(ctx, wiki, page):
     try:
-        result = fandom.page(text)
+        fandom.set_wiki(wiki)
+        result = fandom.page(page)
 
         embed = discord.Embed(title=result.title,description=result.content,url=result.url, color=Color.gold())
         await ctx.reply(embed=embed)
