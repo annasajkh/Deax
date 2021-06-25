@@ -47,7 +47,7 @@ async def _wiki(ctx, *, text):
         summary.pop(0)
 
         for text in summary:
-            embed.add_field(value=text)
+            embed.add_field(name="",value=text)
 
         await ctx.reply(embed=embed)
 
