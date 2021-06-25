@@ -40,7 +40,15 @@ async def _wiki(ctx, wiki, page):
 @bot.command(name="wiki")
 async def _wiki(ctx, *, text):
     try:
-        embed = discord.Embed(description=wikipedia.summary(text), color=Color.gold())
+        summary = textwrap.wrap(wikipedia.summary(text),2048)
+
+        embed = discord.Embed(description=summary[0], color=Color.gold())
+
+        summary.pop(0)
+
+        for text in summary:
+            embed.add_field(value=text)
+
         await ctx.reply(embed=embed)
 
     except Exception as e:
