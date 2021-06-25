@@ -60,7 +60,7 @@ search fandom
 scroll
 !scr
 
-download audio of a youtube video
-!aud <thing>
+search youtube
+!yt <thing>
 """.strip()
 
