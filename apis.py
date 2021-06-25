@@ -25,12 +25,5 @@ def get_random_def(text):
         result = f"sorry i can't find any information about \"{text}\""
     else:
         result = result[random.randrange(0,len(result))].definition.replace("[","").replace("]","")
-
-        for i in range(20):
-
-            if len(result) <= 1000:
-                break
-            
-            result = result[random.randrange(0,len(result))].definition.replace("[","").replace("]","")
     
     return result
