@@ -28,4 +28,5 @@ soupsieve==2.2.1
 typing-extensions==3.10.0.0
 udpy==2.0.0
 urllib3==1.26.5
+wikipedia==1.4.0
 yarl==1.6.3
