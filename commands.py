@@ -30,9 +30,8 @@ async def _help(ctx):
 async def _wiki(ctx, wiki, page):
     try:
         fandom.set_wiki(wiki)
-        result = fandom.page(page)
 
-        embed = discord.Embed(title=result.title,description=result.content,url=result.url, color=Color.gold())
+        embed = discord.Embed(description=fandom.summary(page), color=Color.gold())
         await ctx.reply(embed=embed)
 
     except Exception as e:

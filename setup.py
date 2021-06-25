@@ -29,6 +29,6 @@ help_str = """!affirmation
 !randimg <width> <height>
 !urbansay <thing>
 !wiki <thing>
-!fandom <thing>
+!fandom "<root (game name/title/name)>" "<page (character/actor/object)>"
 """ 
 
