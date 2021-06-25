@@ -31,11 +31,13 @@ async def _help(ctx):
 async def _wiki(ctx, wiki, page):
     try:
         fandom.set_wiki(wiki)
-        result = textwrap.wrap(fandom.page(page).content, 1024)
+        result = fandom.page(page) 
+
+        content = textwrap.wrap(result.content, 1024)
 
         embed = discord.Embed(title=result.title, color=Color.gold())
 
-        for text in result:
+        for text in content:
             embed.add_field(value=text)
         
         await ctx.reply(embed=embed)
