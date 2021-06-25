@@ -1,4 +1,3 @@
-from discord.enums import Status
 from bot_client import BotClient
 from udpy import UrbanClient
 from googletrans import Translator
@@ -21,13 +20,13 @@ urban_client = UrbanClient()
 help_str = """!affirmation
 !ask <thing>
 !quote
-!translate "<thing>"
+!translate <thing>
 !advice
 !numfact <number>
-!search "<thing>" <count>
-!urbandict "<thing>"
-!say "<thing>"
+!search <thing>
+!urbandict <thing>
+!say <thing>
 !randimg <width> <height>
-!urbansay "<thing>"
+!urbansay <thing>
 """ 
 

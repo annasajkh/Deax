@@ -15,7 +15,6 @@ import random
 import os
 
 
-
 @bot.command(name="help")
 async def _help(ctx):
     try:
@@ -43,19 +42,14 @@ async def _help(ctx):
 
 
 @bot.command(name="urbansay")
-async def _urbansay(ctx, xterm):
+async def _urbansay(ctx, *, xterm):
     try:
-        result = urban_client.get_definition(xterm)
+        tts = gTTS(get_random_def(xterm))
+        tts.save("result.mp3")
 
-        if len(result) == 0:
-            await ctx.reply(f"sorry i can't find any information about \"{xterm}\"")
-        else:
-            tts = gTTS(result[random.randrange(0,len(result))].definition.replace("[","").replace("]",""))
-            tts.save("result.mp3")
+        await ctx.reply(file=discord.File("result.mp3"))
 
-            await ctx.reply(file=discord.File("result.mp3"))
-
-            os.remove("result.mp3")
+        os.remove("result.mp3")
 
     except Exception as e:
         await ctx.reply(e)
@@ -86,7 +80,7 @@ async def _quote(ctx):
 
 
 @bot.command(name="translate")
-async def _translate(ctx,text):
+async def _translate(ctx, *, text):
     try:
         await ctx.reply(translator.translate(text).text)
 
@@ -103,7 +97,7 @@ async def _advice(ctx):
 
 
 @bot.command(name="numfact")
-async def _numfact(ctx,num):
+async def _numfact(ctx, num):
     try:
         await ctx.reply(get_number_fact(num))
     except Exception as e:
@@ -111,13 +105,9 @@ async def _numfact(ctx,num):
 
 
 @bot.command(name="search")
-async def _search(ctx,text,num_results):
+async def _search(ctx, *, text):
     try:
-        result = search(text,num_results=int(num_results))
-
-        if len(result) > int(num_results):
-            result.pop(len(result) - 1)
-        
+        result = search(text, num_results=4)
         string_result = ""
 
         for i in result:
@@ -131,21 +121,15 @@ async def _search(ctx,text,num_results):
 
 
 @bot.command(name="urbandict")
-async def _urbandict(ctx, xterm):
+async def _urbandict(ctx, *, xterm):
     try:
-        result = urban_client.get_definition(xterm)
-
-        if len(result) == 0:
-            await ctx.reply(f"sorry i can't find any information about \"{xterm}\"")
-        else:
-            await ctx.reply(result[random.randrange(0,len(result))].definition.replace("[","").replace("]",""))
-    
+        await ctx.reply(get_random_def(xterm))
     except Exception as e:
         await ctx.reply(e)
 
 
 @bot.command(name="say")
-async def _say(ctx, text):
+async def _say(ctx, *, text):
     try:
         tts = gTTS(text)
         tts.save("result.mp3")
@@ -159,7 +143,7 @@ async def _say(ctx, text):
 
 
 @bot.command(name="randimg")
-async def _randimg(ctx,width,height):
+async def _randimg(ctx, width, height):
     try:
         w = int(width)
         h = int(height)
