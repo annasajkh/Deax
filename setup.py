@@ -8,7 +8,7 @@ import discord
 
 #Setup Everything
 
-activity = discord.Activity(type=discord.ActivityType.unknown, name="use !help for commands info")
+activity = discord.Activity(name="use !help for commands info")
 
 bot = BotClient(command_prefix="!", activity=activity)
 bot.remove_command("help")
