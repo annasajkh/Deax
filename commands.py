@@ -34,13 +34,13 @@ async def _wiki(ctx, wiki, page):
         result = fandom.page(page) 
 
         content = textwrap.wrap(result.content, 1024)
+        
+        await ctx.reply(embed=discord.Embed(title=result.title, color=Color.gold()),description=content[0])
 
-        embed = discord.Embed(title=result.title, color=Color.gold())
+        content.pop(0)
 
         for text in content:
-            embed.add_field(value=text)
-        
-        await ctx.reply(embed=embed)
+            await ctx.reply(embed=discord.Embed(color=Color.gold()),description=text)
 
     except Exception as e:
         await ctx.reply(e)
