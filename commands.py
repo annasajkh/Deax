@@ -19,7 +19,7 @@ import wikipedia
 import fandom
 
 
-@bot.command(name="help")
+@bot.command(name="h")
 async def _help(ctx):
     try:
         embed = discord.Embed(title="Cum Bot Commands",description=help_str, color=Color.dark_blue())
@@ -28,7 +28,7 @@ async def _help(ctx):
     except Exception as e:
         await ctx.reply(e)
 
-@bot.command(name="fandom")
+@bot.command(name="fand")
 async def _wiki(ctx, wiki, page):
     try:
         fandom.set_wiki(wiki)
@@ -45,7 +45,7 @@ async def _wiki(ctx, *, text):
         await ctx.reply(e)
 
 
-@bot.command(name="scroll")
+@bot.command(name="scr")
 async def _help(ctx):
     try:
         num = random.randint(1,100) 
@@ -61,7 +61,7 @@ async def _help(ctx):
         await ctx.reply(e)
 
 
-@bot.command(name="urbansay")
+@bot.command(name="uds")
 async def _urbansay(ctx, *, text):
     try:
         tts = gTTS(get_random_def(text))
@@ -75,7 +75,7 @@ async def _urbansay(ctx, *, text):
         await ctx.reply(e)
 
 
-@bot.command(name="affirmation")
+@bot.command(name="aff")
 async def _affirmation(ctx):
     try:
         embed = discord.Embed(description=get_affirmation(), color=0xFFFF00)
@@ -94,7 +94,7 @@ async def _ask(ctx):
         await ctx.reply(e)
 
 
-@bot.command(name="quote")
+@bot.command(name="quo")
 async def _quote(ctx):
     try:
         embed = discord.Embed(description=get_quote(), color=Color.green())
@@ -103,7 +103,7 @@ async def _quote(ctx):
         await ctx.reply(e)
 
 
-@bot.command(name="translate")
+@bot.command(name="tra")
 async def _translate(ctx, *, text):
     try:
         await ctx.reply(translator.translate(text).text)
@@ -112,7 +112,7 @@ async def _translate(ctx, *, text):
         await ctx.reply(e)
 
 
-@bot.command(name="advice")
+@bot.command(name="adv")
 async def _advice(ctx):
     try:
         embed = discord.Embed(description=get_advice(), color=Color.blue())
@@ -121,7 +121,7 @@ async def _advice(ctx):
         await ctx.reply(e)
 
 
-@bot.command(name="numfact")
+@bot.command(name="nf")
 async def _numfact(ctx, num):
     try:
         embed = discord.Embed(description=get_number_fact(num), color=Color.gold())
@@ -130,7 +130,7 @@ async def _numfact(ctx, num):
         await ctx.reply(e)
 
 
-@bot.command(name="search")
+@bot.command(name="src")
 async def _search(ctx, *, text):
     try:
         result = search(text, num_results=4)
@@ -147,7 +147,7 @@ async def _search(ctx, *, text):
         await ctx.reply(e)
 
 
-@bot.command(name="urbandict")
+@bot.command(name="ud")
 async def _urbandict(ctx, *, text):
     try:
         await send_chunked_embed(ctx, get_random_def(text), Color.orange())
@@ -169,7 +169,7 @@ async def _say(ctx, *, text):
         await ctx.reply(e)
 
 
-@bot.command(name="randimg")
+@bot.command(name="ri")
 async def _randimg(ctx, width, height):
     try:
         w = int(width)
