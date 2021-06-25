@@ -1,13 +1,14 @@
-from discord.errors import ClientException
+from __future__ import unicode_literals
 from helper import send_chunked_embed
 from googlesearch import search
 from discord.colour import Color
 from gtts import gTTS
+from youtube_search import YoutubeSearch
 
 from apis import *
 from setup import *
 
-
+import youtube_dl
 import asyncio
 import discord
 import random
@@ -17,7 +18,7 @@ import random
 import os
 import wikipedia
 import fandom
-
+import glob
 
 @bot.command(name="h")
 async def _help(ctx):
@@ -28,8 +29,31 @@ async def _help(ctx):
     except Exception as e:
         await ctx.reply(e)
 
+@bot.command(name="aud")
+async def _audio(ctx, *, text):
+    try:
+        link = "http://www.youtube.com" + YoutubeSearch(text, max_results=1).to_dict()[0]["url_suffix"]
+
+        await ctx.reply(link)
+
+        ydl_opts = {
+            "format":"bestaudio/best"
+        }
+
+        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+            ydl.download([link])
+
+
+        for audio in glob.glob("*.webm"):
+            await ctx.reply(file=discord.File(audio))
+            os.remove(audio)
+
+    except Exception as e:
+        await ctx.reply(e)
+
+
 @bot.command(name="fand")
-async def _wiki(ctx, wiki, page):
+async def _fand(ctx, wiki, page):
     try:
         fandom.set_wiki(wiki)
         await send_chunked_embed(ctx,fandom.summary(page),Color.gold())
@@ -46,7 +70,7 @@ async def _wiki(ctx, *, text):
 
 
 @bot.command(name="scr")
-async def _help(ctx):
+async def _scroll(ctx):
     try:
         num = random.randint(1,100) 
 

@@ -59,5 +59,8 @@ search fandom
 
 scroll
 !scr
+
+download audio of a youtube video
+!aud <thing>
 """.strip()
 
