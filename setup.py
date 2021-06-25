@@ -8,9 +8,9 @@ import discord
 
 #Setup Everything
 
-activity = discord.Activity(type=discord.ActivityType.watching, name="YOU")
+activity = discord.Activity(type=discord.ActivityType.custom, name="use !help for commands info")
 
-bot = BotClient(command_prefix="!", activity=activity, description="use !help to see all of the commands")
+bot = BotClient(command_prefix="!", activity=activity)
 bot.remove_command("help")
 
 load_dotenv()
