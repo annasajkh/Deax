@@ -30,7 +30,6 @@ async def _help(ctx):
 async def _wiki(ctx, *, text):
     try:
         embed = discord.Embed(description=wikipedia.summary(text), color=Color.gold())
-
         await ctx.reply(embed=embed)
 
     except Exception as e:
