@@ -39,7 +39,7 @@ get fact about a number
 search something
 !src <thing>
 
-get random definition from urban dictionary
+get random definition from urban dict
 !ud <thing>
 
 make the bot say something
@@ -48,7 +48,7 @@ make the bot say something
 get random image
 !ri <width> <height>
 
-make the bot say something from urban dictionary
+make the bot say something from urban dict
 !uds <thing>
 
 search wikipedia
