@@ -54,6 +54,10 @@ async def _help(ctx):
             await ctx.send(str(num) + " Your number is above 50")
             await asyncio.sleep(3)
             await ctx.send("get ready for some cum")
+            await asyncio.sleep(3)
+
+            for i in range(100):
+                await ctx.send("cum\n")
         else:
             await ctx.send(("scroll\n" * 40)+ str(num))
 
