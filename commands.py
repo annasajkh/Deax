@@ -1,3 +1,5 @@
+from discord.errors import ClientException
+from helper import send_chunked_embed
 from googlesearch import search
 from discord.colour import Color
 from gtts import gTTS
@@ -31,8 +33,7 @@ async def _help(ctx):
 async def _wiki(ctx, wiki, page):
     try:
         fandom.set_wiki(wiki)
-
-        await ctx.reply(embed=discord.Embed(description=fandom.summary(page), color=Color.gold()))
+        await send_chunked_embed(ctx,fandom.summary(page),Color.gold())
 
     except Exception as e:
         await ctx.reply(e)
@@ -40,17 +41,7 @@ async def _wiki(ctx, wiki, page):
 @bot.command(name="wiki")
 async def _wiki(ctx, *, text):
     try:
-        summary = textwrap.wrap(wikipedia.summary(text),2048)
-
-        embed = discord.Embed(description=summary[0], color=Color.gold())
-        await ctx.reply(embed=embed)
-
-        summary.pop(0)
-
-        for text in summary:
-            embed = discord.Embed(description=text, color=Color.gold())
-            await ctx.reply(embed=embed)
-
+        await send_chunked_embed(ctx, wikipedia.summary(text), Color.gold())
     except Exception as e:
         await ctx.reply(e)
 
@@ -160,8 +151,7 @@ async def _search(ctx, *, text):
 @bot.command(name="urbandict")
 async def _urbandict(ctx, *, text):
     try:
-        embed = discord.Embed(description=get_random_def(text), color=Color.orange())
-        await ctx.reply(embed=embed)
+        send_chunked_embed(ctx, get_random_def(text), Color.orange())
     except Exception as e:
         await ctx.reply(e)
 
