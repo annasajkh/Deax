@@ -14,6 +14,7 @@ import magic8ball
 import random
 import os
 import wikipedia
+import fandom
 
 
 @bot.command(name="help")
@@ -25,6 +26,14 @@ async def _help(ctx):
     except Exception as e:
         await ctx.reply(e)
 
+@bot.command(name="fandom")
+async def _wiki(ctx, *, text):
+    try:
+        embed = discord.Embed(description=fandom.summary(text), color=Color.gold())
+        await ctx.reply(embed=embed)
+
+    except Exception as e:
+        await ctx.reply(e)
 
 @bot.command(name="wiki")
 async def _wiki(ctx, *, text):

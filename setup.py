@@ -29,5 +29,6 @@ help_str = """!affirmation
 !randimg <width> <height>
 !urbansay <thing>
 !wiki <thing>
+!fandom <thing>
 """ 
 
