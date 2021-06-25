@@ -1,11 +1,16 @@
+from discord.enums import Status
 from bot_client import BotClient
 from udpy import UrbanClient
 from googletrans import Translator
 from dotenv import load_dotenv
 
+import discord
+
 #Setup Everything
 
-bot = BotClient(command_prefix="!")
+activity = discord.Activity(type=discord.ActivityType.watching, name="YOU")
+
+bot = BotClient(command_prefix="!", activity=activity, description="use !help to see all of the commands")
 bot.remove_command("help")
 
 load_dotenv()
@@ -25,3 +30,4 @@ help_str = """!affirmation
 !randimg <width> <height>
 !urbansay "<thing>"
 """ 
+

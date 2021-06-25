@@ -88,8 +88,7 @@ async def _quote(ctx):
 @bot.command(name="translate")
 async def _translate(ctx,text):
     try:
-        result = translator.translate(text)
-        await ctx.reply(result.text)
+        await ctx.reply(translator.translate(text).text)
 
     except Exception as e:
         await ctx.reply(e)
