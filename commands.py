@@ -29,9 +29,7 @@ async def _help(ctx):
 @bot.command(name="wiki")
 async def _wiki(ctx, *, text):
     try:
-        result = wikipedia.search(text)
-
-        embed = discord.Embed(title=result.title,description=result.content, color=Color.gold(), url=result.url)
+        embed = discord.Embed(description=wikipedia.summary(text), color=Color.gold())
 
         await ctx.reply(embed=embed)
 
