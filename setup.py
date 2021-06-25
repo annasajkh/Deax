@@ -27,6 +27,7 @@ ask question to magic 8 ball
 get random quote
 !quo
 
+translate sentence to english
 !tra <thing>
 
 get random advice
