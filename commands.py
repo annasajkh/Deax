@@ -35,12 +35,12 @@ async def _wiki(ctx, wiki, page):
 
         content = textwrap.wrap(result.plain_text, 1024)
         
-        await ctx.reply(embed=discord.Embed(title=result.title, ,description=content[0], color=Color.gold()))
+        await ctx.reply(embed=discord.Embed(title=result.title, description=content[0], color=Color.gold()))
 
         content.pop(0)
 
         for text in content:
-            await ctx.reply(embed=discord.Embed(color=description=text, Color.gold()))
+            await ctx.reply(embed=discord.Embed(description=text, color=Color.gold()))
 
     except Exception as e:
         await ctx.reply(e)
