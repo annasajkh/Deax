@@ -16,13 +16,13 @@ def get_quote():
 def get_advice():
     return requests.get("https://api.adviceslip.com/advice").json()["slip"]["advice"]
 
-def get_random_def(xterm):
+def get_random_def(text):
     global result
 
-    result = urban_client.get_definition(xterm)
+    result = urban_client.get_definition(text)
 
     if len(result) == 0:
-        result = f"sorry i can't find any information about \"{xterm}\""
+        result = f"sorry i can't find any information about \"{text}\""
     else:
         result = result[random.randrange(0,len(result))].definition.replace("[","").replace("]","")
 

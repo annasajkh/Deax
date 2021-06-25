@@ -13,12 +13,26 @@ import os
 import magic8ball
 import random
 import os
+import wikipedia
 
 
 @bot.command(name="help")
 async def _help(ctx):
     try:
-        embed = discord.Embed(title="Cum Bot Commands",description=help_str, color=Color.blue())
+        embed = discord.Embed(title="Cum Bot Commands",description=help_str, color=Color.dark_blue())
+        await ctx.reply(embed=embed)
+
+    except Exception as e:
+        await ctx.reply(e)
+
+
+@bot.command(name="wiki")
+async def _wiki(ctx, *, text):
+    try:
+        result = wikipedia.search(text)
+
+        embed = discord.Embed(title=result.title,description=result.content, color=Color.gold(), url=result.url)
+
         await ctx.reply(embed=embed)
 
     except Exception as e:
@@ -42,9 +56,9 @@ async def _help(ctx):
 
 
 @bot.command(name="urbansay")
-async def _urbansay(ctx, *, xterm):
+async def _urbansay(ctx, *, text):
     try:
-        tts = gTTS(get_random_def(xterm))
+        tts = gTTS(get_random_def(text))
         tts.save("result.mp3")
 
         await ctx.reply(file=discord.File("result.mp3"))
@@ -58,7 +72,9 @@ async def _urbansay(ctx, *, xterm):
 @bot.command(name="affirmation")
 async def _affirmation(ctx):
     try:
-        await ctx.reply(get_affirmation())
+        embed = discord.Embed(description=get_affirmation(), color=0xFFFF00)
+        await ctx.reply(embed=embed)
+
     except Exception as e:
         await ctx.reply(e)
 
@@ -66,7 +82,8 @@ async def _affirmation(ctx):
 @bot.command(name="ask")
 async def _ask(ctx):
     try:
-        await ctx.reply(random.choice(magic8ball.list))
+        embed = discord.Embed(description=random.choice(magic8ball.list), color=Color.purple())
+        await ctx.reply(embed=embed)
     except Exception as e:
         await ctx.reply(e)
 
@@ -74,7 +91,8 @@ async def _ask(ctx):
 @bot.command(name="quote")
 async def _quote(ctx):
     try:
-        await ctx.reply(get_quote())
+        embed = discord.Embed(description=get_quote(), color=Color.green())
+        await ctx.reply(embed=embed)
     except Exception as e:
         await ctx.reply(e)
 
@@ -91,7 +109,8 @@ async def _translate(ctx, *, text):
 @bot.command(name="advice")
 async def _advice(ctx):
     try:
-        await ctx.reply(get_advice())
+        embed = discord.Embed(description=get_advice(), color=Color.blue())
+        await ctx.reply(embed=embed)
     except Exception as e:
         await ctx.reply(e)
 
@@ -99,7 +118,8 @@ async def _advice(ctx):
 @bot.command(name="numfact")
 async def _numfact(ctx, num):
     try:
-        await ctx.reply(get_number_fact(num))
+        embed = discord.Embed(description=get_number_fact(num), color=Color.gold())
+        await ctx.reply(embed=embed)
     except Exception as e:
         await ctx.reply(e)
 
@@ -114,16 +134,18 @@ async def _search(ctx, *, text):
             if "http" in i:
                 string_result += i +'\n'
         
-        await ctx.reply(string_result)
+        embed = discord.Embed(description=string_result, color=Color.gold())
+        await ctx.reply(embed=embed)
 
     except Exception as e:
         await ctx.reply(e)
 
 
 @bot.command(name="urbandict")
-async def _urbandict(ctx, *, xterm):
+async def _urbandict(ctx, *, text):
     try:
-        await ctx.reply(get_random_def(xterm))
+        embed = discord.Embed(description=get_random_def(text), color=Color.orange())
+        await ctx.reply(embed=embed)
     except Exception as e:
         await ctx.reply(e)
 
