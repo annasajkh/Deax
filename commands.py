@@ -33,7 +33,7 @@ async def _wiki(ctx, wiki, page):
         fandom.set_wiki(wiki)
         result = fandom.page(page) 
 
-        content = textwrap.wrap("".join(result.content.values()), 1024)
+        content = textwrap.wrap(result.plain_text, 1024)
         
         await ctx.reply(embed=discord.Embed(title=result.title, color=Color.gold()),description=content[0])
 
