@@ -17,7 +17,6 @@ import random
 import os
 import wikipedia
 import fandom
-import textwrap
 
 
 @bot.command(name="help")
@@ -151,7 +150,7 @@ async def _search(ctx, *, text):
 @bot.command(name="urbandict")
 async def _urbandict(ctx, *, text):
     try:
-        send_chunked_embed(ctx, get_random_def(text), Color.orange())
+        await send_chunked_embed(ctx, get_random_def(text), Color.orange())
     except Exception as e:
         await ctx.reply(e)
 
