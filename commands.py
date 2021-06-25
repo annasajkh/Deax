@@ -29,7 +29,9 @@ async def _help(ctx):
 @bot.command(name="fandom")
 async def _wiki(ctx, *, text):
     try:
-        embed = discord.Embed(description=fandom.summary(text), color=Color.gold())
+        result = fandom.page(text)
+
+        embed = discord.Embed(title=result.title,description=result.content, color=Color.gold(), url=result.url)
         await ctx.reply(embed=embed)
 
     except Exception as e:
