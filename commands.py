@@ -15,6 +15,7 @@ import random
 import os
 import wikipedia
 import fandom
+import textwrap
 
 
 @bot.command(name="help")
@@ -30,10 +31,13 @@ async def _help(ctx):
 async def _wiki(ctx, wiki, page):
     try:
         fandom.set_wiki(wiki)
-        result = fandom.page(page)
+        result = textwrap.wrap(fandom.page(page).content, 2048)
 
         embed = discord.Embed(title=result.title, color=Color.gold())
-        embed.description = result.url
+
+        for text in result:
+            embed.add_field(value=text)
+        
         await ctx.reply(embed=embed)
 
     except Exception as e:
