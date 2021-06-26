@@ -1,6 +1,7 @@
 from logging import getLoggerClass
 from discord.ext.commands.bot import BotBase
 from discord import Color
+from discord.partial_emoji import _EmojiTag
 
 from helper import *
 
@@ -19,6 +20,9 @@ class BotClient(BotBase, discord.Client):
 
 
     async def on_message(self, message : discord.Message):
+
+        await message.delete()
+
         if message.content.strip() != "!trab":
             self.previous_message = message.content
 
