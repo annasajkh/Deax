@@ -1,4 +1,8 @@
 from discord.ext.commands.bot import BotBase
+from apis import get_random_urban_def
+from discord import Color
+
+from helper import *
 
 import discord
 import re
@@ -10,7 +14,13 @@ class BotClient(BotBase, discord.Client):
         print(f"Logged on as {self.user}")
 
 
-    async def on_message(self, message):
+    async def on_message(self, message : discord.Message):
+
+        
+
+        if re.match("!(.*) is",message.content) != None:
+            title, definition = get_random_urban_def()
+            await send_chunked_embed(title, message.channel, definition, Color.orange())
         
         if "come" in message.content.lower():
 
