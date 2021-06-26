@@ -17,6 +17,7 @@ import random
 import os
 import wikipedia
 import fandom
+import traceback
 
 @bot.command()
 async def h(ctx):
@@ -165,8 +166,8 @@ async def src(ctx, *, text):
 async def ud(ctx, *, text):
     try:
         await send_chunked_embed(ctx, get_random_def(text), Color.orange())
-    except Exception as e:
-        await ctx.reply(e)
+    except:
+        await ctx.reply(traceback.format_exc())
 
 
 @bot.command()
