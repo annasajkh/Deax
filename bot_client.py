@@ -1,11 +1,13 @@
 from discord.ext.commands.bot import BotBase
-from apis import get_random_urban_def
 from discord import Color
 
 from helper import *
 
 import discord
 import re
+from udpy import UrbanClient
+
+urban_client = UrbanClient()
 
 
 class BotClient(BotBase, discord.Client):
@@ -16,11 +18,9 @@ class BotClient(BotBase, discord.Client):
 
     async def on_message(self, message : discord.Message):
 
-        
-
         if re.match("!(.*) is",message.content) != None:
-            title, definition = get_random_urban_def()
-            await send_chunked_embed(title, message.channel, definition, Color.orange())
+            await send_chunked_embed("", message, urban_client.get_random_definition()[0].definition.replace("[","").replace("]",""), Color.orange())
+            return
         
         if "come" in message.content.lower():
 
@@ -30,6 +30,8 @@ class BotClient(BotBase, discord.Client):
             #send the result and delete the message
             await message.channel.send(src_str.sub("cum", message.content))
             await message.delete()
+
+            return
         
         # since we override on_message we have to call this
         await self.process_commands(message)

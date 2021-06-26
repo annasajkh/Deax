@@ -17,7 +17,6 @@ import random
 import os
 import wikipedia
 import fandom
-import traceback
 
 @bot.command()
 async def h(ctx):
