@@ -18,43 +18,43 @@ translator = Translator()
 urban_client = UrbanClient()
 
 help_str = """
-get random affirmation
+get random affirmation, this command uses Affirmations API
 !aff
 
 ask question to magic 8 ball
 !ask <sentence>
 
-get random quote
+get random quote, this command uses Zenquotes API
 !quo
 
-translate sentence to english
+translate sentence to english, this command uses Google Translate
 !tra <sentence>
 
-get random advice
+get random advice, this command uses Adviceslip API
 !adv
 
-get fact about a number
+get fact about a number, this command uses Number Fact API
 !nf <number>
 
-search somesentence
+search something
 !src <sentence>
 
 get random definition from urban dict
 !ud <sentence>
 
-make the bot say somesentence
+make the bot say something
 !say <sentence>
 
-get random image
-!ri <width> <height>
+get random image, this command uses Lorem Picsum API
+!ri
 
-make the bot say somesentence from urban dict
+make the bot say something from urban dict
 !uds <sentence>
 
 search wikipedia
 !wiki <sentence>
 
-search fandom
+search fandom website
 !fand "<root (game name/title/name)>" "<page (character/actor/object)>"
 
 scroll

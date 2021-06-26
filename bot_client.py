@@ -22,6 +22,7 @@ class BotClient(BotBase, discord.Client):
         if message.content.strip() != "!trab":
             self.previous_message = message.content
 
+        # if the content match not empty for "!<sentence> is" 
         if re.match("!(.*) is",message.content) != None:
             await send_chunked_embed("", message, urban_client.get_random_definition()[0].definition.replace("[","").replace("]",""), Color.orange())
             return

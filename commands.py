@@ -1,3 +1,4 @@
+from dotenv.main import rewrite
 from helper import send_chunked_embed
 from googlesearch import search
 from discord.colour import Color
@@ -16,6 +17,7 @@ import random
 import os
 import wikipedia
 import fandom
+import requests
 
 
 @bot.command()
@@ -198,15 +200,8 @@ async def say(ctx, *, text):
 
 
 @bot.command()
-async def ri(ctx, width, height):
+async def ri(ctx):
     try:
-        w = int(width)
-        h = int(height)
-
-        if w > 1000 or h > 1000:
-            raise Exception("width and height has to be less or equal to 1000")
-
-        await ctx.reply(f"https://picsum.photos/{w}/{h}")
-
+        await ctx.reply(requests.get(f"https://picsum.photos/500"))
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
