@@ -37,7 +37,7 @@ get fact about a number, this command uses Number Fact API
 !nf <number>
 
 search something
-!src <sentence>
+!search <sentence>
 
 get random definition from urban dict
 !ud <sentence>
@@ -46,7 +46,7 @@ make the bot say something
 !say <sentence>
 
 get random image, this command uses Lorem Picsum API
-!ri
+!imgr
 
 make the bot say something from urban dict
 !uds <sentence>
@@ -71,5 +71,8 @@ get random definition of
 
 translate above
 !trab
+
+grab image from thispersondoesnotexist.com
+!face
 """.strip()
 

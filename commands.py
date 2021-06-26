@@ -153,7 +153,7 @@ async def nf(ctx, num):
 
 
 @bot.command()
-async def src(ctx, *, text):
+async def search(ctx, *, text):
     try:
         result = search(text, num_results=4)
         string_result = ""
@@ -200,7 +200,7 @@ async def say(ctx, *, text):
 
 
 @bot.command()
-async def ri(ctx):
+async def imgr(ctx):
     try:
         await ctx.reply(requests.get(f"https://picsum.photos/500").url)
     except Exception as e:
