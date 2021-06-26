@@ -209,6 +209,6 @@ async def ri(ctx):
 @bot.command()
 async def face(ctx):
     try:
-        await ctx.reply(requests.get("thispersondoesnotexist.com").url)
+        await ctx.reply(requests.get("http://thispersondoesnotexist.com").url)
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
