@@ -27,3 +27,9 @@ def get_random_def(text):
         result = result[random.randrange(0,len(result))].definition.replace("[","").replace("]","")
     
     return result
+
+def get_random_def():
+    result = urban_client.get_random_definition()
+    result = result[random.randrange(0,len(result))].definition.replace("[","").replace("]","")
+    
+    return result

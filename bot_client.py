@@ -11,6 +11,7 @@ class BotClient(BotBase, discord.Client):
 
 
     async def on_message(self, message):
+        
         if "come" in message.content.lower():
 
             #will find all come and it IGNORECASE
