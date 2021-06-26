@@ -8,7 +8,7 @@ from requests.models import Response
 
 
 
-def req_async(url) -> Response:
+async def req_async(url) -> Response:
     async def internal():
         loop = asyncio.get_event_loop()
         future = loop.run_in_executor(None,requests.get,url)
