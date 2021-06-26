@@ -71,8 +71,5 @@ get random definition of
 
 translate above
 !trab
-
-grab image from thispersondoesnotexist.com
-!face
 """.strip()
 

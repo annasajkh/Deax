@@ -1,5 +1,4 @@
-from dotenv.main import rewrite
-from helper import req_async, send_chunked_embed
+from helper import send_chunked_embed
 from googlesearch import search
 from discord.colour import Color
 from gtts import gTTS
@@ -17,7 +16,8 @@ import random
 import os
 import wikipedia
 import fandom
-import grequests
+import requests
+import urllib.request
 
 
 @bot.command()
@@ -162,8 +162,7 @@ async def search(ctx, *, text):
             if "http" in i:
                 string_result += i +'\n'
         
-        embed = discord.Embed(description=string_result, color=Color.gold())
-        await ctx.reply(embed=embed)
+        await ctx.reply(string_result)
 
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
@@ -202,13 +201,6 @@ async def say(ctx, *, text):
 @bot.command()
 async def imgr(ctx):
     try:
-        await ctx.reply(grequests.get("https://picsum.photos/500").url)
-    except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
-
-@bot.command()
-async def face(ctx):
-    try:
-        await ctx.reply(grequests.get("http://thispersondoesnotexist.com").url)
+        await ctx.reply(requests.get("https://picsum.photos/500").url)
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
