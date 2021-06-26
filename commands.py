@@ -199,7 +199,7 @@ async def say(ctx, *, text):
 
 
 @bot.command()
-async def imgr(ctx):
+async def ri(ctx):
     try:
         await ctx.reply(requests.get("https://picsum.photos/500").url)
     except Exception as e:

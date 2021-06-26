@@ -46,7 +46,7 @@ make the bot say something
 !say <sentence>
 
 get random image, this command uses Lorem Picsum API
-!imgr
+!ri
 
 make the bot say something from urban dict
 !uds <sentence>
