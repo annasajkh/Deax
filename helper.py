@@ -32,7 +32,6 @@ async def send_chunked_embed(title,ctx, text, color):
         embed = discord.Embed(title=title, description=texts[0], color=color)
 
     await ctx.reply(embed=embed)
-
     texts.pop(0)
 
     for text in texts:
