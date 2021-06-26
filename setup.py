@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 import discord
 
-#Setup Everything
+#Setup Everysentence
 
 activity = discord.Activity(type=discord.ActivityType.watching, name="!h")
 
@@ -22,13 +22,13 @@ get random affirmation
 !aff
 
 ask question to magic 8 ball
-!ask <thing>
+!ask <sentence>
 
 get random quote
 !quo
 
 translate sentence to english
-!tra <thing>
+!tra <sentence>
 
 get random advice
 !adv
@@ -36,23 +36,23 @@ get random advice
 get fact about a number
 !nf <number>
 
-search something
-!src <thing>
+search somesentence
+!src <sentence>
 
 get random definition from urban dict
-!ud <thing>
+!ud <sentence>
 
-make the bot say something
-!say <thing>
+make the bot say somesentence
+!say <sentence>
 
 get random image
 !ri <width> <height>
 
-make the bot say something from urban dict
-!uds <thing>
+make the bot say somesentence from urban dict
+!uds <sentence>
 
 search wikipedia
-!wiki <thing>
+!wiki <sentence>
 
 search fandom
 !fand "<root (game name/title/name)>" "<page (character/actor/object)>"
@@ -61,9 +61,12 @@ scroll
 !scr
 
 search youtube
-!yt <thing>
+!yt <sentence>
 
 urban dict random
 !udr
+
+get random definition of
+!<sentence> is
 """.strip()
 
