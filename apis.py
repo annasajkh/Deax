@@ -33,7 +33,7 @@ def get_random_urban_def():
 
     index = random.randrange(0,len(result))
 
-    word = result[index].word
-    result = result[index].definition.replace("[","").replace("]","")
+    title = result[index].word
+    definition = result[index].definition.replace("[","").replace("]","")
     
-    return result, word
+    return title, definition

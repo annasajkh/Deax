@@ -42,7 +42,7 @@ async def yt(ctx, *, text):
 async def fand(ctx, wiki, page):
     try:
         fandom.set_wiki(wiki)
-        await send_chunked_embed(ctx,fandom.summary(page),Color.gold())
+        await send_chunked_embed("",ctx,fandom.summary(page),Color.gold())
 
     except Exception as e:
         await ctx.reply(e)
@@ -50,7 +50,7 @@ async def fand(ctx, wiki, page):
 @bot.command()
 async def wiki(ctx, *, text):
     try:
-        await send_chunked_embed(ctx, wikipedia.summary(text), Color.gold())
+        await send_chunked_embed("",ctx, wikipedia.summary(text), Color.gold())
     except Exception as e:
         await ctx.reply(e)
 
@@ -79,7 +79,7 @@ async def scr(ctx):
 @bot.command()
 async def uds(ctx, *, text):
     try:
-        tts = gTTS(get_random_def(text))
+        tts = gTTS(get_urban_def(text))
         tts.save("result.mp3")
 
         await ctx.reply(file=discord.File("result.mp3"))
@@ -165,14 +165,15 @@ async def src(ctx, *, text):
 @bot.command()
 async def ud(ctx, *, text):
     try:
-        await send_chunked_embed(ctx, get_urban_def(text), Color.orange())
+        await send_chunked_embed("",ctx, get_urban_def(text), Color.orange())
     except Exception as e:
         await ctx.reply(e)
 
 @bot.command()
 async def rud(ctx):
     try:
-        await send_chunked_embed(ctx, get_random_urban_def(), Color.orange())
+        title, definition = get_random_urban_def()
+        await send_chunked_embed(title, ctx, definition, Color.orange())
     except Exception as e:
         await ctx.reply(e)
 
