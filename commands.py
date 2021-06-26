@@ -205,3 +205,10 @@ async def ri(ctx):
         await ctx.reply(requests.get(f"https://picsum.photos/500").url)
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
+
+@bot.command()
+async def face(ctx):
+    try:
+        await ctx.reply(requests.get("thispersondoesnotexist.com").url)
+    except Exception as e:
+        await send_chunked_embed("",ctx,str(e), Color.red())
