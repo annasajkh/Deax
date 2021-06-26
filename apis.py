@@ -16,7 +16,7 @@ def get_quote():
 def get_advice():
     return requests.get("https://api.adviceslip.com/advice").json()["slip"]["advice"]
 
-def get_random_def(text):
+def get_urban_def(text):
     global result
 
     result = urban_client.get_definition(text)
@@ -28,8 +28,12 @@ def get_random_def(text):
     
     return result
 
-def get_random_def():
+def get_random_urban_def():
     result = urban_client.get_random_definition()
-    result = result[random.randrange(0,len(result))].definition.replace("[","").replace("]","")
+
+    index = random.randrange(0,len(result))
+
+    word = result[index].word
+    result = result[index].definition.replace("[","").replace("]","")
     
-    return result
+    return result, word

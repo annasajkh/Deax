@@ -165,14 +165,14 @@ async def src(ctx, *, text):
 @bot.command()
 async def ud(ctx, *, text):
     try:
-        await send_chunked_embed(ctx, get_random_def(text), Color.orange())
+        await send_chunked_embed(ctx, get_urban_def(text), Color.orange())
     except Exception as e:
         await ctx.reply(e)
 
 @bot.command()
 async def rud(ctx):
     try:
-        await send_chunked_embed(ctx, get_random_def(), Color.orange())
+        await send_chunked_embed(ctx, get_random_urban_def(), Color.orange())
     except Exception as e:
         await ctx.reply(e)
 
