@@ -63,7 +63,7 @@ scroll
 search youtube
 !yt <thing>
 
-random urban dict
+urban dict random
 !udr
 """.strip()
 
