@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from helper import send_chunked_embed
 from googlesearch import search
 from discord.colour import Color
@@ -17,6 +16,7 @@ import random
 import os
 import wikipedia
 import fandom
+
 
 @bot.command()
 async def h(ctx):
@@ -121,7 +121,13 @@ async def quo(ctx):
 async def tra(ctx, *, text):
     try:
         await send_chunked_embed("",ctx,translator.translate(text).text, Color.blurple())
+    except Exception as e:
+        await send_chunked_embed("",ctx,str(e), Color.red())
 
+@bot.command()
+async def trab(ctx):
+    try:
+        await send_chunked_embed("",ctx,translator.translate(bot.previous_message).text, Color.blurple())
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
 

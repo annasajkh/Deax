@@ -1,3 +1,4 @@
+from logging import getLoggerClass
 from discord.ext.commands.bot import BotBase
 from discord import Color
 
@@ -11,12 +12,15 @@ urban_client = UrbanClient()
 
 
 class BotClient(BotBase, discord.Client):
+    previous_message = ""
 
     async def on_ready(self):
         print(f"Logged on as {self.user}")
 
 
     async def on_message(self, message : discord.Message):
+        if message.content.strip() != "!tr":
+            self.previous_message = message.content
 
         if re.match("!(.*) is",message.content) != None:
             await send_chunked_embed("", message, urban_client.get_random_definition()[0].definition.replace("[","").replace("]",""), Color.orange())

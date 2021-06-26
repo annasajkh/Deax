@@ -68,5 +68,8 @@ urban dict random
 
 get random definition of
 !<sentence> is
+
+translate above
+!trab
 """.strip()
 
