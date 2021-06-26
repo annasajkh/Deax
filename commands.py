@@ -170,7 +170,7 @@ async def ud(ctx, *, text):
         await ctx.reply(e)
 
 @bot.command()
-async def rud(ctx):
+async def udr(ctx):
     try:
         title, definition = get_random_urban_def()
         await send_chunked_embed(title, ctx, definition, Color.orange())

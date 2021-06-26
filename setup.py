@@ -64,6 +64,6 @@ search youtube
 !yt <thing>
 
 random urban dict
-!rud
+!udr
 """.strip()
 
