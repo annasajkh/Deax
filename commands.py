@@ -202,6 +202,6 @@ async def say(ctx, *, text):
 @bot.command()
 async def ri(ctx):
     try:
-        await ctx.reply(requests.get(f"https://picsum.photos/500"))
+        await ctx.reply(requests.get(f"https://picsum.photos/500").url)
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
