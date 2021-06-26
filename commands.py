@@ -1,5 +1,5 @@
 from dotenv.main import rewrite
-from helper import send_chunked_embed
+from helper import req_async, send_chunked_embed
 from googlesearch import search
 from discord.colour import Color
 from gtts import gTTS
@@ -202,13 +202,13 @@ async def say(ctx, *, text):
 @bot.command()
 async def imgr(ctx):
     try:
-        await ctx.reply(requests.get(f"https://picsum.photos/500").url)
+        await ctx.reply(req_async(f"https://picsum.photos/500").url)
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
 
 @bot.command()
 async def face(ctx):
     try:
-        await ctx.reply(requests.get("http://thispersondoesnotexist.com").url)
+        await ctx.reply(req_async("http://thispersondoesnotexist.com").url)
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
