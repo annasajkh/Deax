@@ -31,7 +31,7 @@ async def h(ctx):
 async def yt(ctx, *, text):
     try:
         link = "http://www.youtube.com" + YoutubeSearch(text, max_results=1).to_dict()[0]["url_suffix"]
-        await ctx.send(link)
+        await ctx.reply(link)
 
     except Exception as e:
         await ctx.reply(e)
