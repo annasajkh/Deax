@@ -25,7 +25,7 @@ async def h(ctx):
         await ctx.reply(embed=embed)
 
     except Exception as e:
-        await send_chunked_embed("",ctx,e, Color.red())
+        await send_chunked_embed("",ctx,str(e), Color.red())
 
 @bot.command()
 async def yt(ctx, *, text):
@@ -34,7 +34,7 @@ async def yt(ctx, *, text):
         await ctx.reply(link)
 
     except Exception as e:
-        await send_chunked_embed("",ctx,e, Color.red())
+        await send_chunked_embed("",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -44,14 +44,14 @@ async def fand(ctx, wiki, page):
         await send_chunked_embed("",ctx,fandom.summary(page),Color.gold())
 
     except Exception as e:
-        await send_chunked_embed("",ctx,e, Color.red())
+        await send_chunked_embed("",ctx,str(e), Color.red())
 
 @bot.command()
 async def wiki(ctx, *, text):
     try:
         await send_chunked_embed("",ctx, wikipedia.summary(text), Color.gold())
     except Exception as e:
-        await send_chunked_embed("",ctx,e, Color.red())
+        await send_chunked_embed("",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -72,7 +72,7 @@ async def scr(ctx):
             await ctx.send(("scroll\n" * 40)+ str(num))
 
     except Exception as e:
-        await send_chunked_embed("",ctx,e, Color.red())
+        await send_chunked_embed("",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -86,7 +86,7 @@ async def uds(ctx, *, text):
         os.remove("result.mp3")
 
     except Exception as e:
-        await send_chunked_embed("",ctx,e, Color.red())
+        await send_chunked_embed("",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -96,7 +96,7 @@ async def aff(ctx):
         await ctx.reply(embed=embed)
 
     except Exception as e:
-        await send_chunked_embed("",ctx,e, Color.red())
+        await send_chunked_embed("",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -105,7 +105,7 @@ async def ask(ctx):
         embed = discord.Embed(description=random.choice(magic8ball.list), color=Color.purple())
         await ctx.reply(embed=embed)
     except Exception as e:
-        await send_chunked_embed("",ctx,e, Color.red())
+        await send_chunked_embed("",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -114,7 +114,7 @@ async def quo(ctx):
         embed = discord.Embed(description=get_quote(), color=Color.green())
         await ctx.reply(embed=embed)
     except Exception as e:
-        await send_chunked_embed("",ctx,e, Color.red())
+        await send_chunked_embed("",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -123,7 +123,7 @@ async def tra(ctx, *, text):
         await send_chunked_embed("",ctx,translator.translate(text).text, Color.blurple())
 
     except Exception as e:
-        await send_chunked_embed("",ctx,e, Color.red())
+        await send_chunked_embed("",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -132,7 +132,7 @@ async def adv(ctx):
         embed = discord.Embed(description=get_advice(), color=Color.blue())
         await ctx.reply(embed=embed)
     except Exception as e:
-        await send_chunked_embed("",ctx,e, Color.red())
+        await send_chunked_embed("",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -141,7 +141,7 @@ async def nf(ctx, num):
         embed = discord.Embed(description=get_number_fact(num), color=Color.gold())
         await ctx.reply(embed=embed)
     except Exception as e:
-        await send_chunked_embed("",ctx,e, Color.red())
+        await send_chunked_embed("",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -158,7 +158,7 @@ async def src(ctx, *, text):
         await ctx.reply(embed=embed)
 
     except Exception as e:
-        await send_chunked_embed("",ctx,e, Color.red())
+        await send_chunked_embed("",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -166,7 +166,7 @@ async def ud(ctx, *, text):
     try:
         await send_chunked_embed("",ctx, get_urban_def(text), Color.orange())
     except Exception as e:
-        await send_chunked_embed("",ctx,e, Color.red())
+        await send_chunked_embed("",ctx,str(e), Color.red())
 
 @bot.command()
 async def udr(ctx):
@@ -174,7 +174,7 @@ async def udr(ctx):
         title, definition = get_random_urban_def()
         await send_chunked_embed(title, ctx, definition, Color.orange())
     except Exception as e:
-        await send_chunked_embed("",ctx,e, Color.red())
+        await send_chunked_embed("",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -188,7 +188,7 @@ async def say(ctx, *, text):
         os.remove("result.mp3")
 
     except Exception as e:
-        await send_chunked_embed("",ctx,e, Color.red())
+        await send_chunked_embed("",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -203,4 +203,4 @@ async def ri(ctx, width, height):
         await ctx.reply(f"https://picsum.photos/{w}/{h}")
 
     except Exception as e:
-        await send_chunked_embed("",ctx,e, Color.red())
+        await send_chunked_embed("",ctx,str(e), Color.red())
