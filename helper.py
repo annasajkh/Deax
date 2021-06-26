@@ -1,24 +1,5 @@
 import textwrap
 import discord
-import requests
-import asyncio
-
-from requests.models import Response
-
-
-
-
-async def req_async(url) -> Response:
-    async def internal():
-        loop = asyncio.get_event_loop()
-        future = loop.run_in_executor(None,requests.get,url)
-        response = await future
-        return response
-
-    loop = asyncio.get_event_loop()
-    return loop.run_until_complete(internal())
-
-
 
 #if embed is larger than 2048 character use this!
 async def send_chunked_embed(title,ctx, text, color):

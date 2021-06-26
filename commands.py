@@ -17,7 +17,7 @@ import random
 import os
 import wikipedia
 import fandom
-import requests
+import grequests
 
 
 @bot.command()
@@ -202,13 +202,13 @@ async def say(ctx, *, text):
 @bot.command()
 async def imgr(ctx):
     try:
-        await ctx.reply(await req_async("https://picsum.photos/500").url)
+        await ctx.reply(grequests.get("https://picsum.photos/500").url)
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
 
 @bot.command()
 async def face(ctx):
     try:
-        await ctx.reply(await req_async("http://thispersondoesnotexist.com").url)
+        await ctx.reply(grequests.get("http://thispersondoesnotexist.com").url)
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
