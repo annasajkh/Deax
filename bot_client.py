@@ -19,7 +19,7 @@ class BotClient(BotBase, discord.Client):
 
 
     async def on_message(self, message : discord.Message):
-        if message.content.strip() != "!tr":
+        if message.content.strip() != "!trab":
             self.previous_message = message.content
 
         if re.match("!(.*) is",message.content) != None:
