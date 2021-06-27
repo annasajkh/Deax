@@ -21,8 +21,6 @@ class BotClient(BotBase, discord.Client):
 
     async def on_message(self, message : discord.Message):
 
-        await message.delete()
-
         if message.content.strip() != "!trab":
             self.previous_message = message.content
 
