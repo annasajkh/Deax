@@ -112,7 +112,7 @@ async def on_message(message : discord.Message):
         data["inputs"]["past_user_inputs"].append(text)
         data["inputs"]["generated_responses"].append(response)
 
-        if len(data["inputs"]["past_user_inputs"]) > 10:
+        if len(data["inputs"]["past_user_inputs"]) > 3:
             data["inputs"]["past_user_inputs"].pop(0)
             data["inputs"]["generated_responses"].pop(0)
         
