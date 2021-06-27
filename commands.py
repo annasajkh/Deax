@@ -17,7 +17,6 @@ import os
 import wikipedia
 import fandom
 import requests
-import urllib.request
 
 
 @bot.command()

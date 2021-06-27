@@ -34,9 +34,8 @@ class BotClient(BotBase, discord.Client):
             #will find all come and it IGNORECASE
             src_str = re.compile("come", re.IGNORECASE)
 
-            #send the result and delete the message
+            #send the result
             await message.channel.send(src_str.sub("cum", message.content))
-            await message.delete()
 
             return
         
