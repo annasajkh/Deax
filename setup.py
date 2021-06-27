@@ -95,28 +95,24 @@ data = {
 
 @bot.event
 async def on_message(message : discord.Message):
+    try:
+        if message.author == bot.user:
+            return
 
-    if message.author == bot.user:
-        return
+        if message.content.startswith("*"):
+            response = get_hugging_face(message.content.replace("*",""),"gpt2-large")[0]["generated_text"]
+            await send_chunked_embed("",message,response, Color.dark_purple())
 
-    if message.content.startswith("*"):
-        response = get_hugging_face(message.content.replace("*",""),"gpt2-large")[0]["generated_text"]
-        await send_chunked_embed("",message,response, Color.dark_purple())
+        elif message.content.startswith("~"):
+            text = message.content.replace("~","")
 
-    elif message.content.startswith("~"):
-        text = message.content.replace("~","")
-
-        data["inputs"]["text"] = text
-        try:
+            data["inputs"]["text"] = text
             response = get_hugging_face(data,"microsoft/DialoGPT-large")["generated_text"]
 
-            if text not in data["inputs"]["past_user_inputs"]:
-                data["inputs"]["past_user_inputs"].append(text)
-            
-            if response not in data["inputs"]["generated_responses"]:
-                data["inputs"]["generated_responses"].append(response)
+            data["inputs"]["past_user_inputs"][0] = text
+            data["inputs"]["generated_responses"][0] = response
 
-            if len(data["inputs"]["past_user_inputs"]) > 10000:
+            if len(data["inputs"]["past_user_inputs"]) > 3:
                 data["inputs"]["past_user_inputs"].pop(0)
                 data["inputs"]["generated_responses"].pop(0)
             
@@ -126,28 +122,29 @@ async def on_message(message : discord.Message):
 
             
             await message.channel.send(response)
-        except:
-            await message.channel.send("erro")
 
 
 
-    if message.content.strip() != "!trab":
-        bot.previous_message = message.content
+        if message.content.strip() != "!trab":
+            bot.previous_message = message.content
 
-    # if the content match not empty for "!<sentence> is" 
-    if re.match("!(.*) is",message.content) != None:
-        await send_chunked_embed("", message, urban_client.get_random_definition()[0].definition.replace("[","").replace("]",""), Color.orange())
-        return
+        # if the content match not empty for "!<sentence> is" 
+        if re.match("!(.*) is",message.content) != None:
+            await send_chunked_embed("", message, urban_client.get_random_definition()[0].definition.replace("[","").replace("]",""), Color.orange())
+            return
+        
+        if "come" in message.content.lower():
+
+            #will find all come and it IGNORECASE
+            src_str = re.compile("come", re.IGNORECASE)
+
+            #send the result
+            await message.channel.send(src_str.sub("cum", message.content))
+
+            return
+        
+        # since we override on_message we have to call this
+    except Exception as e:
+        message.channel.send(e)
     
-    if "come" in message.content.lower():
-
-        #will find all come and it IGNORECASE
-        src_str = re.compile("come", re.IGNORECASE)
-
-        #send the result
-        await message.channel.send(src_str.sub("cum", message.content))
-
-        return
-    
-    # since we override on_message we have to call this
     await bot.process_commands(message)
