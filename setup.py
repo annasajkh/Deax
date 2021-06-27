@@ -85,6 +85,14 @@ from apis import *
 from helper import *
 
 
+data = {
+    "inputs": {
+        "past_user_inputs": [""],
+        "generated_responses": [""],
+        "text": "",
+    },
+}
+
 @bot.event
 async def on_message(message : discord.Message):
 
@@ -94,8 +102,16 @@ async def on_message(message : discord.Message):
     if message.content.startswith("*"):
         response = get_hugging_face(message.content.replace("*",""),"gpt2-large")[0]["generated_text"]
         await send_chunked_embed("",message,response, Color.dark_purple())
+
     elif message.content.startswith("~"):
-        response = get_hugging_face(message.content.replace("~",""),"microsoft/DialoGPT-large")["generated_text"]
+        text = message.content.replace("~","")
+        data["inputs"]["text"] = text
+        response = get_hugging_face(data["inputs"]["text"],"microsoft/DialoGPT-large")["generated_text"]
+
+        data["inputs"]["past_user_inputs"] = text
+        data["inputs"]["generated_responses"] = response
+
+        
         await message.channel.send(response)
 
 
