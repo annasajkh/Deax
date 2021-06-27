@@ -6,7 +6,7 @@ import json
 import requests
 import os
 
-key = os.environ["GPT2_KEY"]
+key = os.environ["HUGGING_FACE_KEY"]
 headers = {"Authorization": f"Bearer {key}"}
 
 def get_gpt2(payload):
