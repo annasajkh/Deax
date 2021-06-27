@@ -93,7 +93,7 @@ async def on_message(message : discord.Message):
         await send_chunked_embed("",message,response, Color.dark_purple())
     elif message.content.startswith("~"):
         response = get_hugging_face(message.content.replace("~",""),"microsoft/DialoGPT-large")["generated_text"]
-        await message.send(message,response)
+        await message.send(response)
 
 
 
