@@ -73,8 +73,11 @@ get random definition of
 translate above
 !trab
 
-use hugging face AI GPT2-Large to generate texts
+generate texts using hugging face gpt2-large models
 *<sentence>
+
+talk to ai using hugging face DialoGPT-large models
+~<sentence>
 """.strip()
 
 #setup all function
@@ -86,8 +89,12 @@ from helper import *
 async def on_message(message : discord.Message):
 
     if message.content.startswith("*"):
-        response = get_gpt2(message.content.replace("*",""))[0]["generated_text"]
+        response = get_hugging_face(message.content.replace("*",""),"gpt2-large")[0]["generated_text"]
         await send_chunked_embed("",message,response, Color.dark_purple())
+    elif message.content.startswith("~"):
+        response = get_hugging_face(message.content.replace("~",""),"microsoft/DialoGPT-large")["generated_text"]
+        await send_chunked_embed("",message,response, Color.dark_purple())
+
 
 
     if message.content.strip() != "!trab":
