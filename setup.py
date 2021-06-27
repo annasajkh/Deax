@@ -105,15 +105,19 @@ async def on_message(message : discord.Message):
 
     elif message.content.startswith("~"):
         text = message.content.replace("~","")
+
         data["inputs"]["text"] = text
         response = get_hugging_face(data["inputs"]["text"],"microsoft/DialoGPT-large")["generated_text"]
 
         data["inputs"]["past_user_inputs"].append(text)
         data["inputs"]["generated_responses"].append(response)
 
-        if len(data["inputs"]["past_user_inputs"]) > 100:
+        if len(data["inputs"]["past_user_inputs"]) > 10000:
             data["inputs"]["past_user_inputs"] = []
             data["inputs"]["generated_responses"] = []
+        
+        print(data["inputs"]["past_user_inputs"])
+        print(data["inputs"]["generated_responses"])
 
 
         
