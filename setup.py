@@ -107,7 +107,7 @@ async def on_message(message : discord.Message):
         text = message.content.replace("~","")
 
         data["inputs"]["text"] = text
-        response = get_hugging_face(data["inputs"]["text"],"microsoft/DialoGPT-large")["generated_text"]
+        response = get_hugging_face(data,"microsoft/DialoGPT-large")["generated_text"]
 
         data["inputs"]["past_user_inputs"].append(text)
         data["inputs"]["generated_responses"].append(response)
