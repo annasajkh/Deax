@@ -1,10 +1,8 @@
-from helper import send_chunked_embed
 from googlesearch import search
 from discord.colour import Color
 from gtts import gTTS
 from youtube_search import YoutubeSearch
 
-from apis import *
 from setup import *
 
 import asyncio

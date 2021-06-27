@@ -2,6 +2,17 @@
 import requests
 from setup import urban_client
 import random
+import json
+import requests
+import os
+
+key = os.environ["GPT2_KEY"]
+headers = {"Authorization": f"Bearer {key}"}
+
+def get_gpt2(payload):
+    data = json.dumps(payload)
+    response = requests.request("POST", "https://api-inference.huggingface.co/models/gpt2-large", headers=headers, data=data)
+    return json.loads(response.content.decode("utf-8"))
 
 def get_affirmation():
     return requests.get("https://www.affirmations.dev/").json()["affirmation"]
