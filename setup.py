@@ -107,24 +107,27 @@ async def on_message(message : discord.Message):
         text = message.content.replace("~","")
 
         data["inputs"]["text"] = text
-        response = get_hugging_face(data,"microsoft/DialoGPT-large")["generated_text"]
+        try:
+            response = get_hugging_face(data,"microsoft/DialoGPT-large")["generated_text"]
 
-        if text not in data["inputs"]["past_user_inputs"]:
-            data["inputs"]["past_user_inputs"].append(text)
-        
-        if response not in data["inputs"]["generated_responses"]:
-            data["inputs"]["generated_responses"].append(response)
+            if text not in data["inputs"]["past_user_inputs"]:
+                data["inputs"]["past_user_inputs"].append(text)
+            
+            if response not in data["inputs"]["generated_responses"]:
+                data["inputs"]["generated_responses"].append(response)
 
-        if len(data["inputs"]["past_user_inputs"]) > 10000:
-            data["inputs"]["past_user_inputs"].pop(0)
-            data["inputs"]["generated_responses"].pop(0)
-        
-        print(data["inputs"]["past_user_inputs"])
-        print(data["inputs"]["generated_responses"])
+            if len(data["inputs"]["past_user_inputs"]) > 10000:
+                data["inputs"]["past_user_inputs"].pop(0)
+                data["inputs"]["generated_responses"].pop(0)
+            
+            print(data["inputs"]["past_user_inputs"])
+            print(data["inputs"]["generated_responses"])
 
 
-        
-        await message.channel.send(response)
+            
+            await message.channel.send(response)
+        except:
+            await message.channel.send("erro")
 
 
 
