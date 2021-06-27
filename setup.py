@@ -109,8 +109,12 @@ async def on_message(message : discord.Message):
             data["inputs"]["text"] = text
             response = get_hugging_face(data,"microsoft/DialoGPT-large")["generated_text"]
 
-            data["inputs"]["past_user_inputs"][0] = text
-            data["inputs"]["generated_responses"][0] = response
+            try:
+                data["inputs"]["past_user_inputs"][0] = text
+                data["inputs"]["generated_responses"][0] = response
+            except:
+                data["inputs"]["past_user_inputs"].append(text)
+                data["inputs"]["generated_responses"].append(response)
 
             if len(data["inputs"]["past_user_inputs"]) > 3:
                 data["inputs"]["past_user_inputs"].pop(0)
