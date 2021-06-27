@@ -88,12 +88,15 @@ from helper import *
 @bot.event
 async def on_message(message : discord.Message):
 
+    if message.author == bot.user:
+        return
+
     if message.content.startswith("*"):
         response = get_hugging_face(message.content.replace("*",""),"gpt2-large")[0]["generated_text"]
         await send_chunked_embed("",message,response, Color.dark_purple())
     elif message.content.startswith("~"):
         response = get_hugging_face(message.content.replace("~",""),"microsoft/DialoGPT-large")["generated_text"]
-        await message.channel.send(response)
+        await message.send(response)
 
 
 
