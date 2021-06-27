@@ -87,8 +87,8 @@ from helper import *
 
 data = {
     "inputs": {
-        "past_user_inputs": [""],
-        "generated_responses": [""],
+        "past_user_inputs": [],
+        "generated_responses": [],
         "text": "",
     },
 }
