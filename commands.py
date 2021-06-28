@@ -46,6 +46,7 @@ async def fand(ctx, wiki, page):
         embed.title = page.title
         embed.set_image(url=page.images[0])
         embed.description = page.summary
+        embed.color = Color.from_rgb(0, 214, 217)
 
         await ctx.send(embed=embed)
 
