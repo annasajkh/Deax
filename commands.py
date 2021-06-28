@@ -47,9 +47,6 @@ async def fand(ctx, wiki, page):
         embed.set_image(url=page.images[0])
         embed.description = page.summary
 
-        for section in page.content["sections"]:
-            embed.add_field(name=section["title"],value=section["content"][:1024])
-
         await ctx.send(embed=embed)
 
     except Exception as e:
