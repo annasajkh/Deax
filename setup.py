@@ -79,6 +79,9 @@ generate texts using hugging face gpt2-large models
 
 talk to ai using hugging face DialoGPT-large models
 ~<sentence>
+
+evaluate expression
+!eval <sentence>
 """.strip()
 
 #setup all function
