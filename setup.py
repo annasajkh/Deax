@@ -122,7 +122,7 @@ async def dialogpt_large(message):
 
 
 async def evaluate(message):
-    send_chunked_embed("",message,ast.literal_eval(message),Color.green())
+    send_chunked_embed("",message,str(ast.literal_eval(message)),Color.green())
 
 
 @bot.event
