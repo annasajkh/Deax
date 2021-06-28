@@ -125,7 +125,7 @@ async def evaluate(message):
     if "__" in message:
         raise Exception("that's dangerous don't do that")
     
-    send_chunked_embed("",message,eval(message.content,{"__builtins__":None},{}),Color.green())
+    send_chunked_embed("",message,str(eval(message.content,{"__builtins__":None},{})),Color.green())
 
 
 @bot.event
