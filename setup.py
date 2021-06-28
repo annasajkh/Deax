@@ -74,16 +74,15 @@ get random definition of
 translate above
 !trab
 
-generate texts using hugging face gpt2-large models
-*<sentence>
-
-talk to ai using hugging face DialoGPT-large models
-~<sentence>
-
 evaluate expression
 !eval <sentence>
 """.strip()
 
+# generate texts using hugging face gpt2-large models
+# *<sentence>
+
+# talk to ai using hugging face DialoGPT-large models
+# ~<sentence>
 #setup all function
 from apis import *
 from helper import *
@@ -129,8 +128,8 @@ async def on_message(message : discord.Message):
         if message.author == bot.user:
             return
 
-        await evaluate_startwith("*",message,gpt2_large)
-        await evaluate_startwith("~",message,dialogpt_large)
+        # await evaluate_startwith("*",message,gpt2_large)
+        # await evaluate_startwith("~",message,dialogpt_large)
 
         if message.content.strip() != "!trab":
             bot.previous_message = message.content
