@@ -84,6 +84,7 @@ talk to ai using hugging face DialoGPT-large models
 from apis import *
 from helper import *
 
+#this is messy but this is only way to avoid circular import im sorry
 
 data = {
     "inputs": {
@@ -114,8 +115,8 @@ async def on_message(message : discord.Message):
             data["inputs"]["generated_responses"].append(response)
 
             if len(data["inputs"]["past_user_inputs"]) > 3:
-                data["inputs"]["past_user_inputs"] = []
-                data["inputs"]["generated_responses"] = []
+                data["inputs"]["past_user_inputs"].pop(0)
+                data["inputs"]["generated_responses"].pop(0)
             
             print(data["inputs"]["past_user_inputs"])
             print(data["inputs"]["generated_responses"])
@@ -124,14 +125,15 @@ async def on_message(message : discord.Message):
             
             await message.channel.send(response)
 
-
-
         if message.content.strip() != "!trab":
             bot.previous_message = message.content
+        
+        #get match
+        match_re = re.match("!(.*) is",message.content)
 
         # if the content match not empty for "!<sentence> is" 
-        if re.match("!(.*) is",message.content) != None:
-            await send_chunked_embed("", message, urban_client.get_random_definition()[0].definition.replace("[","").replace("]",""), Color.orange())
+        if match_re != None:
+            await send_chunked_embed(match_re[0], message, urban_client.get_random_definition()[0].definition.replace("[","").replace("]",""), Color.orange())
             return
         
         if "come" in message.content.lower():
