@@ -15,7 +15,6 @@ import os
 import wikipedia
 import fandom
 import requests
-import simpleeval
 
 
 @bot.command()
