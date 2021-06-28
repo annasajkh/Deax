@@ -6,6 +6,7 @@ from discord.colour import Color
 
 import discord
 import re
+import ast
 
 #Setup all variables
 
@@ -94,38 +95,45 @@ data = {
     },
 }
 
+async def gpt2_large(message):
+    response = get_hugging_face(message.content.replace("*",""),"gpt2-large")[0]["generated_text"]
+    await send_chunked_embed("",message,response, Color.dark_purple())
+
+
+async def dialogpt_large(message):
+    text = message.content.replace("~","")
+
+    data["inputs"]["text"] = text
+    response = get_hugging_face(data,"microsoft/DialoGPT-large")
+
+    print(response)
+
+
+    data["inputs"]["past_user_inputs"].append(text)
+    data["inputs"]["generated_responses"].append(response)
+
+    if len(data["inputs"]["past_user_inputs"]) > 3:
+        data["inputs"]["past_user_inputs"].pop(0)
+        data["inputs"]["generated_responses"].pop(0)
+
+
+    
+    await message.channel.send(response["generated_text"])
+
+
+async def evaluate(message):
+    send_chunked_embed("",message,ast.literal_eval(message),Color.green())
+
+
 @bot.event
 async def on_message(message : discord.Message):
     try:
         if message.author == bot.user:
             return
 
-        if message.content.startswith("*"):
-            response = get_hugging_face(message.content.replace("*",""),"gpt2-large")[0]["generated_text"]
-            await send_chunked_embed("",message,response, Color.dark_purple())
-
-        elif message.content.startswith("~"):
-            text = message.content.replace("~","")
-
-            data["inputs"]["text"] = text
-            response = get_hugging_face(data,"microsoft/DialoGPT-large")
-
-            print(response)
-
-
-            data["inputs"]["past_user_inputs"].append(text)
-            data["inputs"]["generated_responses"].append(response)
-
-            if len(data["inputs"]["past_user_inputs"]) > 3:
-                data["inputs"]["past_user_inputs"].pop(0)
-                data["inputs"]["generated_responses"].pop(0)
-            
-            print(data["inputs"]["past_user_inputs"])
-            print(data["inputs"]["generated_responses"])
-
-
-            
-            await message.channel.send(response["generated_text"])
+        evaluate_startwith("*",message,gpt2_large)
+        evaluate_startwith("~",message,dialogpt_large)
+        evaluate_startwith(">",message,evaluate)
 
         if message.content.strip() != "!trab":
             bot.previous_message = message.content

@@ -1,3 +1,4 @@
+from re import L
 import textwrap
 import discord
 
@@ -18,3 +19,7 @@ async def send_chunked_embed(title,ctx, text, color):
     for text in texts:
         embed = discord.Embed(description=text, color=color)
         await ctx.reply(embed=embed)
+
+def evaluate_startwith(char, message , func):
+    if message.content.startswith(char):
+        func(message.content.replace(char, ""))
