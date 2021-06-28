@@ -122,7 +122,10 @@ async def dialogpt_large(message):
 
 
 async def evaluate(message):
-    send_chunked_embed("",message,str(ast.literal_eval(message)),Color.green())
+    if "__" in message:
+        raise Exception("that's dangerous don't do that")
+    
+    send_chunked_embed("",message,eval(message.content,{"__builtins__":None},{}),Color.green())
 
 
 @bot.event
