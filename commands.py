@@ -216,7 +216,7 @@ async def ri(ctx):
 
 
 @bot.command()
-async def def(ctx, *, text):
+async def df(ctx, *, text):
     try:
         await send_chunked_embed(text,ctx, urban_client.get_random_definition()[0].definition.replace("[","").replace("]",""), Color.orange())
     except Exception as e:
