@@ -20,6 +20,6 @@ async def send_chunked_embed(title,ctx, text, color):
         embed = discord.Embed(description=text, color=color)
         await ctx.reply(embed=embed)
 
-def evaluate_startwith(char, message , func):
+async def evaluate_startwith(char, message , func):
     if message.content.startswith(char):
-        func(message.content.replace(char, ""))
+        await func(message.content.replace(char, ""))

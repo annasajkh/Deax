@@ -131,9 +131,9 @@ async def on_message(message : discord.Message):
         if message.author == bot.user:
             return
 
-        evaluate_startwith("*",message,gpt2_large)
-        evaluate_startwith("~",message,dialogpt_large)
-        evaluate_startwith(">",message,evaluate)
+        await evaluate_startwith("*",message,gpt2_large)
+        await evaluate_startwith("~",message,dialogpt_large)
+        await evaluate_startwith(">",message,evaluate)
 
         if message.content.strip() != "!trab":
             bot.previous_message = message.content
