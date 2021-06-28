@@ -129,7 +129,7 @@ async def on_message(message : discord.Message):
             bot.previous_message = message.content
         
         #get match
-        match_re = re.match("!(.*) is",message.content)
+        match_re = re.match("!([^\"]+) is",message.content)
 
         # if the content match not empty for "!<sentence> is" 
         if match_re != None:
