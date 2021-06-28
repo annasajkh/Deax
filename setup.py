@@ -120,14 +120,6 @@ async def dialogpt_large(message):
     
     await message.channel.send(response["generated_text"])
 
-
-async def evaluate(message):
-    if "__" in message.content:
-        raise Exception("that's dangerous don't do that")
-    
-    await send_chunked_embed("",message,str(eval(message.content,{"__builtins__":None},{})),Color.green())
-
-
 @bot.event
 async def on_message(message : discord.Message):
     try:
@@ -136,7 +128,6 @@ async def on_message(message : discord.Message):
 
         await evaluate_startwith("*",message,gpt2_large)
         await evaluate_startwith("~",message,dialogpt_large)
-        await evaluate_startwith(">",message,evaluate)
 
         if message.content.strip() != "!trab":
             bot.previous_message = message.content

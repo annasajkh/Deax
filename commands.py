@@ -15,6 +15,7 @@ import os
 import wikipedia
 import fandom
 import requests
+import simpleeval
 
 
 @bot.command()
@@ -210,5 +211,13 @@ async def say(ctx, *, text):
 async def ri(ctx):
     try:
         await ctx.reply(requests.get("https://picsum.photos/500").url)
+    except Exception as e:
+        await send_chunked_embed("",ctx,str(e), Color.red())
+
+
+@bot.command()
+async def eval(ctx, *, text):
+    try:
+        await send_chunked_embed("",ctx,simpleeval.simple_eval(text),Color.green())
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
