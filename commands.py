@@ -40,7 +40,17 @@ async def yt(ctx, *, text):
 async def fand(ctx, wiki, page):
     try:
         fandom.set_wiki(wiki)
-        await send_chunked_embed("",ctx,fandom.summary(page),Color.gold())
+        page = fandom.page(page)
+
+        embed = discord.Embed()
+        embed.title = page.title
+        embed.set_image(url=page.images[0])
+        embed.description = page.summary
+
+        for section in page.content["sections"]:
+            embed.add_field(name=section["title"],value=section["content"][:1024])
+
+        await ctx.send(embed=embed)
 
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
@@ -171,6 +181,7 @@ async def ud(ctx, *, text):
         await send_chunked_embed("",ctx, get_urban_def(text), Color.orange())
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
+
 
 @bot.command()
 async def udr(ctx):
