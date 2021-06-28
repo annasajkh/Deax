@@ -129,11 +129,11 @@ async def on_message(message : discord.Message):
             bot.previous_message = message.content
         
         #get match
-        match_re = re.match("!([^\"]+) is",message.content)
+        match_re = re.match("!(.*) is",message.content)
 
         # if the content match not empty for "!<sentence> is" 
         if match_re != None:
-            await send_chunked_embed(match_re[0], message, urban_client.get_random_definition()[0].definition.replace("[","").replace("]",""), Color.orange())
+            await send_chunked_embed(match_re.replace("is","").replace("!",""), message, urban_client.get_random_definition()[0].definition.replace("[","").replace("]",""), Color.orange())
             return
         
         if "come" in message.content.lower():
