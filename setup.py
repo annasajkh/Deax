@@ -108,7 +108,9 @@ async def on_message(message : discord.Message):
             text = message.content.replace("~","")
 
             data["inputs"]["text"] = text
-            response = get_hugging_face(data,"microsoft/DialoGPT-large")["generated_text"]
+            response = get_hugging_face(data,"microsoft/DialoGPT-large")
+
+            print(response)
 
 
             data["inputs"]["past_user_inputs"].append(text)
@@ -123,7 +125,7 @@ async def on_message(message : discord.Message):
 
 
             
-            await message.channel.send(response)
+            await message.channel.send(response["generated_text"])
 
         if message.content.strip() != "!trab":
             bot.previous_message = message.content
