@@ -215,9 +215,9 @@ async def ri(ctx):
         await send_chunked_embed("",ctx,str(e), Color.red())
 
 
-@bot.command()
-async def eval(ctx, *, text):
-    try:
-        await send_chunked_embed("",ctx,str(simpleeval.simple_eval(text)),Color.green())
-    except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+# @bot.command()
+# async def eval(ctx, *, text):
+#     try:
+#         await send_chunked_embed("",ctx,str(simpleeval.simple_eval(text)),Color.green())
+#     except Exception as e:
+#         await send_chunked_embed("",ctx,str(e), Color.red())

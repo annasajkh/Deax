@@ -73,9 +73,6 @@ get random definition of
 
 translate above
 !trab
-
-evaluate expression
-!eval <sentence>
 """.strip()
 
 # generate texts using hugging face gpt2-large models
