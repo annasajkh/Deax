@@ -22,4 +22,5 @@ async def send_chunked_embed(title,ctx, text, color):
 
 async def evaluate_startwith(char, message , func):
     if message.content.startswith(char):
-        await func(message.content.replace(char, ""))
+        message.content = message.content.replace(char,"")
+        await func(message)
