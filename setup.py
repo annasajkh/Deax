@@ -68,8 +68,8 @@ search youtube
 urban dict random
 !udr
 
-get random definition of
-!<sentence> is
+get random definition of someting
+!def <sentence>
 
 translate above
 !trab
@@ -130,14 +130,6 @@ async def on_message(message : discord.Message):
 
         if message.content.strip() != "!trab":
             bot.previous_message = message.content
-        
-        #get match
-        match_re = re.match("!(.*) is",message.content)
-
-        # if the content match not empty for "!<sentence> is" 
-        if match_re != None:
-            await send_chunked_embed(match_re[0].replace("is","").replace("!",""), message, urban_client.get_random_definition()[0].definition.replace("[","").replace("]",""), Color.orange())
-            return
         
         if "come" in message.content.lower():
 

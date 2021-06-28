@@ -215,9 +215,9 @@ async def ri(ctx):
         await send_chunked_embed("",ctx,str(e), Color.red())
 
 
-# @bot.command()
-# async def eval(ctx, *, text):
-#     try:
-#         await send_chunked_embed("",ctx,str(simpleeval.simple_eval(text)),Color.green())
-#     except Exception as e:
-#         await send_chunked_embed("",ctx,str(e), Color.red())
+@bot.command()
+async def def(ctx, *, text):
+    try:
+        await send_chunked_embed(text,ctx, urban_client.get_random_definition()[0].definition.replace("[","").replace("]",""), Color.orange())
+    except Exception as e:
+        await send_chunked_embed("",ctx,str(e), Color.red())
