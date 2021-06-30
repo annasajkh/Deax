@@ -1,7 +1,6 @@
 from googlesearch import search
 from discord.colour import Color
 from gtts import gTTS
-from quora import Quora
 from youtube_search import YoutubeSearch
 
 from setup import *
