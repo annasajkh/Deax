@@ -176,7 +176,7 @@ async def search(ctx, *, text):
 @bot.command()
 async def ud(ctx, *, text):
     try:
-        await send_chunked_embed("",ctx, get_urban_def(text), Color.orange())
+        await send_chunked_embed(text,ctx, get_urban_def(text), Color.orange())
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
 
@@ -216,9 +216,10 @@ async def ri(ctx):
 async def df(ctx, *, text):
     try:
         text = text.title()
+        
         title, definition = get_random_urban_def()
-        definition = definition.replace("[","").replace("]","")
 
+        definition = definition.replace("[","").replace("]","")
         definition = definition.replace(title,text)
 
         await send_chunked_embed(text,ctx,definition, Color.orange())
