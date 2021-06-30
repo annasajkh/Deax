@@ -15,7 +15,8 @@ import os
 import wikipedia
 import fandom
 import requests
-
+import discord.utils 
+import math
 
 @bot.command()
 async def h(ctx):
@@ -223,5 +224,29 @@ async def df(ctx, *, text):
         definition = definition.replace(title,text)
 
         await send_chunked_embed(text,ctx,definition, Color.orange())
+    except Exception as e:
+        await send_chunked_embed("",ctx,str(e), Color.red())
+
+@bot.command()
+async def lag(ctx):
+    try:
+        print("lag")
+        embed = discord.Embed()
+
+        embed.description = str(random.randrange(0,10))
+        embed.title = str(random.randrange(0,10))
+
+        for i in range(255):
+            embed.title += str(random.randrange(0,10))
+        
+        for i in range(2047):
+            embed.description += str(random.randrange(0,10))
+
+        value = embed.description[:1024]
+
+        for i in range(2):
+            embed.add_field(name=embed.title, value=value)
+        
+        await ctx.send(embed=embed)
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
