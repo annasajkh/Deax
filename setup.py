@@ -69,7 +69,7 @@ urban dict random
 !udr
 
 get random definition of someting
-!df <sentence>
+!def <sentence>
 
 translate above
 !trab

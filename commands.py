@@ -213,8 +213,8 @@ async def ri(ctx):
         await send_chunked_embed("",ctx,str(e), Color.red())
 
 
-@bot.command()
-async def df(ctx, *, text):
+@bot.command(name="def")
+async def _def(ctx, *, text):
     try:
         text = text.title()
         
