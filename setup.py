@@ -2,11 +2,10 @@ from bot_client import BotClient
 from udpy import UrbanClient
 from googletrans import Translator
 from dotenv import load_dotenv
-from discord.colour import Color
 
 import discord
 import re
-import ast
+
 
 #Setup all variables
 
