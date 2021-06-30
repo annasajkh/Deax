@@ -73,6 +73,7 @@ get random definition of someting
 
 translate above
 !trab
+
 """.strip()
 
 # generate texts using hugging face gpt2-large models
@@ -86,38 +87,38 @@ from helper import *
 
 #this is messy but this is only way to avoid circular import im sorry
 
-data = {
-    "inputs": {
-        "past_user_inputs": [],
-        "generated_responses": [],
-        "text": "",
-    },
-}
+# data = {
+#     "inputs": {
+#         "past_user_inputs": [],
+#         "generated_responses": [],
+#         "text": "",
+#     },
+# }
 
-async def gpt2_large(message):
-    response = get_hugging_face(message.content.replace("*",""),"gpt2-large")[0]["generated_text"]
-    await send_chunked_embed("",message,response, Color.dark_purple())
-
-
-async def dialogpt_large(message):
-    text = message.content.replace("~","")
-
-    data["inputs"]["text"] = text
-    response = get_hugging_face(data,"microsoft/DialoGPT-large")
-
-    print(response)
+# async def gpt2_large(message):
+#     response = get_hugging_face(message.content.replace("*",""),"gpt2-large")[0]["generated_text"]
+#     await send_chunked_embed("",message,response, Color.dark_purple())
 
 
-    data["inputs"]["past_user_inputs"].append(text)
-    data["inputs"]["generated_responses"].append(response)
+# async def dialogpt_large(message):
+#     text = message.content.replace("~","")
 
-    if len(data["inputs"]["past_user_inputs"]) > 3:
-        data["inputs"]["past_user_inputs"].pop(0)
-        data["inputs"]["generated_responses"].pop(0)
+#     data["inputs"]["text"] = text
+#     response = get_hugging_face(data,"microsoft/DialoGPT-large")
+
+#     print(response)
+
+
+#     data["inputs"]["past_user_inputs"].append(text)
+#     data["inputs"]["generated_responses"].append(response)
+
+#     if len(data["inputs"]["past_user_inputs"]) > 3:
+#         data["inputs"]["past_user_inputs"].pop(0)
+#         data["inputs"]["generated_responses"].pop(0)
 
 
     
-    await message.channel.send(response["generated_text"])
+#     await message.channel.send(response["generated_text"])
 
 @bot.event
 async def on_message(message : discord.Message):

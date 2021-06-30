@@ -1,6 +1,7 @@
 from googlesearch import search
 from discord.colour import Color
 from gtts import gTTS
+from quora import Quora
 from youtube_search import YoutubeSearch
 
 from setup import *
@@ -16,7 +17,7 @@ import wikipedia
 import fandom
 import requests
 import discord.utils 
-import math
+import re
 
 @bot.command()
 async def h(ctx):
@@ -221,32 +222,10 @@ async def _def(ctx, *, text):
         title, definition = get_random_urban_def()
 
         definition = definition.replace("[","").replace("]","")
-        definition = definition.replace(title,text)
+
+        title_re = re.compile(re.escape(title),re.IGNORECASE)
+        definition = title_re.sub(text,definition)
 
         await send_chunked_embed(text,ctx,definition, Color.orange())
-    except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
-
-@bot.command()
-async def lag(ctx):
-    try:
-        print("lag")
-        embed = discord.Embed()
-
-        embed.description = str(random.randrange(0,10))
-        embed.title = str(random.randrange(0,10))
-
-        for i in range(255):
-            embed.title += str(random.randrange(0,10))
-        
-        for i in range(2047):
-            embed.description += str(random.randrange(0,10))
-
-        value = embed.description[:1024]
-
-        for i in range(2):
-            embed.add_field(name=embed.title, value=value)
-        
-        await ctx.send(embed=embed)
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
