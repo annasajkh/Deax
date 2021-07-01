@@ -220,6 +220,9 @@ async def _def(ctx, *, text):
         
         title, definition = get_random_urban_def()
 
+        while title not in definition:
+            title, definition = get_random_urban_def()
+
         definition = definition.replace("[","").replace("]","")
 
         title_re = re.compile(re.escape(title),re.IGNORECASE)
