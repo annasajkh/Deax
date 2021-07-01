@@ -26,5 +26,4 @@ async def evaluate_startwith(char, message , func):
         await func(message)
 
 def replace_ignore_case(text, old_word, new_word):
-    title_re = re.compile(re.escape(old_word),re.IGNORECASE)
-    return title_re.sub(new_word,text)
+    return re.compile(re.escape(old_word),re.IGNORECASE).sub(new_word,text)
