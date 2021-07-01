@@ -223,10 +223,10 @@ async def _def(ctx, *, text):
         while title not in definition:
             title, definition = get_random_urban_def()
 
-        definition = definition.replace("[","").replace("]","")
+        definition = definition.replace('[','').replace(']','')
         definition = replace_ignore_case(definition, title, text)
 
-        if text[0] in ['a','i','u','e','o']:
+        if text[0] in ['A','I','U','E','O']:
             definition = replace_ignore_case(definition,f"a {text}", f"an {text}")
         else:
             definition = replace_ignore_case(definition,f"an {text}", f"a {text}")
