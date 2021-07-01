@@ -16,7 +16,6 @@ import wikipedia
 import fandom
 import requests
 import discord.utils 
-import re
 
 @bot.command()
 async def h(ctx):
@@ -185,7 +184,7 @@ async def ud(ctx, *, text):
 @bot.command()
 async def udr(ctx):
     try:
-        title, definition = get_random_urban_def()
+        title, definition = get_rand_urban_def()
         await send_chunked_embed(title, ctx, definition, Color.orange())
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
@@ -218,10 +217,10 @@ async def _def(ctx, *, text):
     try:
         text = text.title()
         
-        title, definition = get_random_urban_def()
+        title, definition = get_rand_urban_def()
 
         while title not in definition:
-            title, definition = get_random_urban_def()
+            title, definition = get_rand_urban_def()
 
         definition = definition.replace('[','').replace(']','')
         definition = replace_ignore_case(definition, title, text)
@@ -235,5 +234,18 @@ async def _def(ctx, *, text):
             definition = definition.replace('An' + text, 'A' + text)
 
         await send_chunked_embed(text,ctx,definition, Color.orange())
+    except Exception as e:
+        await send_chunked_embed("",ctx,str(e), Color.red())
+
+@bot.command()
+async def meme(ctx):
+    try:
+        name, url = get_rand_meme()
+
+        embed = discord.Embed()
+        embed.title = name
+        embed.set_image(url=url)
+
+        await ctx.reply(embed=embed)
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())

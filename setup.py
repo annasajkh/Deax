@@ -73,7 +73,10 @@ get random definition of someting
 translate above
 !trab
 
+get random meme this command uses D3vd Meme API
+!meme
 """.strip()
+
 
 # generate texts using hugging face gpt2-large models
 # *<sentence>

@@ -36,7 +36,7 @@ def get_urban_def(text):
     return result
 
 
-def get_random_urban_def():
+def get_rand_urban_def():
     result = urban_client.get_random_definition()
 
     index = random.randrange(0,len(result))
@@ -45,3 +45,8 @@ def get_random_urban_def():
     definition = result[index].definition.replace("[","").replace("]","")
     
     return title, definition
+
+def get_rand_meme():
+    result = requests.get("https://meme-api.herokuapp.com/gimme").json()
+
+    return result["postLink"], result["url"]
