@@ -226,6 +226,7 @@ async def _def(ctx, *, text):
         definition = definition.replace('[','').replace(']','')
         definition = replace_ignore_case(definition, title, text)
 
+        #thanks mert
         if text[0] in ['A','I','U','E','O']:
             definition = definition.replace('a' + text, 'an' + text)
             definition = definition.replace('A' + text, 'An' + text)
