@@ -227,9 +227,11 @@ async def _def(ctx, *, text):
         definition = replace_ignore_case(definition, title, text)
 
         if text[0] in ['A','I','U','E','O']:
-            definition = replace_ignore_case(definition,f"a {text}", f"an {text}")
+            definition.replace('a' + text, 'an' + text)
+            definition.replace('A' + text, 'An' + text)
         else:
-            definition = replace_ignore_case(definition,f"an {text}", f"a {text}")
+            definition.replace('an' + text, 'a' + text)
+            definition.replace('An' + text, 'A' + text)
 
         await send_chunked_embed(text,ctx,definition, Color.orange())
     except Exception as e:
