@@ -216,7 +216,7 @@ async def ri(ctx):
 @bot.command(name="def")
 async def _def(ctx, *, text):
     try:
-        text = text.title()
+        text = text.title().replace('@','')
         
         title, definition = get_random_urban_def()
 
