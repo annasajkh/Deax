@@ -224,9 +224,10 @@ async def _def(ctx, *, text):
             title, definition = get_random_urban_def()
 
         definition = definition.replace("[","").replace("]","")
+        definition = replace_ignore_case(definition, title, text)
 
-        title_re = re.compile(re.escape(title),re.IGNORECASE)
-        definition = title_re.sub(text,definition)
+        if text[0] in ['a','i','u','e','o']:
+            definition = replace_ignore_case(definition,f"a {text}", f"an {text}")
 
         await send_chunked_embed(text,ctx,definition, Color.orange())
     except Exception as e:
