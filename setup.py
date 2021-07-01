@@ -132,17 +132,11 @@ async def on_message(message : discord.Message):
             bot.previous_message = message.content
         
         if "come" in message.content.lower():
-
-            #will find all come and it IGNORECASE
-            src_str = re.compile("come", re.IGNORECASE)
-
-            #send the result
-            await message.channel.send(src_str.sub("cum", message.content))
-
+            await message.channel.send(replace_ignore_case(message.content,"come", "cum"))
             return
         
-        # since we override on_message we have to call this
     except Exception as e:
         await message.channel.send(e)
     
+    # since we override on_message we have to call this
     await bot.process_commands(message)
