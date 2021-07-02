@@ -78,6 +78,8 @@ get random meme this command uses D3vd Meme API
 
 hidden suprize
 !hide
+
+
 """.strip()
 
 

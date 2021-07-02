@@ -266,3 +266,32 @@ async def hide(ctx):
         await send_chunked_embed("",ctx,str(message), Color.orange())
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
+
+@bot.command()
+async def fst(ctx):
+    try:
+        r = requests.post(
+            "https://api.deepai.org/api/fast-style-transfer",
+            data={
+                "content": f"{ctx.message.attachments[0].url}",
+                "style": f"{ctx.message.attachments[1].url}",
+            },
+            headers={"api-key": os.environ["DEEP_DREAM_KEY"]}
+        )
+        await ctx.reply(r.json()["output_url"])
+    except Exception as e:
+        await send_chunked_embed("",ctx,str(e), Color.red())
+
+@bot.command()
+async def tg(ctx, *, text):
+    try:
+        r = requests.post(
+            "https://api.deepai.org/api/text-generator",
+            data={
+                "text":text
+            },
+            headers={"api-key": os.environ["DEEP_DREAM_KEY"]}
+        )
+        await ctx.reply(r.json()["output"])
+    except Exception as e:
+        await send_chunked_embed("",ctx,str(e), Color.red())

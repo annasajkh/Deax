@@ -2,9 +2,7 @@
 import requests
 from setup import urban_client
 import random
-import json
 import requests
-import os
 
 def get_affirmation():
     return requests.get("https://www.affirmations.dev/").json()["affirmation"]
