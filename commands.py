@@ -258,7 +258,6 @@ async def hide(ctx):
         title, definition = get_rand_urban_def()
         def_list = definition.split(" ")
 
-        random.shuffle(def_list)
         message = ""
 
         for word in def_list:
