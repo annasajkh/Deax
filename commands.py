@@ -261,7 +261,7 @@ async def hide(ctx):
         message = ""
 
         for word in def_list:
-            message += f" ||{word.strip()} || "
+            message += f" || {word.strip()} || "
         
         await send_chunked_embed("",ctx,str(message), Color.orange())
     except Exception as e:
