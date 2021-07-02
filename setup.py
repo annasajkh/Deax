@@ -75,6 +75,9 @@ translate above
 
 get random meme this command uses D3vd Meme API
 !meme
+
+hidden suprize
+!hide
 """.strip()
 
 

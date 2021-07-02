@@ -1,3 +1,4 @@
+from discord import message
 from googlesearch import search
 from discord.colour import Color
 from gtts import gTTS
@@ -247,5 +248,22 @@ async def meme(ctx):
         embed.set_image(url=url)
 
         await ctx.reply(embed=embed)
+    except Exception as e:
+        await send_chunked_embed("",ctx,str(e), Color.red())
+
+
+@bot.command()
+async def hide(ctx):
+    try:
+        title, definition = get_rand_urban_def()
+        def_list = definition.split(" ")
+
+        random.shuffle(def_list)
+        message = ""
+
+        for word in def_list:
+            message += f" ||{word.strip()} || "
+        
+        await send_chunked_embed("",ctx,str(message), Color.orange())
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
