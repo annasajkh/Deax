@@ -253,7 +253,7 @@ async def meme(ctx):
 
 
 @bot.command()
-async def hide(ctx):
+async def sup(ctx):
     try:
         title, definition = get_rand_urban_def()
         def_list = definition.split(" ")
@@ -291,6 +291,7 @@ async def fst(ctx, img1_url="", img2_url=""):
                 },
                 headers={"api-key": os.environ["DEEP_DREAM_KEY"]}
             )
+        
         await ctx.reply(r.json()["output_url"])
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())

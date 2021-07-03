@@ -77,9 +77,7 @@ get random meme this command uses D3vd Meme API
 !meme
 
 hidden suprize
-!hide
-
-
+!sup
 """.strip()
 
 
@@ -138,10 +136,6 @@ async def on_message(message : discord.Message):
 
         if message.content.strip() != "!trab":
             bot.previous_message = message.content
-        
-        if "come" in message.content.lower():
-            await message.channel.send(replace_ignore_case(message.content,"come", "cum"))
-            return
         
     except Exception as e:
         await message.channel.send(e)
