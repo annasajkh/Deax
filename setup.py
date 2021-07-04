@@ -128,8 +128,6 @@ from helper import *
 @bot.event
 async def on_message(message : discord.Message):
     try:
-        if message.author == bot.user:
-            return
 
         # await evaluate_startwith("*",message,gpt2_large)
         # await evaluate_startwith("~",message,dialogpt_large)
