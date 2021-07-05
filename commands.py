@@ -295,6 +295,32 @@ async def fst(ctx, img1_url="", img2_url=""):
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
 
+@bot.command()
+async def nt(ctx, img_url=""):
+    try:
+        r = None
+        async with ctx.typing():
+            if img_url == "":
+                r = requests.post(
+                    "https://api.deepai.org/api/neuraltalk",
+                    data={
+                        "image": f"{ctx.message.attachments[0].url}"
+                    },
+                    headers={"api-key": os.environ["DEEP_DREAM_KEY"]}
+                )
+            else:
+                r = requests.post(
+                    "https://api.deepai.org/api/neuraltalk",
+                    data={
+                        "image": img_url
+                    },
+                    headers={"api-key": os.environ["DEEP_DREAM_KEY"]}
+                )
+            
+        await ctx.reply(r.json()["output"])
+    except Exception as e:
+        await send_chunked_embed("",ctx,str(e), Color.red())
+
 
 @bot.command()
 async def tg(ctx, *, text):
