@@ -302,7 +302,7 @@ async def tg(ctx, *, text):
 
         async with ctx.typing():
             result = booste.gpt2(os.environ["BOOSTE_KEY"],text,30,window_max=50)
-            await asyncio.sleep(10000)
+            await asyncio.sleep(20)
         
         await ctx.reply(f"{text} {' '.join(result)}")
     except Exception as e:
