@@ -1,2 +1,2 @@
 # Cum-Bot
- Horny-Bot but better 
+this is a discord bot that just try to make everything fun
