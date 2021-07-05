@@ -299,8 +299,11 @@ async def fst(ctx, img1_url="", img2_url=""):
 @bot.command()
 async def tg(ctx, *, text):
     try:
+
         async with ctx.typing():
-            result = booste.gpt2_async_start(os.environ["BOOSTE_KEY"],text,30) 
+            result = booste.gpt2(os.environ["BOOSTE_KEY"],text,30,window_max=50)
+            await asyncio.sleep(10000)
+        
         await ctx.reply(f"{text} {' '.join(result)}")
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
