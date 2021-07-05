@@ -2,7 +2,6 @@ aiohttp==3.7.4.post0
 async-timeout==3.0.1
 attrs==21.2.0
 beautifulsoup4==4.9.3
-booste==0.3.0
 certifi==2021.5.30
 cffi==1.14.5
 chardet==3.0.4
@@ -30,7 +29,6 @@ memeapi==0.2.3
 multidict==5.1.0
 numpy==1.21.0
 pandas==1.2.5
-Pillow==8.3.0
 pip-autoremove==0.9.1
 pycares==4.0.0
 pycparser==2.20

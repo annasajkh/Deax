@@ -16,7 +16,6 @@ import wikipedia
 import fandom
 import requests
 import discord.utils 
-import booste
 
 @bot.command()
 async def h(ctx):
@@ -271,6 +270,7 @@ async def sup(ctx):
 @bot.command()
 async def fst(ctx, img1_url="", img2_url=""):
     try:
+        r = None
         async with ctx.typing():
             if img1_url == "" and img2_url == "":
                 r = requests.post(
@@ -299,7 +299,14 @@ async def fst(ctx, img1_url="", img2_url=""):
 @bot.command()
 async def tg(ctx, *, text):
     try:
-        result = booste.gpt2(os.environ["BOOSTE_KEY"],text,30,window_max=50)
-        await ctx.reply(f"{text} {' '.join(result)}")
+        async with ctx.typing():
+            r = requests.post(
+                "https://api.deepai.org/api/text-generator",
+                data={
+                    "text":text
+                },
+                headers={"api-key": os.environ["DEEP_DREAM_KEY"]}
+            )
+        await ctx.reply(r.json()["output"])
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
