@@ -337,7 +337,7 @@ async def tg(ctx, *, text):
             await asyncio.sleep(15)
             result = await page.evaluate("(element) => element.innerText",gtext)
 
-            browser.close()
+            await browser.close()
 
         await ctx.reply(result)            
 
