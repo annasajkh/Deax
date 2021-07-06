@@ -4,7 +4,7 @@ from googletrans import Translator
 from dotenv import load_dotenv
 
 import discord
-import re
+import asyncio
 
 
 #Setup all variables
@@ -80,57 +80,15 @@ hidden suprize
 !sup
 """.strip()
 
-
-# generate texts using hugging face gpt2-large models
-# *<sentence>
-
-# talk to ai using hugging face DialoGPT-large models
-# ~<sentence>
-#setup all function
 from apis import *
 from helper import *
 
-#this is messy but this is only way to avoid circular import im sorry
+page, input_text, submit_button = asyncio.get_event_loop().run_until_complete(setup_browser())
 
-# data = {
-#     "inputs": {
-#         "past_user_inputs": [],
-#         "generated_responses": [],
-#         "text": "",
-#     },
-# }
-
-# async def gpt2_large(message):
-#     response = get_hugging_face(message.content.replace("*",""),"gpt2-large")[0]["generated_text"]
-#     await send_chunked_embed("",message,response, Color.dark_purple())
-
-
-# async def dialogpt_large(message):
-#     text = message.content.replace("~","")
-
-#     data["inputs"]["text"] = text
-#     response = get_hugging_face(data,"microsoft/DialoGPT-large")
-
-#     print(response)
-
-
-#     data["inputs"]["past_user_inputs"].append(text)
-#     data["inputs"]["generated_responses"].append(response)
-
-#     if len(data["inputs"]["past_user_inputs"]) > 3:
-#         data["inputs"]["past_user_inputs"].pop(0)
-#         data["inputs"]["generated_responses"].pop(0)
-
-
-    
-#     await message.channel.send(response["generated_text"])
 
 @bot.event
 async def on_message(message : discord.Message):
     try:
-
-        # await evaluate_startwith("*",message,gpt2_large)
-        # await evaluate_startwith("~",message,dialogpt_large)
 
         if message.content.strip() != "!trab":
             bot.previous_message = message.content

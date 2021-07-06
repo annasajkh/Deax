@@ -16,6 +16,8 @@ import wikipedia
 import fandom
 import requests
 import discord.utils 
+import asyncio
+
 
 @bot.command()
 async def h(ctx):
@@ -326,13 +328,18 @@ async def nt(ctx, img_url=""):
 async def tg(ctx, *, text):
     try:
         async with ctx.typing():
-            r = requests.post(
-                "https://api.deepai.org/api/text-generator",
-                data={
-                    "text":text
-                },
-                headers={"api-key": os.environ["DEEP_DREAM_KEY"]}
-            )
-        await ctx.reply(r.json()["output"])
+            from setup import input_text, submit_button
+
+            await input_text.type(text)
+            await submit_button.click()
+
+            gtext = await page.querySelector("#gtext")
+            await asyncio.sleep(15)
+            result = await page.evaluate("(element) => element.innerText",gtext)
+
+            await page.reload()
+
+            input_text, submit_button = await get_elemets(page)
+        await ctx.reply(result)
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())

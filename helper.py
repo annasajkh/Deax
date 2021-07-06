@@ -1,6 +1,7 @@
 import textwrap
 import discord
 import re
+from pyppeteer import launch
 
 #if embed is larger than 2048 character use this!
 async def send_chunked_embed(title,ctx, text, color):
@@ -27,3 +28,22 @@ async def evaluate_startwith(char, message , func):
 
 def replace_ignore_case(text, old_word, new_word):
     return re.compile(re.escape(old_word),re.IGNORECASE).sub(new_word,text)
+
+async def get_elemets(page):
+	await page.waitForSelector("#input_text")
+
+	input_text = await page.querySelector("#input_text")
+
+	submit_button = await page.querySelector("#submit_button")
+
+	return input_text, submit_button
+
+async def setup_browser():
+    browser = await launch()
+    page = await browser.newPage()
+
+    await page.goto("https://bellard.org/textsynth/")
+
+    input_text, submit_button = await get_elemets(page)
+
+    return page, input_text, submit_button
