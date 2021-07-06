@@ -328,8 +328,8 @@ async def nt(ctx, img_url=""):
 async def tg(ctx, *, text):
     try:
         async with ctx.typing():
-            from setup import input_text, submit_button
-
+            global input_text, submit_button
+            
             await input_text.type(text)
             await submit_button.click()
 
@@ -340,6 +340,8 @@ async def tg(ctx, *, text):
             await page.reload()
 
             input_text, submit_button = await get_elemets(page)
-        await ctx.reply(result)
+
+        await ctx.reply(result)            
+
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
