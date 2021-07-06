@@ -46,4 +46,4 @@ async def setup_browser():
 
     input_text, submit_button = await get_elemets(page)
 
-    return page, input_text, submit_button
+    return browser, page, input_text, submit_button

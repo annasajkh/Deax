@@ -328,7 +328,7 @@ async def nt(ctx, img_url=""):
 async def tg(ctx, *, text):
     try:
         async with ctx.typing():
-            global input_text, submit_button
+            browser, page, input_text, submit_button = await setup_browser()
 
             await input_text.type(text + " ")
             await submit_button.click()
@@ -337,9 +337,7 @@ async def tg(ctx, *, text):
             await asyncio.sleep(15)
             result = await page.evaluate("(element) => element.innerText",gtext)
 
-            await page.reload()
-
-            input_text, submit_button = await get_elemets(page)
+            browser.close()
 
         await ctx.reply(result)            
 

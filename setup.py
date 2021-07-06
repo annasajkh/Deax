@@ -4,7 +4,6 @@ from googletrans import Translator
 from dotenv import load_dotenv
 
 import discord
-import asyncio
 
 
 #Setup all variables
@@ -82,8 +81,6 @@ hidden suprize
 
 from apis import *
 from helper import *
-
-page, input_text, submit_button = asyncio.get_event_loop().run_until_complete(setup_browser())
 
 
 @bot.event
