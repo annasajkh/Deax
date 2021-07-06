@@ -39,7 +39,7 @@ async def get_elemets(page):
 	return input_text, submit_button
 
 async def setup_browser():
-    browser = await launch()
+    browser = await launch({"args":["--no-sandbox","--disable-setuid-sandbox"]})
     page = await browser.newPage()
 
     await page.goto("https://bellard.org/textsynth/")
