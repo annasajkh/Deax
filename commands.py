@@ -329,8 +329,8 @@ async def tg(ctx, *, text):
     try:
         async with ctx.typing():
             global input_text, submit_button
-            
-            await input_text.type(text)
+
+            await input_text.type(text + " ")
             await submit_button.click()
 
             gtext = await page.querySelector("#gtext")
