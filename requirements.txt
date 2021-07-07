@@ -1,4 +1,5 @@
 aiohttp==3.7.4.post0
+appdirs==1.4.4
 async-timeout==3.0.1
 attrs==21.2.0
 beautifulsoup4==4.9.3
@@ -32,6 +33,8 @@ pandas==1.2.5
 pip-autoremove==0.9.1
 pycares==4.0.0
 pycparser==2.20
+pyee==8.1.0
+pyppeteer==0.2.5
 PySocks==1.7.1
 python-dateutil==2.8.1
 python-dotenv==0.18.0
@@ -43,9 +46,11 @@ six==1.16.0
 sniffio==1.2.0
 soupsieve==2.2.1
 tabulate==0.8.9
+tqdm==4.61.2
 typing-extensions==3.10.0.0
 udpy==2.0.0
 urllib3==1.26.5
+websockets==8.1
 wikipedia==1.4.0
 yarl==1.6.3
 youtube-search==2.1.0
