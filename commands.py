@@ -328,6 +328,7 @@ async def nt(ctx, img_url=""):
 async def tg(ctx, *, text):
     try:
         async with ctx.typing():
+            
             await asyncio.sleep(10)
 
             browser, page, input_text, submit_button = await setup_browser()
