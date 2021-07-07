@@ -324,44 +324,44 @@ async def nt(ctx, img_url=""):
         await send_chunked_embed("",ctx,str(e), Color.red())
 
 
-@bot.command()
-async def tg(ctx, *, text):
-    try:
-        async with ctx.typing():
-
-            await asyncio.sleep(5)
-
-            browser, page, input_text, submit_button = await setup_browser()
-
-            await input_text.type(text + " ")
-            await submit_button.click()
-
-            gtext = await page.querySelector("#gtext")
-            await asyncio.sleep(15)
-            result = await page.evaluate("(element) => element.innerText",gtext)
-
-            await browser.close()
-
-        await ctx.reply(result)            
-
-    except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
-
 # @bot.command()
 # async def tg(ctx, *, text):
 #     try:
 #         async with ctx.typing():
-#             result = requests.post(
-#                 "https://api.deepai.org/api/text-generator",
 
-#                 data={
-#                     "text": text,
-#                 },
-                
-#                 headers={"api-key": os.environ["DEEP_DREAM_KEY"]}
-#             ).json()["output"]
+#             await asyncio.sleep(5)
+
+#             browser, page, input_text, submit_button = await setup_browser()
+
+#             await input_text.type(text + " ")
+#             await submit_button.click()
+
+#             gtext = await page.querySelector("#gtext")
+#             await asyncio.sleep(15)
+#             result = await page.evaluate("(element) => element.innerText",gtext)
+
+#             await browser.close()
 
 #         await ctx.reply(result)            
 
 #     except Exception as e:
 #         await send_chunked_embed("",ctx,str(e), Color.red())
+
+@bot.command()
+async def tg(ctx, *, text):
+    try:
+        async with ctx.typing():
+            result = requests.post(
+                "https://api.deepai.org/api/text-generator",
+
+                data={
+                    "text": text,
+                },
+                
+                headers={"api-key": os.environ["DEEP_DREAM_KEY"]}
+            ).json()["output"]
+
+        await ctx.reply(result)            
+
+    except Exception as e:
+        await send_chunked_embed("",ctx,str(e), Color.red())

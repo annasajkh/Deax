@@ -34,7 +34,6 @@ pip-autoremove==0.9.1
 pycares==4.0.0
 pycparser==2.20
 pyee==8.1.0
-pyppeteer==0.2.5
 PySocks==1.7.1
 python-dateutil==2.8.1
 python-dotenv==0.18.0
