@@ -84,10 +84,16 @@ attact 2 images first one is the content and the seconds one is the style
 [image1]
 [image2]
 
+you can also use a link
+!fst <link1> <link2>
+
 image to text using Neuro Talk API from https://deepai.org/apis
 attact one image to be process 
 !nt
 [image]
+
+you can also use a link
+!fst <link>
 
 text generation using GPT2 API from https://deepai.org/apis
 !tg <text>
