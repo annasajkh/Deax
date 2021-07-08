@@ -77,6 +77,20 @@ get random meme this command uses D3vd Meme API
 
 hidden suprize
 !sup
+
+change style of an image using Fast Style Transfer API from https://deepai.org/apis
+attact 2 images first one is the content and the seconds one is the style
+!fst 
+[image1]
+[image2]
+
+image to text using Neuro Talk API from https://deepai.org/apis
+attact one image to be process 
+!nt
+[image]
+
+text generation using GPT2 API from https://deepai.org/apis
+!tg <text>
 """.strip()
 
 from apis import *
