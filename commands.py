@@ -193,7 +193,7 @@ async def udr(ctx):
 
 
 @bot.command()
-async def say(ctx, lang,  *, text):
+async def say(ctx, lang, text):
     try:
         tts = gTTS(text, lang=lang)
         tts.save("result.mp3")
