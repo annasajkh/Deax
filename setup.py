@@ -18,6 +18,9 @@ translator = Translator()
 urban_client = UrbanClient()
 
 help_str = """
+SELEVER!!!!
+!selever
+
 get random affirmation, this command uses Affirmations API
 !aff
 
