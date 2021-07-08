@@ -25,13 +25,13 @@ get random affirmation, this command uses Affirmations API
 !aff
 
 ask question to magic 8 ball
-!ask <sentence>
+!ask <text>
 
 get random quote, this command uses Zenquotes API
 !quo
 
-translate sentence to english, this command uses Google Translate
-!tra <language> <sentence>
+translate text to english, this command uses Google Translate
+!tra <language> "<text>"
 
 get random advice, this command uses Adviceslip API
 !adv
@@ -40,22 +40,22 @@ get fact about a number, this command uses Number Fact API
 !nf <number>
 
 search something
-!search <sentence>
+!search <text>
 
 get random definition from urban dict
-!ud <sentence>
+!ud <text>
 
 make the bot say something
-!say <language> <sentence>
+!say <language> "<text>"
 
 get random image, this command uses Lorem Picsum API
 !ri
 
 make the bot say something from urban dict
-!uds <sentence>
+!uds <text>
 
 search wikipedia
-!wiki <sentence>
+!wiki <text>
 
 search fandom website
 !fand "<root (game name/title/name)>" "<page (character/actor/object)>"
@@ -64,13 +64,13 @@ scroll
 !scr
 
 search youtube
-!yt <sentence>
+!yt <text>
 
 urban dict random
 !udr
 
 get random definition of someting
-!def <sentence>
+!def <text>
 
 translate above
 !trab
