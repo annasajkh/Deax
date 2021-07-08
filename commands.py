@@ -193,9 +193,9 @@ async def udr(ctx):
 
 
 @bot.command()
-async def say(ctx, *, text):
+async def say(ctx, lang, text):
     try:
-        tts = gTTS(text)
+        tts = gTTS(text, lang=lang)
         tts.save("result.mp3")
 
         await ctx.reply(file=discord.File("result.mp3"))
