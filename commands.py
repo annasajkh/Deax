@@ -126,7 +126,7 @@ async def quo(ctx):
 
 
 @bot.command()
-async def tra(ctx, lang, *text):
+async def tra(ctx, lang, text):
     try:
         await send_chunked_embed("",ctx,translator.translate(text,dest=lang).text, Color.blurple())
     except Exception as e:
@@ -158,15 +158,17 @@ async def nf(ctx, num):
         await send_chunked_embed("",ctx,str(e), Color.red())
 
 
-@bot.command()
-async def search(ctx, *, text):
+@bot.command(name="search")
+async def _search(ctx, *, text):
     try:
-        result = search(text, num_results=4)
+        result = search(text, num_results=5)
         string_result = ""
 
+        if not result:
+            raise Exception("can't find it sorry")
+
         for i in result:
-            if "http" in i:
-                string_result += i +'\n'
+            string_result += i +'\n'
         
         await ctx.reply(string_result)
 
@@ -192,7 +194,7 @@ async def udr(ctx):
 
 
 @bot.command()
-async def say(ctx, lang, *text):
+async def say(ctx, lang, text):
     try:
         tts = gTTS(text, lang=lang)
         tts.save("result.mp3")
