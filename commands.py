@@ -270,13 +270,13 @@ async def sup(ctx):
 
 
 @bot.command()
-async def fst(ctx, img1_url="", img2_url=""):
+async def ns(ctx, img1_url="", img2_url=""):
     try:
         r = None
         async with ctx.typing():
             if img1_url == "" and img2_url == "":
                 r = requests.post(
-                    "https://api.deepai.org/api/fast-style-transfer",
+                    "https://api.deepai.org/api/neural-style",
                     data={
                         "content": f"{ctx.message.attachments[0].url}",
                         "style": f"{ctx.message.attachments[1].url}",
@@ -285,7 +285,7 @@ async def fst(ctx, img1_url="", img2_url=""):
                 )
             else:
                 r = requests.post(
-                    "https://api.deepai.org/api/fast-style-transfer",
+                    "https://api.deepai.org/api/neural-style",
                     data={
                         "content": img1_url,
                         "style": img2_url,

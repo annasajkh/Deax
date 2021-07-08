@@ -83,12 +83,12 @@ hidden suprize
 
 change style of an image using Fast Style Transfer API from https://deepai.org/apis
 attact 2 images first one is the content and the seconds one is the style
-!fst 
+!ns 
 [image1]
 [image2]
 
 you can also use a link
-!fst <link1> <link2>
+!ns <link1> <link2>
 
 image to text using Neuro Talk API from https://deepai.org/apis
 attact one image to be process 
@@ -96,7 +96,7 @@ attact one image to be process
 [image]
 
 you can also use a link
-!fst <link>
+!nt <link>
 
 text generation using GPT2 API from https://deepai.org/apis
 !tg <text>
