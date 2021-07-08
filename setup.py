@@ -31,7 +31,7 @@ get random quote, this command uses Zenquotes API
 !quo
 
 translate sentence to english, this command uses Google Translate
-!tra <sentence>
+!tra <language> <sentence>
 
 get random advice, this command uses Adviceslip API
 !adv
@@ -46,7 +46,7 @@ get random definition from urban dict
 !ud <sentence>
 
 make the bot say something
-!say <sentence>
+!say <language> <sentence>
 
 get random image, this command uses Lorem Picsum API
 !ri

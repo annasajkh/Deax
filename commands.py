@@ -127,9 +127,9 @@ async def quo(ctx):
 
 
 @bot.command()
-async def tra(ctx, *, text):
+async def tra(ctx, lang, text):
     try:
-        await send_chunked_embed("",ctx,translator.translate(text).text, Color.blurple())
+        await send_chunked_embed("",ctx,translator.translate(text,dest=lang).text, Color.blurple())
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
 
@@ -193,7 +193,7 @@ async def udr(ctx):
 
 
 @bot.command()
-async def say(ctx, lang, text):
+async def say(ctx, lang,  *, text):
     try:
         tts = gTTS(text, lang=lang)
         tts.save("result.mp3")
