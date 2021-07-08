@@ -103,7 +103,6 @@ async def aff(ctx):
     try:
         embed = discord.Embed(description=get_affirmation(), color=0xFFFF00)
         await ctx.reply(embed=embed)
-
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
 
