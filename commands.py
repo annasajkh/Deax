@@ -368,9 +368,11 @@ async def tg(ctx, *, text):
 
 
 @bot.command()
-async def seveler(ctx):
+async def selever(ctx):
     try:
-        await ctx.reply("https://static.wikia.nocookie.net/fridaynightfunking/images/2/2f/SeleverAnim.gif/revision/latest?cb=20210430193537")
+        embed = discord.Embed(title="SELEVER", color=Color.purple())
+        embed.set_image("https://static.wikia.nocookie.net/fridaynightfunking/images/2/2f/SeleverAnim.gif/revision/latest?cb=20210430193537")
+        await ctx.reply(embed=embed)
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
 
