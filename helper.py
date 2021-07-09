@@ -7,27 +7,21 @@ import re
 
 #if embed is larger than 2048 character use this!
 async def send_chunked_embed(title, ctx, text, color):
-    texts = textwrap.wrap(text, 2048)
+    chunk = '\n'.join(['\n'.join(textwrap.wrap(line, 90, break_long_words=False, replace_whitespace=False)) for line in text.splitlines() if line.strip() != ''])
 
     embed = None
 
     if title == "":
-        embed = discord.Embed(description=texts[0], color=color)
+        embed = discord.Embed(description=chunk[0], color=color)
     else:
-        embed = discord.Embed(title=title, description=texts[0], color=color)
+        embed = discord.Embed(title=title, description=chunk[0], color=color)
 
     await ctx.reply(embed=embed)
-    texts.pop(0)
+    chunk.pop(0)
 
-    for text in texts:
+    for text in chunk:
         embed = discord.Embed(description=text, color=color)
         await ctx.reply(embed=embed)
-
-async def send_chunked_reply(ctx, text):
-    texts = textwrap.wrap(text, 2000)
-
-    for text in texts:
-        await ctx.reply(text)
 
 async def evaluate_startwith(char, message , func):
     if message.content.startswith(char):
