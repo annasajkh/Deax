@@ -9,7 +9,6 @@ import asyncio
 import discord
 import random
 import os
-import magic8ball
 import random
 import os
 import wikipedia
@@ -108,10 +107,19 @@ async def aff(ctx):
 
 
 @bot.command()
-async def ask(ctx):
+async def ask(ctx, *, text):
     try:
-        embed = discord.Embed(description=random.choice(magic8ball.list), color=Color.purple())
-        await ctx.reply(embed=embed)
+        async with ctx.typing():
+
+            input_text = f"""Question: {text}
+Answer: 
+            """.strip()
+
+            print(input_text)
+
+            result = get_gpt2(input_text).replace(input_text,"").strip()
+
+            await send_chunked_embed("",ctx, result, Color.purple())
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
 
@@ -240,6 +248,7 @@ async def _def(ctx, *, text):
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
 
+
 @bot.command()
 async def meme(ctx):
     try:
@@ -298,6 +307,7 @@ async def ns(ctx, img1_url="", img2_url=""):
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
 
+
 @bot.command()
 async def nt(ctx, img_url=""):
     try:
@@ -348,22 +358,12 @@ async def nt(ctx, img_url=""):
 #     except Exception as e:
 #         await send_chunked_embed("",ctx,str(e), Color.red())
 
+
 @bot.command()
 async def tg(ctx, *, text):
     try:
         async with ctx.typing():
-            result = requests.post(
-                "https://api.deepai.org/api/text-generator",
-
-                data={
-                    "text": text,
-                },
-                
-                headers={"api-key": os.environ["DEEP_DREAM_KEY"]}
-            ).json()["output"]
-
-
-        await send_chunked_embed("",ctx,str(result), Color.blue())      
+            await send_chunked_embed("",ctx,get_gpt2(text), Color.blue())
 
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
@@ -378,6 +378,7 @@ async def selever(ctx):
         await ctx.reply(embed=embed)
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
+
 
 @bot.command()
 async def niko(ctx):

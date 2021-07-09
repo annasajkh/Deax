@@ -1,5 +1,7 @@
 import textwrap
 import discord
+import requests
+import os
 import re
 # from pyppeteer import launch
 
@@ -47,3 +49,14 @@ def replace_ignore_case(text, old_word, new_word):
 #     input_text, submit_button = await get_elemets(page)
 
 #     return browser, page, input_text, submit_button
+
+def get_gpt2(text):
+    return str(requests.post(
+                "https://api.deepai.org/api/text-generator",
+
+                data={
+                    "text": text,
+                },
+                
+                headers={"api-key": os.environ["DEEP_DREAM_KEY"]}
+            ).json()["output"])
