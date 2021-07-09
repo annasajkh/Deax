@@ -362,7 +362,8 @@ async def tg(ctx, *, text):
                 headers={"api-key": os.environ["DEEP_DREAM_KEY"]}
             ).json()["output"]
 
-        await ctx.reply(result)            
+
+        await send_chunked_embed("",ctx,str(result), Color.blue())      
 
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
