@@ -6,7 +6,7 @@ import re
 # from pyppeteer import launch
 
 #if embed is larger than 2048 character use this!
-async def send_chunked_embed(title,ctx, text, color):
+async def send_chunked_embed(title, ctx, text, color):
     texts = textwrap.wrap(text, 2048)
 
     embed = None
@@ -22,6 +22,12 @@ async def send_chunked_embed(title,ctx, text, color):
     for text in texts:
         embed = discord.Embed(description=text, color=color)
         await ctx.reply(embed=embed)
+
+async def send_chunked_reply(ctx, text):
+    texts = textwrap.wrap(text, 2000)
+
+    for text in texts:
+        await ctx.reply(text)
 
 async def evaluate_startwith(char, message , func):
     if message.content.startswith(char):

@@ -119,7 +119,7 @@ Answer:
 
             result = get_gpt2(input_text).replace(input_text,"").strip()
 
-            await send_chunked_embed("",ctx, result, Color.purple())
+            await send_chunked_reply(ctx, result)
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
 
@@ -363,7 +363,7 @@ async def nt(ctx, img_url=""):
 async def tg(ctx, *, text):
     try:
         async with ctx.typing():
-            await send_chunked_embed("",ctx,get_gpt2(text), Color.blue())
+            await send_chunked_reply(ctx,get_gpt2(text))
 
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
