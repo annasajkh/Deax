@@ -374,6 +374,7 @@ async def selever(ctx):
     try:
         embed = discord.Embed(color=Color.purple())
         embed.set_image(url="https://static.wikia.nocookie.net/fridaynightfunking/images/2/2f/SeleverAnim.gif")
+        
         await ctx.reply(embed=embed)
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
@@ -381,10 +382,11 @@ async def selever(ctx):
 @bot.command()
 async def niko(ctx):
     try:
-        embed = discord.Embed(color=Color.purple())
+        embed = discord.Embed(color=Color.orange())
         embed.set_image(url="https://media1.tenor.com/images/0e1c03b54935e214924ab40a8f945372/tenor.gif?itemid=17938358")
+        
         await ctx.reply(embed=embed)
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.orange())
+        await send_chunked_embed("",ctx,str(e), Color.red())
 
         
