@@ -7,7 +7,8 @@ import re
 
 #if embed is larger than 2048 character use this!
 async def send_chunked_embed(title, ctx, text, color):
-    chunk = '\n'.join(['\n'.join(textwrap.wrap(line, 90, break_long_words=False, replace_whitespace=False)) for line in text.splitlines() if line.strip() != ''])
+    wrapper = textwrap.TextWrapper(width=2048, break_long_words=False, replace_whitespace=False)
+    chunk = wrapper.wrap(text)
 
     embed = None
 
