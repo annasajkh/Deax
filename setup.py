@@ -21,6 +21,9 @@ help_str = """
 SELEVER!!!!
 !selever
 
+NIKOOOO!!!!
+!niko
+
 get random affirmation, this command uses Affirmations API
 !aff
 

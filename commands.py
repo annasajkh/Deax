@@ -378,4 +378,13 @@ async def selever(ctx):
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
 
+@bot.command()
+async def niko(ctx):
+    try:
+        embed = discord.Embed(color=Color.purple())
+        embed.set_image(url="https://tenor.com/bnqKw.gif")
+        await ctx.reply(embed=embed)
+    except Exception as e:
+        await send_chunked_embed("",ctx,str(e), Color.red())
+
         
