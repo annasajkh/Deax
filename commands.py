@@ -385,6 +385,6 @@ async def niko(ctx):
         embed.set_image(url="https://media1.tenor.com/images/0e1c03b54935e214924ab40a8f945372/tenor.gif?itemid=17938358")
         await ctx.reply(embed=embed)
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+        await send_chunked_embed("",ctx,str(e), Color.orange())
 
         
