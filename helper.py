@@ -6,16 +6,18 @@ import re
 # from pyppeteer import launch
 
 #if embed is larger than 2048 character use this!
-async def send_chunked_embed(title, ctx, text, color):
+async def send_chunked_embed(title, image, ctx, text, color):
     wrapper = textwrap.TextWrapper(width=2048, break_long_words=False, replace_whitespace=False)
     chunk = wrapper.wrap(text)
 
-    embed = None
-
-    if title == "":
-        embed = discord.Embed(description=chunk[0], color=color)
+    if title:
+        embed = discord.Embed(title=title,description=chunk[0], color=color)
     else:
-        embed = discord.Embed(title=title, description=chunk[0], color=color)
+        embed = discord.Embed(description=chunk[0], color=color)
+
+    if image:
+        embed.set_image(url=image)
+
 
     await ctx.reply(embed=embed)
     chunk.pop(0)

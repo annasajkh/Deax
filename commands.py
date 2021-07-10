@@ -25,7 +25,7 @@ async def h(ctx):
         await ctx.reply(embed=embed)
 
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 @bot.command()
 async def yt(ctx, *, text):
@@ -34,7 +34,7 @@ async def yt(ctx, *, text):
         await ctx.reply(link)
 
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -52,14 +52,16 @@ async def fand(ctx, wiki, page):
         await ctx.send(embed=embed)
 
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 @bot.command()
 async def wiki(ctx, *, text):
     try:
-        await send_chunked_embed("",ctx, wikipedia.summary(text), Color.gold())
+        page = wikipedia.page(text)
+
+        await send_chunked_embed(page.title, "",ctx, page.summary, Color.gold())
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -80,7 +82,7 @@ async def scr(ctx):
             await ctx.send(("scroll\n" * 40)+ str(num))
 
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -94,7 +96,7 @@ async def uds(ctx, *, text):
         os.remove("result.mp3")
 
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -103,7 +105,7 @@ async def aff(ctx):
         embed = discord.Embed(description=get_affirmation(), color=0xFFFF00)
         await ctx.reply(embed=embed)
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -119,9 +121,9 @@ Answer:
 
             result = get_gpt2(input_text).replace(input_text,"").strip()
 
-            await send_chunked_embed("",ctx, result, Color.purple())
+            await send_chunked_embed("","",ctx, result, Color.purple())
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -130,22 +132,22 @@ async def quo(ctx):
         embed = discord.Embed(description=get_quote(), color=Color.green())
         await ctx.reply(embed=embed)
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 @bot.command()
 async def tra(ctx, lang, text):
     try:
-        await send_chunked_embed("",ctx,translator.translate(text,dest=lang).text, Color.blurple())
+        await send_chunked_embed("","",ctx,translator.translate(text,dest=lang).text, Color.blurple())
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 @bot.command()
 async def trab(ctx):
     try:
-        await send_chunked_embed("",ctx,translator.translate(bot.previous_message).text, Color.blurple())
+        await send_chunked_embed("","",ctx,translator.translate(bot.previous_message).text, Color.blurple())
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -154,7 +156,7 @@ async def adv(ctx):
         embed = discord.Embed(description=get_advice(), color=Color.blue())
         await ctx.reply(embed=embed)
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -163,7 +165,7 @@ async def nf(ctx, num):
         embed = discord.Embed(description=get_number_fact(num), color=Color.gold())
         await ctx.reply(embed=embed)
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 @bot.command(name="search")
@@ -181,7 +183,7 @@ async def _search(ctx, *, text):
         await ctx.reply(string_result)
 
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -189,7 +191,7 @@ async def ud(ctx, *, text):
     try:
         await send_chunked_embed(text,ctx, get_urban_def(text), Color.orange())
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -198,7 +200,7 @@ async def udr(ctx):
         title, definition = get_rand_urban_def()
         await send_chunked_embed(title, ctx, definition, Color.orange())
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -212,7 +214,7 @@ async def say(ctx, lang, text):
         os.remove("result.mp3")
 
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -220,7 +222,7 @@ async def ri(ctx):
     try:
         await ctx.reply(requests.get("https://picsum.photos/500").url)
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 @bot.command(name="def")
@@ -246,7 +248,7 @@ async def _def(ctx, *, text):
 
         await send_chunked_embed(text,ctx,definition, Color.orange())
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -260,7 +262,7 @@ async def meme(ctx):
 
         await ctx.reply(embed=embed)
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -274,9 +276,9 @@ async def sup(ctx):
         for word in def_list:
             message += f" || {word.strip()} || "
         
-        await send_chunked_embed("",ctx,str(message), Color.orange())
+        await send_chunked_embed("","",ctx,str(message), Color.orange())
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -305,7 +307,7 @@ async def ns(ctx, img1_url="", img2_url=""):
             
         await ctx.reply(r.json()["output_url"])
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -332,7 +334,7 @@ async def nt(ctx, img_url=""):
             
         await ctx.reply(r.json()["output"])
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 # @bot.command()
@@ -356,17 +358,17 @@ async def nt(ctx, img_url=""):
 #         await ctx.reply(result)            
 
 #     except Exception as e:
-#         await send_chunked_embed("",ctx,str(e), Color.red())
+#         await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 @bot.command()
 async def tg(ctx, *, text):
     try:
         async with ctx.typing():
-            await send_chunked_embed("",ctx,get_gpt2(text), Color.blue())
+            await send_chunked_embed("","",ctx,get_gpt2(text), Color.blue())
 
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -377,7 +379,7 @@ async def selever(ctx):
         
         await ctx.reply(embed=embed)
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 @bot.command()
@@ -388,7 +390,7 @@ async def niko(ctx):
         
         await ctx.reply(embed=embed)
     except Exception as e:
-        await send_chunked_embed("",ctx,str(e), Color.red())
+        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 
