@@ -112,7 +112,6 @@ from helper import *
 @bot.event
 async def on_message(message : discord.Message):
     try:
-
         if message.content.strip() != "!trab":
             bot.previous_message = message.content
         
