@@ -116,6 +116,9 @@ async def on_message(message : discord.Message):
         if message.content.strip() != "!trab":
             bot.previous_message = message.content
         
+        if random.random() >= 0.9:
+            message.reply("https://media2.giphy.com/media/Ju7l5y9osyymQ/giphy.gif?cid=ecf05e47et6gd4p4x6vzf0ha3fyj9tu64e0ytw8e8yx3b8cd&rid=giphy.gif&ct=g")
+        
     except Exception as e:
         await message.channel.send(e)
     
