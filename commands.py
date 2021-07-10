@@ -395,7 +395,7 @@ async def xd(ctx, nums):
     try:
         uwu = ":xD:" * (1024 // 3)
 
-        for i in range(0, nums):
+        for i in range(0, int(nums)):
             ctx.channel.send(uwu)
     except Exception as e:
         await send_chunked_embed("",ctx,str(e), Color.red())
