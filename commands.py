@@ -342,7 +342,7 @@ async def nt(ctx, img_url=""):
 #     try:
 #         async with ctx.typing():
 
-#             await asyncio.sleep(5)
+#             await asyncio.sleep(10)
 
 #             browser, page, input_text, submit_button = await setup_browser()
 
@@ -355,7 +355,7 @@ async def nt(ctx, img_url=""):
 
 #             await browser.close()
 
-#         await ctx.reply(result)            
+#         await send_chunked_embed("", "" ,ctx, result, Color.blue())          
 
 #     except Exception as e:
 #         await send_chunked_embed("","",ctx,str(e), Color.red())
