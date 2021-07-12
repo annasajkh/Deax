@@ -246,7 +246,7 @@ async def _def(ctx, *, text):
             definition = definition.replace('an' + text, 'a' + text)
             definition = definition.replace('An' + text, 'A' + text)
 
-        await send_chunked_embed(text,ctx,definition, Color.orange())
+        await send_chunked_embed(text,"",ctx,definition, Color.orange())
     except Exception as e:
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
