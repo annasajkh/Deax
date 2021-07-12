@@ -189,7 +189,7 @@ async def _search(ctx, *, text):
 @bot.command()
 async def ud(ctx, *, text):
     try:
-        await send_chunked_embed("","",ctx, text, get_urban_def(text), Color.orange())
+        await send_chunked_embed(text,"",ctx, get_urban_def(text), Color.orange())
     except Exception as e:
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
