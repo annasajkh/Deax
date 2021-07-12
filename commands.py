@@ -198,7 +198,7 @@ async def ud(ctx, *, text):
 async def udr(ctx):
     try:
         title, definition = get_rand_urban_def()
-        await send_chunked_embed(title, ctx, definition, Color.orange())
+        await send_chunked_embed(title,"" , ctx, definition, Color.orange())
     except Exception as e:
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
