@@ -229,7 +229,6 @@ async def ri(ctx):
 async def _def(ctx, *, text):
     try:
         text = text.title()
-        
         title, definition = get_rand_urban_def()
 
         while title not in definition:
