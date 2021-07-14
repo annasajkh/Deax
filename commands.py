@@ -151,6 +151,7 @@ async def quo(ctx):
 @bot.command()
 async def tra(ctx, *args):
     try:
+        args = list(args)
 
         lang = args.pop(0)
         text = " ".join(args)
@@ -224,6 +225,8 @@ async def udr(ctx):
 @bot.command()
 async def say(ctx, *args):
     try:
+        args = list(args)
+
         lang = args.pop(0)
         text = " ".join(args)
         
