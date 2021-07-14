@@ -129,7 +129,8 @@ A:
 
             gtext = await page.querySelector("#gtext")
             await asyncio.sleep(15)
-            result = str(await page.evaluate("(element) => element.innerText",gtext)).replace(input_text,"").strip()
+            result = await page.evaluate("(element) => element.innerText",gtext)
+            result = result.replace(input_text,"").strip()
 
             await browser.close()
 
