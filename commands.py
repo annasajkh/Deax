@@ -116,7 +116,7 @@ async def aff(ctx):
 async def ask(ctx, *, text):
     try:
         async with ctx.typing():
-            input_text = f"""Question: {text}
+            combined_text = f"""Question: {text}
 Answer: 
             """.strip()
 
@@ -124,7 +124,7 @@ Answer:
 
             browser, page, input_text, submit_button = await setup_browser()
 
-            await input_text.type(text + " ")
+            await input_text.type(combined_text + " ")
             await submit_button.click()
 
             gtext = await page.querySelector("#gtext")
