@@ -336,38 +336,38 @@ async def nt(ctx, img_url=""):
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
-# @bot.command()
-# async def tg(ctx, *, text):
-#     try:
-#         async with ctx.typing():
-
-#             await asyncio.sleep(10)
-
-#             browser, page, input_text, submit_button = await setup_browser()
-
-#             await input_text.type(text + " ")
-#             await submit_button.click()
-
-#             gtext = await page.querySelector("#gtext")
-#             await asyncio.sleep(15)
-#             result = await page.evaluate("(element) => element.innerText",gtext)
-
-#             await browser.close()
-
-#         await send_chunked_embed("", "" ,ctx, result, Color.blue())          
-
-#     except Exception as e:
-#         await send_chunked_embed("","",ctx,str(e), Color.red())
-
-
 @bot.command()
 async def tg(ctx, *, text):
     try:
         async with ctx.typing():
-            await send_chunked_embed("","",ctx,get_gpt2(text), Color.blue())
+
+            await asyncio.sleep(10)
+
+            browser, page, input_text, submit_button = await setup_browser()
+
+            await input_text.type(text + " ")
+            await submit_button.click()
+
+            gtext = await page.querySelector("#gtext")
+            await asyncio.sleep(15)
+            result = await page.evaluate("(element) => element.innerText",gtext)
+
+            await browser.close()
+
+        await send_chunked_embed("", "" ,ctx, result, Color.blue())          
 
     except Exception as e:
         await send_chunked_embed("","",ctx,str(e), Color.red())
+
+
+# @bot.command()
+# async def tg(ctx, *, text):
+#     try:
+#         async with ctx.typing():
+#             await send_chunked_embed("","",ctx,get_gpt2(text), Color.blue())
+
+#     except Exception as e:
+#         await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 @bot.command()
