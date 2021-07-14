@@ -47,7 +47,7 @@ async def fand(ctx, wiki, page):
         embed.title = page.title
         embed.description = page.summary
         embed.color = Color.from_rgb(0, 214, 217)
-        
+
         try:
             embed.set_image(url=page.images[0])
         except:
@@ -124,7 +124,7 @@ A:
 
             browser, page, input_text, submit_button = await setup_browser()
 
-            await input_text.type(input_text + " ")
+            await input_text.type(text + " ")
             await submit_button.click()
 
             gtext = await page.querySelector("#gtext")
