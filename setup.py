@@ -101,7 +101,7 @@ attact one image to be process
 you can also use a link
 !nt <link>
 
-text generation using GPT2 API from https://deepai.org/apis
+i just scrap https://bellard.org/textsynth/
 !tg <text>
 """.strip()
 
