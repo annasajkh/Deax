@@ -112,16 +112,24 @@ async def aff(ctx):
 async def ask(ctx, *, text):
     try:
         async with ctx.typing():
-
-            input_text = f"""Question: {text}
-Answer: 
+            input_text = f"""Q: {text}
+A: 
             """.strip()
 
-            print(input_text)
+            await asyncio.sleep(10)
 
-            result = get_gpt2(input_text).replace(input_text,"").strip()
+            browser, page, input_text, submit_button = await setup_browser()
 
-            await send_chunked_embed("","",ctx, result, Color.purple())
+            await input_text.type(input_text + " ")
+            await submit_button.click()
+
+            gtext = await page.querySelector("#gtext")
+            await asyncio.sleep(15)
+            result = await page.evaluate("(element) => element.innerText",gtext).replace(input_text,"").strip()
+
+            await browser.close()
+
+        await send_chunked_embed("","",ctx, result, Color.purple())
     except Exception as e:
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
