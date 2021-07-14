@@ -116,8 +116,8 @@ async def aff(ctx):
 async def ask(ctx, *, text):
     try:
         async with ctx.typing():
-            input_text = f"""Q: {text}
-A: 
+            input_text = f"""Question: {text}
+Answer: 
             """.strip()
 
             await asyncio.sleep(10)
@@ -130,8 +130,6 @@ A:
             gtext = await page.querySelector("#gtext")
             await asyncio.sleep(15)
             result = await page.evaluate("(element) => element.innerText",gtext)
-            result = result.replace(input_text,"").strip()
-
             await browser.close()
 
         await send_chunked_embed("","",ctx, result, Color.purple())
