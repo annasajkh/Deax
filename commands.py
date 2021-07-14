@@ -44,10 +44,13 @@ async def fand(ctx, wiki, page):
         page = fandom.page(page)
 
         embed = discord.Embed()
-        embed.title = page.title
-        embed.set_image(url=page.images[0])
-        embed.description = page.summary
-        embed.color = Color.from_rgb(0, 214, 217)
+        try:
+            embed.title = page.title
+            embed.set_image(url=page.images[0])
+            embed.description = page.summary
+            embed.color = Color.from_rgb(0, 214, 217)
+        except:
+            pass
 
         await ctx.send(embed=embed)
 
