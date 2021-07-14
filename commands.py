@@ -27,6 +27,7 @@ async def h(ctx):
     except Exception as e:
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
+
 @bot.command()
 async def yt(ctx, *, text):
     try:
@@ -57,6 +58,7 @@ async def fand(ctx, wiki, page):
 
     except Exception as e:
         await send_chunked_embed("","",ctx,str(e), Color.red())
+
 
 @bot.command()
 async def wiki(ctx, *, text):
