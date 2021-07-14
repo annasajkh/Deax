@@ -149,8 +149,13 @@ async def quo(ctx):
 
 
 @bot.command()
-async def tra(ctx, lang, text):
+async def tra(ctx, *args):
     try:
+
+        lang = args.pop(0)
+        text = " ".join(args)
+
+
         await send_chunked_embed("","",ctx,translator.translate(text,dest=lang).text, Color.blurple())
     except Exception as e:
         await send_chunked_embed("","",ctx,str(e), Color.red())
