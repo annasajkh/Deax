@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 
 import discord
 
-
 #Setup all variables
 
 activity = discord.Activity(type=discord.ActivityType.watching, name="!h")
@@ -16,6 +15,7 @@ load_dotenv()
 
 translator = Translator()
 urban_client = UrbanClient()
+talk_users = {}
 
 
 help_str = """

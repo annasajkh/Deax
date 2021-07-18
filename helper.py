@@ -69,7 +69,7 @@ async def get_GPTJ(text, name = ""):
 
     gtext = await page.querySelector("#gtext")
 
-    await asyncio.sleep(5)
+    await asyncio.sleep(3)
 
     result = await page.evaluate("(element) => element.innerText",gtext)
 
@@ -79,3 +79,14 @@ async def get_GPTJ(text, name = ""):
     await browser.close()
 
     return result
+
+async def response_talk(ctx, name, text, memory):
+
+    text = re.sub("\n", " ", text)
+    memory.append(f"{name}: {text}")
+
+    result = await get_GPTJ("\n".join(memory), name)
+
+    memory.append(f"Bot: {result}")
+
+    await ctx.reply(result)

@@ -17,9 +17,6 @@ import requests
 import discord.utils 
 import asyncio
 
-talking_person = None
-memory = []
-
 @bot.command()
 async def h(ctx):
     try:
@@ -358,52 +355,31 @@ async def nt(ctx, img_url=""):
         await ctx.reply(r.json()["output"])
     except Exception as e:
         await send_chunked_embed("","",ctx,str(e), Color.red())
-
-
-@bot.command(name="t")
-async def _t(ctx):
-    global talking_person
-
-    if talking_person == None:
-        talking_person = ctx.author
-        
-        await ctx.reply("talk now")
-    else:
-        await ctx.reply("im talking with " + talking_person.name)
+    
 
 @bot.command(name="s")
 async def _s(ctx, *, text):
-    global talking_person
-    
     async with ctx.typing():
-        if ctx.author.name == talking_person.name:
-            final = ""
-            text = re.sub("\n", " ", text)
-            memory.append(f"{talking_person.name}: {text}")
+        name = ctx.author.name
 
-            for chunk in memory:
-                final += chunk + "\n"
+        talk_users[name] = []
+        await response_talk(ctx, name, text, talk_users[name])
 
-            result = await get_GPTJ("\n".join(memory), talking_person.name)
+        for name in talk_users.keys():
+            if len(talk_users[name]) > 50:
+                talk_users[name].pop(0)
 
-            memory.append(f"Bot: {result}")
 
-            await ctx.reply(result)
-        else:
-            await ctx.reply("im talking with " + talking_person.name)
+@bot.command()
+async def forget(ctx):
+    name = ctx.author.name
 
-@bot.command(name="st")
-async def _st(ctx):
-    global talking_person 
-    global memory
-
-    if ctx.author.name == talking_person.name:
-        talking_person = None
-        memory = []
-        await ctx.reply("okay im stop")
+    if name in talk_users.keys():
+        await ctx.reply("okay i will forget you " + name)
+        del talk_users["name"]
+        
     else:
-        await ctx.reply("im talking with " + talking_person.name)
-
+        await ctx.reply("you are not talking with the bot yet use !s to start talking")
 
 
 @bot.command()
