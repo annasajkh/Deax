@@ -77,7 +77,7 @@ async def get_gpt(text):
 
     gtext = await page.querySelector("#gtext")
 
-    await asyncio.sleep(3)
+    await asyncio.sleep(8)
 
     result = await page.evaluate("(element) => element.innerText",gtext)
         
