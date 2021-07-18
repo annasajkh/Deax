@@ -369,7 +369,7 @@ async def tg(ctx, *, text):
             await submit_button.click()
 
             gtext = await page.querySelector("#gtext")
-            await asyncio.sleep(15)
+            await asyncio.sleep(5)
             result = await page.evaluate("(element) => element.innerText",gtext)
 
             await browser.close()
