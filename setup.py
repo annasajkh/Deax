@@ -28,7 +28,7 @@ NIKOOOO!!!!
 get random affirmation, this command uses Affirmations API
 !aff
 
-ask question to magic 8 ball
+ask question to the ai
 !ask <text>
 
 get random quote, this command uses Zenquotes API

@@ -56,11 +56,19 @@ async def setup_browser():
     return browser, page, input_text, submit_button
 
 
-async def get_GPTJ(text, name = ""):
-    text += "\nBot: "
+async def get_dialog_response(text, name):
+    text += "\nBot:"
 
     print(text)
     print("-" * 20)
+
+    result = await get_gpt(text)
+    result = result.replace(text, "").strip().split(f"{name}:")[0].strip().split(".")[0].split("\n")[0]
+
+    return result
+
+async def get_gpt(text):
+    text = text + " "
 
     browser, page, input_text, submit_button = await setup_browser()
 
@@ -72,22 +80,18 @@ async def get_GPTJ(text, name = ""):
     await asyncio.sleep(3)
 
     result = await page.evaluate("(element) => element.innerText",gtext)
-
-    if name: 
-        result = result.replace(text, "").strip().split(f"{name}:")[0].strip().split(".")[0].split("\n")[0]
         
     await browser.close()
 
     return result
 
+
 async def response_talk(ctx, name, text, memory):
     text = re.sub("\n", " ", text)
     memory.append(f"{name}: {text}")
 
-    result = await get_GPTJ("\n".join(memory), name)
+    result = await get_dialog_response("\n".join(memory), name)
 
     memory.append(f"Bot: {result}")
-
-    print(memory)
 
     await ctx.reply(result)

@@ -117,19 +117,13 @@ async def aff(ctx):
 async def ask(ctx, *, text):
     try:
         async with ctx.typing():
-            combined_text = f"""Question: {text}
-Answer: 
+            text = f"""
+Q: {text}
+A: 
             """.strip()
 
-            browser, page, input_text, submit_button = await setup_browser()
-
-            await input_text.type(combined_text + " ")
-            await submit_button.click()
-
-            gtext = await page.querySelector("#gtext")
-            await asyncio.sleep(5)
-            result = await page.evaluate("(element) => element.innerText",gtext)
-            await browser.close()
+            result = await get_gpt(text)
+            result = result.replace(text, "").strip().split("Q:")[0].strip().split(".")[0].split("\n")[0]
 
         await send_chunked_embed("","",ctx, result, Color.purple())
     except Exception as e:
@@ -388,7 +382,7 @@ async def forget(ctx):
 async def tg(ctx, *, text):
     try:
         async with ctx.typing():
-            result = await get_GPTJ(text)
+            result = await get_gpt(text)
         await send_chunked_embed("", "" ,ctx, result, Color.blue())          
 
     except Exception as e:
