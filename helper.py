@@ -81,12 +81,13 @@ async def get_GPTJ(text, name = ""):
     return result
 
 async def response_talk(ctx, name, text, memory):
-
     text = re.sub("\n", " ", text)
     memory.append(f"{name}: {text}")
 
     result = await get_GPTJ("\n".join(memory), name)
 
     memory.append(f"Bot: {result}")
+
+    print(memory)
 
     await ctx.reply(result)

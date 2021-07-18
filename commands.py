@@ -362,7 +362,9 @@ async def _s(ctx, *, text):
     async with ctx.typing():
         name = ctx.author.name
 
-        talk_users[name] = []
+        if name not in talk_users.keys():
+            talk_users[name] = []
+        
         await response_talk(ctx, name, text, talk_users[name])
 
         for name in talk_users.keys():
@@ -376,7 +378,7 @@ async def forget(ctx):
 
     if name in talk_users.keys():
         await ctx.reply("okay i will forget you " + name)
-        del talk_users["name"]
+        del talk_users[name]
         
     else:
         await ctx.reply("you are not talking with the bot yet use !s to start talking")
