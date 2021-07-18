@@ -122,15 +122,13 @@ async def ask(ctx, *, text):
 Answer: 
             """.strip()
 
-            await asyncio.sleep(10)
-
             browser, page, input_text, submit_button = await setup_browser()
 
             await input_text.type(combined_text + " ")
             await submit_button.click()
 
             gtext = await page.querySelector("#gtext")
-            await asyncio.sleep(15)
+            await asyncio.sleep(5)
             result = await page.evaluate("(element) => element.innerText",gtext)
             await browser.close()
 
@@ -364,8 +362,6 @@ async def nt(ctx, img_url=""):
 async def tg(ctx, *, text):
     try:
         async with ctx.typing():
-
-            await asyncio.sleep(10)
 
             browser, page, input_text, submit_button = await setup_browser()
 
