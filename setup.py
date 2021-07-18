@@ -64,9 +64,6 @@ search wikipedia
 search fandom website
 !fand "<root (game name/title/name)>" "<page (character/actor/object)>"
 
-scroll
-!scr
-
 search youtube
 !yt <text>
 
@@ -102,8 +99,14 @@ attact one image to be process
 you can also use a link
 !nt <link>
 
-i just scrap https://bellard.org/textsynth/
+generate text using https://bellard.org/textsynth/
 !tg <text>
+
+have a talk with the ai
+!s <text>
+
+delete ai memory talk about you so the ai will forget everything about you
+!forget
 """.strip()
 
 from apis import *

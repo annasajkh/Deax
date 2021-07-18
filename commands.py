@@ -68,28 +68,6 @@ async def wiki(ctx, *, text):
     except Exception as e:
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
-
-@bot.command()
-async def scr(ctx):
-    try:
-        num = random.randint(1,100) 
-
-        if num > 50:
-            await ctx.send(str(num) + " Your number is above 50")
-            await asyncio.sleep(3)
-            await ctx.send("get ready for some cum")
-            await asyncio.sleep(3)
-
-            for i in range(20):
-                await ctx.send("cum\n")
-                await asyncio.sleep(1)
-        else:
-            await ctx.send(("scroll\n" * 40)+ str(num))
-
-    except Exception as e:
-        await send_chunked_embed("","",ctx,str(e), Color.red())
-
-
 @bot.command()
 async def uds(ctx, *, text):
     try:
