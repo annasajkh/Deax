@@ -72,8 +72,10 @@ async def get_GPTJ(text, name = ""):
     await asyncio.sleep(5)
 
     result = await page.evaluate("(element) => element.innerText",gtext)
+
     if name: 
         result = result.replace(text, "").strip().split(f"{name}:")[0].strip().split(".")[0].split("\n")[0]
+        
     await browser.close()
 
     return result

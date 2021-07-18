@@ -360,8 +360,8 @@ async def nt(ctx, img_url=""):
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
-@bot.command()
-async def t(ctx):
+@bot.command(name="t")
+async def _t(ctx):
     global talking_person
 
     if talking_person == None:
@@ -371,8 +371,8 @@ async def t(ctx):
     else:
         await ctx.reply("im talking with " + talking_person.name)
 
-@bot.command()
-async def s(ctx, *, text):
+@bot.command(name="s")
+async def _s(ctx, *, text):
     global talking_person
     
     async with ctx.typing():
@@ -392,8 +392,8 @@ async def s(ctx, *, text):
         else:
             await ctx.reply("im talking with " + talking_person.name)
 
-@bot.command()
-async def st(ctx):
+@bot.command(name="st")
+async def _st(ctx):
     global talking_person 
     global memory
 
