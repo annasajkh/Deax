@@ -17,6 +17,8 @@ import requests
 import discord.utils 
 import asyncio
 
+talking_person = None
+memory = []
 
 @bot.command()
 async def h(ctx):
@@ -359,21 +361,56 @@ async def nt(ctx, img_url=""):
 
 
 @bot.command()
+async def t(ctx):
+    global talking_person
+
+    if talking_person == None:
+        talking_person = ctx.author
+        
+        await ctx.reply("talk now")
+    else:
+        await ctx.reply("im talking with " + talking_person.name)
+
+@bot.command()
+async def s(ctx, *, text):
+    global talking_person
+    
+    async with ctx.typing():
+        if ctx.author.name == talking_person.name:
+            final = ""
+            text = re.sub("\n", " ", text)
+            memory.append(f"{talking_person.name}: {text}")
+
+            for chunk in memory:
+                final += chunk + "\n"
+
+            result = await get_GPTJ("\n".join(memory), talking_person.name)
+
+            memory.append(f"Bot: {result}")
+
+            await ctx.reply(result)
+        else:
+            await ctx.reply("im talking with " + talking_person.name)
+
+@bot.command()
+async def st(ctx):
+    global talking_person 
+    global memory
+
+    if ctx.author.name == talking_person.name:
+        talking_person = None
+        memory = []
+        await ctx.reply("okay im stop")
+    else:
+        await ctx.reply("im talking with " + talking_person.name)
+
+
+
+@bot.command()
 async def tg(ctx, *, text):
     try:
         async with ctx.typing():
-
-            browser, page, input_text, submit_button = await setup_browser()
-
-            await input_text.type(text + " ")
-            await submit_button.click()
-
-            gtext = await page.querySelector("#gtext")
-            await asyncio.sleep(5)
-            result = await page.evaluate("(element) => element.innerText",gtext)
-
-            await browser.close()
-
+            result = await get_GPTJ(text)
         await send_chunked_embed("", "" ,ctx, result, Color.blue())          
 
     except Exception as e:

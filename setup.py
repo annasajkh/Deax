@@ -17,6 +17,7 @@ load_dotenv()
 translator = Translator()
 urban_client = UrbanClient()
 
+
 help_str = """
 SELEVER!!!!
 !selever
@@ -120,7 +121,6 @@ async def on_message(message : discord.Message):
         
         if random.random() >= 0.999 and message.channel.id == 861775224030363649:
             await message.reply("https://media2.giphy.com/media/Ju7l5y9osyymQ/giphy.gif?cid=ecf05e47et6gd4p4x6vzf0ha3fyj9tu64e0ytw8e8yx3b8cd&rid=giphy.gif&ct=g")
-        
     except Exception as e:
         await message.channel.send(e)
     

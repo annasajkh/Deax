@@ -3,6 +3,7 @@ import discord
 import requests
 import os
 import re
+import asyncio
 from pyppeteer import launch
 
 
@@ -53,3 +54,26 @@ async def setup_browser():
     input_text, submit_button = await get_elemets(page)
 
     return browser, page, input_text, submit_button
+
+
+async def get_GPTJ(text, name = ""):
+    text += "\nBot: "
+
+    print(text)
+    print("-" * 20)
+
+    browser, page, input_text, submit_button = await setup_browser()
+
+    await input_text.type(text)
+    await submit_button.click()
+
+    gtext = await page.querySelector("#gtext")
+
+    await asyncio.sleep(5)
+
+    result = await page.evaluate("(element) => element.innerText",gtext)
+    if name: 
+        result = result.replace(text, "").strip().split(f"{name}:")[0].strip().split(".")[0].split("\n")[0]
+    await browser.close()
+
+    return result
