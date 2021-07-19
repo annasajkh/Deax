@@ -15,7 +15,7 @@ load_dotenv()
 
 translator = Translator()
 urban_client = UrbanClient()
-talk_users = {}
+memories = {}
 
 
 help_str = """

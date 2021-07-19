@@ -5,11 +5,8 @@ from youtube_search import YoutubeSearch
 
 from setup import *
 
-import asyncio
 import discord
-import random
 import os
-import random
 import os
 import wikipedia
 import fandom
@@ -129,6 +126,7 @@ async def tra(ctx, *args):
         await send_chunked_embed("","",ctx,translator.translate(text,dest=lang).text, Color.blurple())
     except Exception as e:
         await send_chunked_embed("","",ctx,str(e), Color.red())
+
 
 @bot.command()
 async def trab(ctx):
@@ -334,26 +332,37 @@ async def _s(ctx, *, text):
     async with ctx.typing():
         name = ctx.author.name
 
-        if name not in talk_users.keys():
-            talk_users[name] = []
+        if name not in memories.keys():
+            memories[name] = []
         
-        await response_talk(ctx, name, text, talk_users[name])
+        await response_talk(ctx, name, text, memories[name])
 
-        for name in talk_users.keys():
-            if len(talk_users[name]) > 50:
-                talk_users[name].pop(0)
+        for name in memories.keys():
+            if len(memories[name]) > 50:
+                memories[name].pop(0)
 
 
 @bot.command()
 async def forget(ctx):
     name = ctx.author.name
 
-    if name in talk_users.keys():
+    if name in memories.keys():
         await ctx.reply("okay i will forget you " + name)
-        del talk_users[name]
+        del memories[name]
         
     else:
-        await ctx.reply("you are not talking with the bot yet use !s to start talking")
+        await send_chunked_embed("", "", ctx, "you don't have any memory with the bot use !s to start talking", Color.red())
+
+
+@bot.command()
+async def mem(ctx):
+    name = ctx.author.name
+
+    if name in memories.keys():
+        await send_chunked_embed(name + " Memory", "", ctx, "\n".join(memories[name]), Color.green())
+        
+    else:
+        await send_chunked_embed("", "", ctx, "you don't have any memory with the bot use !s to start talking", Color.red())
 
 
 @bot.command()
@@ -397,6 +406,3 @@ async def niko(ctx):
         await ctx.reply(embed=embed)
     except Exception as e:
         await send_chunked_embed("","",ctx,str(e), Color.red())
-
-
-
