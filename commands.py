@@ -331,7 +331,7 @@ async def nt(ctx, img_url=""):
 
 @bot.command(name="s")
 async def _s(ctx, *, text):
-    ctx.reply("this command is disable sorry...")
+    await ctx.reply("this command is disable sorry...")
     return
     async with ctx.typing():
         name = ctx.author.name
@@ -348,7 +348,7 @@ async def _s(ctx, *, text):
 
 @bot.command()
 async def forget(ctx):
-    ctx.reply("this command is disable sorry...")
+    await ctx.reply("this command is disable sorry...")
     return
 
     name = ctx.author.name
@@ -363,7 +363,7 @@ async def forget(ctx):
 
 @bot.command()
 async def mem(ctx):
-    ctx.reply("this command is disable sorry...")
+    await ctx.reply("this command is disable sorry...")
     return
 
     name = ctx.author.name
