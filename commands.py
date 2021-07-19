@@ -19,7 +19,7 @@ from PIL import Image
 # By @tdxf20, ily annas!
 @bot.command()
 async def e(ctx, *args):
-    if not ctx.attachments:
+    if not ctx.message.attachments:
         await ctx.reply('You need to attach an image!')
 
     else:
@@ -33,7 +33,7 @@ async def e(ctx, *args):
         #
 
         # Get the image
-        image = ctx.attachments[0]
+        image = ctx.message.attachments[0]
 
         # Get the image name for saving
         # Second part is getting the extension
