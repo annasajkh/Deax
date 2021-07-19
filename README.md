@@ -1,3 +1,2 @@
-# Cum-Bot-2
-
+# Cum-Bot
 fun discord bot
