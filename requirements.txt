@@ -27,9 +27,11 @@ hyperframe==5.2.0
 idna==2.10
 memeapi==0.2.3
 multidict==5.1.0
+numexpr==2.7.3
 numpy==1.21.0
+opensimplex==0.3
 pandas==1.2.5
-pip-autoremove==0.9.1
+Pillow==8.3.1
 pycares==4.0.0
 pycparser==2.20
 pyee==8.1.0
@@ -53,4 +55,3 @@ websockets==9.1
 wikipedia==1.4.0
 yarl==1.6.3
 youtube-search==2.1.0
-Pillow==8.3.1

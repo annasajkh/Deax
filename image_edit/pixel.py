@@ -2,7 +2,7 @@ import numpy as np
 import numexpr as ne
 from PIL import Image
 
-from cmds_helper import args_to_array
+from image_edit.cmds_helper import args_to_array
 
 
 def get_comparison_func(comparison_str):

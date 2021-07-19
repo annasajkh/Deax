@@ -5,9 +5,9 @@ import numpy as np
 from PIL import Image, ImageFilter, ImageFont, ImageDraw, ImageOps, ImageEnhance
 from opensimplex import OpenSimplex
 
-from cmds_helper import *
-from impact import make_caption
-from pixel import pixel
+from image_edit.cmds_helper import *
+from image_edit.impact import make_caption
+from image_edit.pixel import pixel
 
 
 #####################
