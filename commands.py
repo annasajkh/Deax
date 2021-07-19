@@ -97,7 +97,7 @@ Q: {text}
 A: 
             """.strip()
 
-            result = await get_gpt(text)
+            result = await get_gpt(text, 10)
             result = result.replace(text, "").strip().split("Q:")[0].strip().split(".")[0].split("\n")[0]
 
         await send_chunked_embed("","",ctx, result, Color.purple())
@@ -369,7 +369,7 @@ async def mem(ctx):
 async def tg(ctx, *, text):
     try:
         async with ctx.typing():
-            result = await get_gpt(text)
+            result = await get_gpt(text, 10)
         await send_chunked_embed("", "" ,ctx, result, Color.blue())          
 
     except Exception as e:

@@ -62,12 +62,12 @@ async def get_dialog_response(text, name):
     print(text)
     print("-" * 20)
 
-    result = await get_gpt(text)
+    result = await get_gpt(text, 3)
     result = result.replace(text, "").strip().split(f"{name}:")[0].strip().split(".")[0].split("\n")[0]
 
     return result
 
-async def get_gpt(text):
+async def get_gpt(text, delay):
     text = text + " "
 
     browser, page, input_text, submit_button = await setup_browser()
@@ -77,7 +77,7 @@ async def get_gpt(text):
 
     gtext = await page.querySelector("#gtext")
 
-    await asyncio.sleep(8)
+    await asyncio.sleep(delay)
 
     result = await page.evaluate("(element) => element.innerText",gtext)
         
