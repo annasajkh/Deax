@@ -12,7 +12,8 @@ import wikipedia
 import fandom
 import requests
 import discord.utils 
-import asyncio
+
+
 
 @bot.command()
 async def h(ctx):
@@ -64,6 +65,7 @@ async def wiki(ctx, *, text):
         await send_chunked_embed(page.title, "",ctx, page.summary, Color.gold())
     except Exception as e:
         await send_chunked_embed("","",ctx,str(e), Color.red())
+
 
 @bot.command()
 async def uds(ctx, *, text):
@@ -329,6 +331,8 @@ async def nt(ctx, img_url=""):
 
 @bot.command(name="s")
 async def _s(ctx, *, text):
+    ctx.reply("this command is disable sorry...")
+    return
     async with ctx.typing():
         name = ctx.author.name
 
@@ -344,6 +348,9 @@ async def _s(ctx, *, text):
 
 @bot.command()
 async def forget(ctx):
+    ctx.reply("this command is disable sorry...")
+    return
+
     name = ctx.author.name
 
     if name in memories.keys():
@@ -356,6 +363,9 @@ async def forget(ctx):
 
 @bot.command()
 async def mem(ctx):
+    ctx.reply("this command is disable sorry...")
+    return
+
     name = ctx.author.name
 
     if name in memories.keys():

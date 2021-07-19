@@ -67,6 +67,7 @@ async def get_dialog_response(text, name):
 
     return result
 
+
 async def get_gpt(text, delay):
     text = text + " "
 

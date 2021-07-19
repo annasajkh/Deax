@@ -102,11 +102,15 @@ you can also use a link
 generate text using https://bellard.org/textsynth/
 !tg <text>
 
-have a talk with the ai
+have a talk with the ai (disable)
 !s <text>
 
-delete ai memory talk about you so the ai will forget everything about you
+delete ai memory talk about you so the ai will forget everything about you (disable)
 !forget
+
+see the bot memory of you (disable)
+!mem
+
 """.strip()
 
 from apis import *
