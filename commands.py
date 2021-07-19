@@ -331,7 +331,7 @@ async def nt(ctx, img_url=""):
 
 @bot.command(name="s")
 async def _s(ctx, *, text):
-    await ctx.reply("this command is disable sorry...")
+    await ctx.reply("this command is disabled sorry...")
     return
     async with ctx.typing():
         name = ctx.author.name
@@ -348,7 +348,7 @@ async def _s(ctx, *, text):
 
 @bot.command()
 async def forget(ctx):
-    await ctx.reply("this command is disable sorry...")
+    await ctx.reply("this command is disabled sorry...")
     return
 
     name = ctx.author.name
@@ -363,14 +363,13 @@ async def forget(ctx):
 
 @bot.command()
 async def mem(ctx):
-    await ctx.reply("this command is disable sorry...")
+    await ctx.reply("this command is disabled sorry...")
     return
 
     name = ctx.author.name
 
     if name in memories.keys():
         await send_chunked_embed(name + " Memory", "", ctx, "\n".join(memories[name]), Color.green())
-        
     else:
         await send_chunked_embed("", "", ctx, "you don't have any memory with the bot use !s to start talking", Color.red())
 
