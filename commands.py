@@ -4,6 +4,7 @@ from gtts import gTTS
 from youtube_search import YoutubeSearch
 
 from setup import *
+import image_edit.cmds
 
 import discord
 import os
@@ -12,7 +13,62 @@ import wikipedia
 import fandom
 import requests
 import discord.utils 
+from PIL import Image
 
+
+# By @tdxf20, ily annas!
+@bot.command()
+async def e(ctx, *args):
+    if not ctx.attachments:
+        await ctx.reply('You need to attach an image!')
+
+    else:
+        # I guess this is for avoiding Nones? 
+        args = list(args)
+
+        args = ' '.join(args)
+
+        #
+        # Getting the image
+        #
+
+        # Get the image
+        image = ctx.attachments[0]
+
+        # Get the image name for saving
+        # Second part is getting the extension
+        filename = 'file.' + image.filename.split('.')[-1]
+
+        # Save the image
+        await image.save(filename)
+
+        #
+        # PIL and editing
+        #
+
+        # Open the image in PIL
+        image = Image.open(filename)
+
+        # Multiple effects are separated with newlines
+        for i in args.splitlines():
+            i = i.strip().split('=')
+
+            command = i[0]
+            value = i[1]
+
+            # Apply the effect and save
+            image = image_edit.cmds.commands_list[command](value, image)
+        
+        image.save(filename)
+
+        #
+        # Sending the file
+        #
+
+        with open(filename, 'rb') as f:
+            f = discord.File(f)
+        
+        await ctx.reply(file=f)
 
 
 @bot.command()
@@ -331,7 +387,7 @@ async def nt(ctx, img_url=""):
 
 @bot.command(name="s")
 async def _s(ctx, *, text):
-    await ctx.reply("this command is disabled sorry...")
+    await ctx.reply("this command is disable sorry...")
     return
     async with ctx.typing():
         name = ctx.author.name
@@ -348,7 +404,7 @@ async def _s(ctx, *, text):
 
 @bot.command()
 async def forget(ctx):
-    await ctx.reply("this command is disabled sorry...")
+    await ctx.reply("this command is disable sorry...")
     return
 
     name = ctx.author.name
@@ -363,13 +419,14 @@ async def forget(ctx):
 
 @bot.command()
 async def mem(ctx):
-    await ctx.reply("this command is disabled sorry...")
+    await ctx.reply("this command is disable sorry...")
     return
 
     name = ctx.author.name
 
     if name in memories.keys():
         await send_chunked_embed(name + " Memory", "", ctx, "\n".join(memories[name]), Color.green())
+        
     else:
         await send_chunked_embed("", "", ctx, "you don't have any memory with the bot use !s to start talking", Color.red())
 
