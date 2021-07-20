@@ -156,7 +156,7 @@ A:
             """.strip()
 
             result = await get_gpt(text, 3)
-            result = result.replace(text, "").strip().split("Q:")[0].strip().split(".")[0].split("\n")[0]
+            result = result.replace(text, "").strip().split("Q:")[0].strip().split(".")
 
         await send_chunked_embed("","",ctx, result, Color.purple())
     except Exception as e:
