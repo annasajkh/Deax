@@ -1,0 +1,439 @@
+HELP-TOPIC _generic:
+
+SELEVER!!!!
+!selever
+
+NIKOOOO!!!!
+!niko
+
+get random affirmation, this command uses Affirmations API
+!aff
+
+ask question to the ai
+!ask <text>
+
+get random quote, this command uses Zenquotes API
+!quo
+
+translate text to english, this command uses Google Translate
+!tra <language> "<text>"
+
+get random advice, this command uses Adviceslip API
+!adv
+
+get fact about a number, this command uses Number Fact API
+!nf <number>
+
+search something
+!search <text>
+
+get random definition from urban dict
+!ud <text>
+
+make the bot say something
+!say <language> "<text>"
+
+get random image, this command uses Lorem Picsum API
+!ri
+
+make the bot say something from urban dict
+!uds <text>
+
+search wikipedia
+!wiki <text>
+
+search fandom website
+!fand "<root (game name/title/name)>" "<page (character/actor/object)>"
+
+search youtube
+!yt <text>
+
+urban dict random
+!udr
+
+get random definition of someting
+!def <text>
+
+translate above
+!trab
+
+get random meme this command uses D3vd Meme API
+!meme
+
+hidden suprize
+!sup
+
+change style of an image using Fast Style Transfer API from https://deepai.org/apis
+attact 2 images first one is the content and the seconds one is the style
+!ns 
+[image1]
+[image2]
+
+you can also use a link
+!ns <link1> <link2>
+
+image to text using Neuro Talk API from https://deepai.org/apis
+attact one image to be process 
+!nt
+[image]
+
+you can also use a link
+!nt <link>
+
+generate text using https://bellard.org/textsynth/
+!tg <text>
+
+have a talk with the ai (disabled)
+!s <text>
+
+delete ai memory talk about you so the ai will forget everything about you (disabled)
+!forget
+
+see the bot memory of you (disabled)
+!mem
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+HELP-TOPIC tra:
+
+Usage: !tra <language code> <text...
+
+Translates text to English using Google Translate.
+
+```
+LANGUAGE               CODE
+afrikaans              af
+albanian               sq
+amharic                am
+arabic                 ar
+armenian               hy
+azerbaijani            az
+basque                 eu
+belarusian             be
+bengali                bn
+bosnian                bs
+bulgarian              bg
+catalan                ca
+cebuano                ceb
+chichewa               ny
+chinese (simplified)   zh-cn
+chinese (traditional)  zh-tw
+corsican               co
+croatian               hr
+czech                  cs
+danish                 da
+dutch                  nl
+english                en
+esperanto              eo
+estonian               et
+filipino               tl
+finnish                fi
+french                 fr
+frisian                fy
+galician               gl
+georgian               ka
+german                 de
+greek                  el
+gujarati               gu
+haitian creole         ht
+hausa                  ha
+hawaiian               haw
+hebrew                 iw
+hebrew                 he
+hindi                  hi
+hmong                  hmn
+hungarian              hu
+icelandic              is
+igbo                   ig
+indonesian             id
+irish                  ga
+italian                it
+japanese               ja
+javanese               jw
+kannada                kn
+kazakh                 kk
+khmer                  km
+korean                 ko
+kurdish (kurmanji)     ku
+kyrgyz                 ky
+lao                    lo
+latin                  la
+latvian                lv
+lithuanian             lt
+luxembourgish          lb
+macedonian             mk
+malagasy               mg
+malay                  ms
+malayalam              ml
+maltese                mt
+maori                  mi
+marathi                mr
+mongolian              mn
+myanmar (burmese)      my
+nepali                 ne
+norwegian              no
+odia                   or
+pashto                 ps
+persian                fa
+polish                 pl
+portuguese             pt
+punjabi                pa
+romanian               ro
+russian                ru
+samoan                 sm
+scots gaelic           gd
+serbian                sr
+sesotho                st
+shona                  sn
+sindhi                 sd
+sinhala                si
+slovak                 sk
+slovenian              sl
+somali                 so
+spanish                es
+sundanese              su
+swahili                sw
+swedish                sv
+tajik                  tg
+tamil                  ta
+telugu                 te
+thai                   th
+turkish                tr
+ukrainian              uk
+urdu                   ur
+uyghur                 ug
+uzbek                  uz
+vietnamese             vi
+welsh                  cy
+xhosa                  xh
+yiddish                yi
+yoruba                 yo
+zulu                   zu
+```
+
+
+
+
+
+
+
+
+
+HELP-TOPIC selever:
+Usage: !selever
+
+SELEVER!!!!
+
+
+
+HELP-TOPIC niko:
+Usage: !niko
+
+NIKOOOO!!!!
+
+
+
+HELP-TOPIC aff:
+Usage: !aff
+
+Shows a random affirmation using the Affirmations API.
+
+
+
+HELP-TOPIC ask:
+Usage: !ask <text>
+
+Ask a question to an AI.
+
+
+
+HELP-TOPIC quo:
+Usage: !quo
+
+Shows a random quote using the Zenquotes API.
+
+
+
+HELP-TOPIC adv:
+Usage: !adv
+
+Shows random advice using the Adviceslip API.
+
+
+
+HELP-TOPIC nf:
+Usage: !nf <number>
+
+Shows a fact about a number using the Number Fact API.
+
+
+
+HELP-TOPIC search:
+Usage: !search <text>
+
+Looks something up, shows the top results.
+
+
+
+HELP-TOPIC ud:
+Usage: !ud <text>
+
+Shows a random definition for <text> from the Urban Dictionary.
+
+
+
+HELP-TOPIC say:
+Usage: !say <language> <text...
+
+Sends an .mp3 file with the text spoken using a TTS.
+
+
+
+HELP-TOPIC ri:
+Usage: !ri
+
+Shows random image using the Lorem Picsum API
+
+
+
+HELP-TOPIC ri:
+Usage: !uds <text>
+
+Makes the bot say something from the Urban Dictionary
+
+
+
+HELP-TOPIC wiki:
+Usage: !wiki <text>
+
+Searches Wikipedia
+
+
+HELP-TOPIC fand:
+Usage: !fand "<root (game name/title/name)>" "<page (character/actor/object)>"
+
+Searches a Fandom website
+
+
+
+HELP-TOPIC yt:
+Usage: !yt <text>
+
+Searches Youtube
+
+
+
+HELP-TOPIC udr:
+Usage: !udr
+Shows a random definition from the Urban Dictionary.
+
+
+
+HELP-TOPIC def:
+Usage: !def <text>
+
+Shows a random definition of someting
+
+
+
+HELP-TOPIC trab:
+Usage: !trab
+
+Translates the last sent message
+
+
+
+HELP-TOPIC meme:
+Usage: !meme
+
+Shows a random meme using the D3vd Meme API
+
+
+
+HELP-TOPIC sup:
+Usage: !sup
+
+hidden suprize
+
+
+
+HELP-TOPIC ns:
+Usage #1: !ns
+          [image1]
+          [image2]
+
+Usage #2: !ns <link1> <link2>
+
+change style of an image using Fast Style Transfer API from https://deepai.org/apis
+attact 2 images first one is the content and the seconds one is the style
+you can also use a link
+
+
+
+HELP-TOPIC nt:
+Usage #1: !nt
+          [image]
+
+Usage #2: !nt <link>
+
+image to text using Neuro Talk API from https://deepai.org/apis
+attact one image to be process
+you can also use a link
+
+
+
+HELP-TOPIC th:
+Usage: !tg <text...
+
+Generates additional text using https://bellard.org/textsynth/
+
+
+
+HELP-TOPIC s:
+NOTE: This command is currently disabled!
+Usage: !s <text>
+
+Allows you to have a talk with the AI.
+
+
+
+HELP-TOPIC forget:
+NOTE: This command is currently disabled!
+Usage: !forget
+
+Clears the AI's memory about you, starting a new conversation. (see !s)
+
+
+
+HELP-TOPIC mem:
+NOTE: This command is currently disabled!
+Usage: !mem
+
+Shows the full conversation between you and the AI. (see !s)

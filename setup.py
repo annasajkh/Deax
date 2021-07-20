@@ -17,101 +17,28 @@ translator = Translator()
 urban_client = UrbanClient()
 memories = {}
 
+HELP_TOPICS = {}
+def _fill_help_topics():
+    # VERY ugly parser; it works but it's ugly
+    # Also I put this in a function to isolate scope
+    with open("help.txt", encoding="utf-8") as f:
+        data = f.read()
+        topic = None
+        tdata = ""
+        for line in data.split("\n"):
+            sres = line.split("HELP-TOPIC ")
+            if len(sres) == 2 and sres[0] == "":
+                if topic is not None:
+                    HELP_TOPICS[topic] = tdata.strip()
+                topic = sres[1][:-1]
+                tdata = ""
+            else:
+                tdata += line + "\n"
+        HELP_TOPICS[topic] = tdata.strip()
 
-help_str = """
-SELEVER!!!!
-!selever
-
-NIKOOOO!!!!
-!niko
-
-get random affirmation, this command uses Affirmations API
-!aff
-
-ask question to the ai
-!ask <text>
-
-get random quote, this command uses Zenquotes API
-!quo
-
-translate text to english, this command uses Google Translate
-!tra <language> "<text>"
-
-get random advice, this command uses Adviceslip API
-!adv
-
-get fact about a number, this command uses Number Fact API
-!nf <number>
-
-search something
-!search <text>
-
-get random definition from urban dict
-!ud <text>
-
-make the bot say something
-!say <language> "<text>"
-
-get random image, this command uses Lorem Picsum API
-!ri
-
-make the bot say something from urban dict
-!uds <text>
-
-search wikipedia
-!wiki <text>
-
-search fandom website
-!fand "<root (game name/title/name)>" "<page (character/actor/object)>"
-
-search youtube
-!yt <text>
-
-urban dict random
-!udr
-
-get random definition of someting
-!def <text>
-
-translate above
-!trab
-
-get random meme this command uses D3vd Meme API
-!meme
-
-hidden suprize
-!sup
-
-change style of an image using Fast Style Transfer API from https://deepai.org/apis
-attact 2 images first one is the content and the seconds one is the style
-!ns 
-[image1]
-[image2]
-
-you can also use a link
-!ns <link1> <link2>
-
-image to text using Neuro Talk API from https://deepai.org/apis
-attact one image to be process 
-!nt
-[image]
-
-you can also use a link
-!nt <link>
-
-generate text using https://bellard.org/textsynth/
-!tg <text>
-
-have a talk with the ai (disabled)
-!s <text>
-
-delete ai memory talk about you so the ai will forget everything about you (disabled)
-!forget
-
-see the bot memory of you (disabled)
-!mem
-
-""".strip()
+_fill_help_topics()
+del _fill_help_topics
+            
 
 from apis import *
 from helper import *
