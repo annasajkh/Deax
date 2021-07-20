@@ -1,3 +1,5 @@
+import traceback
+
 from googlesearch import search
 from discord.colour import Color
 from gtts import gTTS
@@ -56,12 +58,22 @@ async def e(ctx, *, args):
 
 
 @bot.command()
-async def h(ctx):
+async def h(ctx, which=""):
     try:
-        embed = discord.Embed(title="Cum Bot Commands",description=help_str, color=Color.dark_blue())
-        await ctx.reply(embed=embed)
+        # I could make this more modular? I don't want to modify the code too much
+        if which == "":
+            embed = discord.Embed(title="Cum Bot Commands",description=help_str, color=Color.dark_blue())
+            await ctx.reply(embed=embed)
+        
+        elif which == "tra":
+            embed = discord.Embed(title="Info", description=open("help-tra.txt", encoding="utf8").read(), color=Color.dark_blue())
+            await ctx.reply(embed=embed)
+
+        else:
+            raise Exception("Unknown help command")
 
     except Exception as e:
+        traceback.print_exc()
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
@@ -72,6 +84,7 @@ async def yt(ctx, *, text):
         await ctx.reply(link)
 
     except Exception as e:
+        traceback.print_exc()
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
@@ -94,6 +107,7 @@ async def fand(ctx, wiki, page):
         await ctx.send(embed=embed)
 
     except Exception as e:
+        traceback.print_exc()
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
@@ -118,6 +132,7 @@ async def uds(ctx, *, text):
         os.remove("result.mp3")
 
     except Exception as e:
+        traceback.print_exc()
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
@@ -127,6 +142,7 @@ async def aff(ctx):
         embed = discord.Embed(description=get_affirmation(), color=0xFFFF00)
         await ctx.reply(embed=embed)
     except Exception as e:
+        traceback.print_exc()
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
@@ -146,6 +162,7 @@ A:
 
         await send_chunked_embed("","",ctx, result, Color.purple())
     except Exception as e:
+        traceback.print_exc()
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
@@ -155,6 +172,7 @@ async def quo(ctx):
         embed = discord.Embed(description=get_quote(), color=Color.green())
         await ctx.reply(embed=embed)
     except Exception as e:
+        traceback.print_exc()
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
@@ -169,6 +187,7 @@ async def tra(ctx, *args):
 
         await send_chunked_embed("","",ctx,translator.translate(text,dest=lang).text, Color.blurple())
     except Exception as e:
+        traceback.print_exc()
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
@@ -177,6 +196,7 @@ async def trab(ctx):
     try:
         await send_chunked_embed("","",ctx,translator.translate(bot.previous_message).text, Color.blurple())
     except Exception as e:
+        traceback.print_exc()
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
@@ -186,6 +206,7 @@ async def adv(ctx):
         embed = discord.Embed(description=get_advice(), color=Color.blue())
         await ctx.reply(embed=embed)
     except Exception as e:
+        traceback.print_exc()
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
@@ -195,6 +216,7 @@ async def nf(ctx, num):
         embed = discord.Embed(description=get_number_fact(num), color=Color.gold())
         await ctx.reply(embed=embed)
     except Exception as e:
+        traceback.print_exc()
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
@@ -213,6 +235,7 @@ async def _search(ctx, *, text):
         await ctx.reply(string_result)
 
     except Exception as e:
+        traceback.print_exc()
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
@@ -221,6 +244,7 @@ async def ud(ctx, *, text):
     try:
         await send_chunked_embed(text,"",ctx, get_urban_def(text), Color.orange())
     except Exception as e:
+        traceback.print_exc()
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
@@ -230,6 +254,7 @@ async def udr(ctx):
         title, definition = get_rand_urban_def()
         await send_chunked_embed(title,"" , ctx, definition, Color.orange())
     except Exception as e:
+        traceback.print_exc()
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
@@ -249,6 +274,7 @@ async def say(ctx, *args):
         os.remove("result.mp3")
 
     except Exception as e:
+        traceback.print_exc()
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
@@ -257,6 +283,7 @@ async def ri(ctx):
     try:
         await ctx.reply(requests.get("https://picsum.photos/500").url)
     except Exception as e:
+        traceback.print_exc()
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
@@ -282,6 +309,7 @@ async def _def(ctx, *, text):
 
         await send_chunked_embed(text,"",ctx,definition, Color.orange())
     except Exception as e:
+        traceback.print_exc()
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
@@ -296,6 +324,7 @@ async def meme(ctx):
 
         await ctx.reply(embed=embed)
     except Exception as e:
+        traceback.print_exc()
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
@@ -312,6 +341,7 @@ async def sup(ctx):
         
         await send_chunked_embed("","",ctx,str(message), Color.orange())
     except Exception as e:
+        traceback.print_exc()
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
@@ -341,6 +371,7 @@ async def ns(ctx, img1_url="", img2_url=""):
             
         await ctx.reply(r.json()["output_url"])
     except Exception as e:
+        traceback.print_exc()
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
@@ -368,6 +399,7 @@ async def nt(ctx, img_url=""):
             
         await ctx.reply(r.json()["output"])
     except Exception as e:
+        traceback.print_exc()
         await send_chunked_embed("","",ctx,str(e), Color.red())
     
 
@@ -438,6 +470,7 @@ async def selever(ctx):
         
         await ctx.reply(embed=embed)
     except Exception as e:
+        traceback.print_exc()
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
@@ -449,4 +482,5 @@ async def niko(ctx):
         
         await ctx.reply(embed=embed)
     except Exception as e:
+        traceback.print_exc()
         await send_chunked_embed("","",ctx,str(e), Color.red())
