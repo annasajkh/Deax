@@ -63,8 +63,8 @@ async def get_dialog_response(text, name):
     print("-" * 20)
 
     result = await get_gpt(text, 3)
-    result = result.replace(text, "").strip().split(f"{name}:")[0].strip().split(".")[0].split("\n")[0]
-
+    result = result.replace(text, "")
+    result = re.split(".*?:",result)[0].strip()
     return result
 
 

@@ -7,6 +7,7 @@ from setup import *
 import image_edit.cmds
 
 import discord
+import re
 import os
 import os
 import wikipedia
@@ -156,7 +157,9 @@ A:
             """.strip()
 
             result = await get_gpt(text, 3)
-            result = result.replace(text, "").strip().split("Q:")[0].strip().split(".")[0]
+            result = result.replace(text, "")
+            result = re.split(".*?:",result)[0].strip()
+
 
         await send_chunked_embed("","",ctx, result, Color.purple())
     except Exception as e:
