@@ -1,7 +1,7 @@
 from bot_client import BotClient
 from udpy import UrbanClient
 from googletrans import Translator
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 
 import discord
 
@@ -11,7 +11,7 @@ activity = discord.Activity(type=discord.ActivityType.watching, name="!h")
 bot = BotClient(command_prefix="!", activity=activity)
 bot.remove_command("help")
 
-# load_dotenv()
+load_dotenv()
 
 translator = Translator()
 urban_client = UrbanClient()
