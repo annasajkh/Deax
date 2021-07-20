@@ -1,4 +1,5 @@
 import traceback
+import itertools
 
 from googlesearch import search
 from discord.colour import Color
@@ -58,19 +59,39 @@ async def e(ctx, *, args):
 
 
 @bot.command()
-async def h(ctx, which=""):
-    try:
-        # I could make this more modular? I don't want to modify the code too much
-        if which == "":
-            embed = discord.Embed(title="Cum Bot Commands",description=help_str, color=Color.dark_blue())
-            await ctx.reply(embed=embed)
+async def h(ctx, which="_generic"):
+    NLINESPERPAGE = 20
+    
+    page_n = 0
+    
+    async def wait_for_arrow(user, message, emoji, page_delta):
+        nonlocal page_n, description
         
-        elif which == "tra":
-            embed = discord.Embed(title="Info", description=open("help-tra.txt", encoding="utf8").read(), color=Color.dark_blue())
-            await ctx.reply(embed=embed)
+        await message.add_reaction(emoji)
+        while 1:
+            reaction, user = await bot.wait_for("reaction_add", check=lambda reaction, ruser: str(reaction.emoji) == emoji and reaction.message == message and ruser == user)
+            await reaction.remove(user)
+            page_n += page_delta
+            if page_n < 0:
+                page_n = 0
+            if page_n >= len(description):
+                page_n = len(description) - 1
+            await message.edit(embed=discord.Embed(title="Cum Bot help (page %d/%d)" % (page_n + 1, len(description)), description=description[page_n], color=Color.dark_blue()))
+    
+    iterable = HELP_TOPICS[which].split("\n")
+    description = ["\n".join(i) for i in itertools.zip_longest(*([iter(iterable)] * NLINESPERPAGE), fillvalue="")]
+    
+    try:
+        if which in HELP_TOPICS:
+            embed = discord.Embed(title="Cum Bot help (page %d/%d)" % (page_n + 1, len(description)), description=description[page_n], color=Color.dark_blue())
+            message = await ctx.reply(embed=embed)
 
+            if len(description) > 1:
+                asyncio.Task(wait_for_arrow(ctx.message.author, message, "\N{LEFTWARDS BLACK ARROW}", -1))
+                asyncio.Task(wait_for_arrow(ctx.message.author, message, "\N{BLACK RIGHTWARDS ARROW}", 1))
+        
         else:
-            raise Exception("Unknown help command")
+            await send_chunked_embed("", "", ctx, "Unknown help topic %r" % (which.replace("@", "@."), ), Color.red())
 
     except Exception as e:
         traceback.print_exc()
