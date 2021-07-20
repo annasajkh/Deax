@@ -78,20 +78,20 @@ async def h(ctx, which="_generic"):
                 page_n = len(description) - 1
             await message.edit(embed=discord.Embed(title="Cum Bot help (page %d/%d)" % (page_n + 1, len(description)), description=description[page_n], color=Color.dark_blue()))
     
+    if which not in HELP_TOPICS:
+        await send_chunked_embed("", "", ctx, "Unknown help topic %r" % (which.replace("@", "@."), ), Color.red())
+        return
+    
     iterable = HELP_TOPICS[which].split("\n")
     description = ["\n".join(i) for i in itertools.zip_longest(*([iter(iterable)] * NLINESPERPAGE), fillvalue="")]
     
     try:
-        if which in HELP_TOPICS:
-            embed = discord.Embed(title="Cum Bot help (page %d/%d)" % (page_n + 1, len(description)), description=description[page_n], color=Color.dark_blue())
-            message = await ctx.reply(embed=embed)
+        embed = discord.Embed(title="Cum Bot help (page %d/%d)" % (page_n + 1, len(description)), description=description[page_n], color=Color.dark_blue())
+        message = await ctx.reply(embed=embed)
 
-            if len(description) > 1:
-                asyncio.Task(wait_for_arrow(ctx.message.author, message, "\N{LEFTWARDS BLACK ARROW}", -1))
-                asyncio.Task(wait_for_arrow(ctx.message.author, message, "\N{BLACK RIGHTWARDS ARROW}", 1))
-        
-        else:
-            await send_chunked_embed("", "", ctx, "Unknown help topic %r" % (which.replace("@", "@."), ), Color.red())
+        if len(description) > 1:
+            asyncio.Task(wait_for_arrow(ctx.message.author, message, "\N{LEFTWARDS BLACK ARROW}", -1))
+            asyncio.Task(wait_for_arrow(ctx.message.author, message, "\N{BLACK RIGHTWARDS ARROW}", 1))
 
     except Exception as e:
         traceback.print_exc()
