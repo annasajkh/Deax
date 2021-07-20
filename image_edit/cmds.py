@@ -402,16 +402,6 @@ def move(value, img):
     
     return Image.fromarray(img_arr)
 
-        
-def repeat(value, img):
-    # value = number;number
-    # range 0 -> 20
-    value = all_to_int(args_to_array(value, 2))
-
-    img = get_concat_tile_repeat(img, np.clip(value[0],0,20), np.clip(value[1],0,20))
-
-    return img
-
     
 def resize(value, img):
     print("whyyy")
@@ -468,7 +458,7 @@ def binary(self, value):
                        pixels[i, j] = 0
 
 
-def light(self,value):
+def light(self, value):
        value = float(value)
 
        max_radius = self.img.width if self.img.width < self.img.height else self.img.height
@@ -570,7 +560,6 @@ commands_list = {
     "filter": filterfunc,
     "crop_circle": crop_circle,
     "move": move,
-    "repeat": repeat,
     "resize": resize,
     "light": light,
     "binary": binary,

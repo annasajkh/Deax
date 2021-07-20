@@ -19,26 +19,17 @@ from PIL import Image
 
 # By @tdxf20, ily annas!
 @bot.command()
-async def e(ctx, *args):
+async def e(ctx, *, args):
     if not ctx.message.attachments:
-        await ctx.reply('You need to attach an image!')
+        await ctx.reply("You need to attach an image!")
 
     else:
-        # I guess this is for avoiding Nones? 
-        args = list(args)
-
-        args = ' '.join(args)
-
-        #
-        # Getting the image
-        #
-
         # Get the image
         image = ctx.message.attachments[0]
 
         # Get the image name for saving
         # Second part is getting the extension
-        filename = 'file.' + image.filename.split('.')[-1]
+        filename = "image." + image.filename.split('.')[-1]
 
         # Save the image
         await image.save(filename)
@@ -61,15 +52,7 @@ async def e(ctx, *args):
             image = image_edit.cmds.commands_list[command](value, image)
         
         image.save(filename)
-
-        #
-        # Sending the file
-        #
-
-        with open(filename, 'rb') as f:
-            f = discord.File(f)
-        
-        await ctx.reply(file=f)
+        await ctx.reply(file=discord.File(filename))
 
 
 @bot.command()
