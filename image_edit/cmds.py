@@ -442,53 +442,53 @@ def sheer(value, img):
 
 
 
-#def square_crop(self, value):
-#        # value = number
-#        value = int(value)
-#
-#        half_size_x = self.img.size[0] // 2
-#        half_size_y = self.img.size[1] // 2
-#
-#        self.img = self.img.crop((  half_size_x - value,
-#                                    half_size_y - value,
-#                                    half_size_x + value,
-#                                    half_size_y + value))
+def square_crop(self, value):
+       # value = number
+       value = int(value)
+
+       half_size_x = self.img.size[0] // 2
+       half_size_y = self.img.size[1] // 2
+
+       self.img = self.img.crop((  half_size_x - value,
+                                   half_size_y - value,
+                                   half_size_x + value,
+                                   half_size_y + value))
     
 
-#def binary(self, value):
-#        self.grayscale("true")
-#        value = int(value)
-#        pixels = self.img.load()
-#        
-#        for i in range(self.img.size[0]):
-#                for j in range(self.img.size[1]):
-#                    if pixels[i, j] >= value:
-#                        pixels[i, j] = 255
-#                    else:
-#                        pixels[i, j] = 0
+def binary(self, value):
+       self.grayscale("true")
+       value = int(value)
+       pixels = self.img.load()
+       
+       for i in range(self.img.size[0]):
+               for j in range(self.img.size[1]):
+                   if pixels[i, j] >= value:
+                       pixels[i, j] = 255
+                   else:
+                       pixels[i, j] = 0
 
 
-#def light(self,value):
-#        value = float(value)
-#
-#        max_radius = self.img.width if self.img.width < self.img.height else self.img.height
-#        img = self.img.load()
-#        center = (self.img.width // 2, self.img.height // 2)
-#
-#        max_x = abs(max_radius - center[0])
-#        max_y = abs(max_radius - center[1])
-#
-#
-#        max_distance = math.sqrt(max_x * max_x + max_y * max_y)
-#
-#        for i in range(self.img.width):
-#            for j in range(self.img.height):
-#
-#                x = abs(i - center[0])
-#                y = abs(j - center[1])
-#
-#                distance = math.sqrt(x * x + y * y)
-#                img[i ,j] = tuple(map(lambda x : int(x * (1 - (distance / max_distance * value)) * 3), img[i ,j]))
+def light(self,value):
+       value = float(value)
+
+       max_radius = self.img.width if self.img.width < self.img.height else self.img.height
+       img = self.img.load()
+       center = (self.img.width // 2, self.img.height // 2)
+
+       max_x = abs(max_radius - center[0])
+       max_y = abs(max_radius - center[1])
+
+
+       max_distance = math.sqrt(max_x * max_x + max_y * max_y)
+
+       for i in range(self.img.width):
+           for j in range(self.img.height):
+
+               x = abs(i - center[0])
+               y = abs(j - center[1])
+
+               distance = math.sqrt(x * x + y * y)
+               img[i ,j] = tuple(map(lambda x : int(x * (1 - (distance / max_distance * value)) * 3), img[i ,j]))
 
 
 ##########################################
@@ -571,5 +571,8 @@ commands_list = {
     "crop_circle": crop_circle,
     "move": move,
     "repeat": repeat,
-    "resize": resize
+    "resize": resize,
+    "light": light,
+    "binary": binary,
+    "square_crop": square_crop
 }
