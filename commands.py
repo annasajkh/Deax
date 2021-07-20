@@ -156,7 +156,7 @@ Q: {text}
 A: 
             """.strip()
 
-            result = await get_gpt(text, 5)
+            result = await get_gpt(text, 8)
             result = result.replace(text, "")
             result = re.split(".*?:",result)[0].strip()
 
@@ -445,16 +445,6 @@ async def tg(ctx, *, text):
         import traceback
         traceback.print_exception()
         await send_chunked_embed("","",ctx,str(e), Color.red())
-
-
-# @bot.command()
-# async def tg(ctx, *, text):
-#     try:
-#         async with ctx.typing():
-#             await send_chunked_embed("","",ctx,get_gpt2(text), Color.blue())
-
-#     except Exception as e:
-#         await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 @bot.command()
