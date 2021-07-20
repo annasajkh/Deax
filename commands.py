@@ -435,10 +435,12 @@ async def mem(ctx):
 async def tg(ctx, *, text):
     try:
         async with ctx.typing():
-            result = await get_gpt(text, 8)
+            result = await get_gpt(text, 10)
         await send_chunked_embed("", "" ,ctx, result, Color.blue())          
 
     except Exception as e:
+        import traceback
+        traceback.print_exception()
         await send_chunked_embed("","",ctx,str(e), Color.red())
 
 

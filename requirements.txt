@@ -51,7 +51,7 @@ tqdm==4.61.2
 typing-extensions==3.10.0.0
 udpy==2.0.0
 urllib3==1.26.5
-websockets==9.1
+websockets==8.1
 wikipedia==1.4.0
 yarl==1.6.3
 youtube-search==2.1.0
