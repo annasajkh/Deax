@@ -371,10 +371,8 @@ async def nt(ctx, img_url=""):
         await send_chunked_embed("","",ctx,str(e), Color.red())
     
 
-@bot.command(name="s")
-async def _s(ctx, *, text):
-    await ctx.reply("this command is disable sorry...")
-    return
+@bot.command(name="c")
+async def _c(ctx, *, text):
     async with ctx.typing():
         name = ctx.author.name
 
@@ -390,9 +388,7 @@ async def _s(ctx, *, text):
 
 @bot.command()
 async def forget(ctx):
-    await ctx.reply("this command is disable sorry...")
     return
-
     name = ctx.author.name
 
     if name in memories.keys():
@@ -405,9 +401,7 @@ async def forget(ctx):
 
 @bot.command()
 async def mem(ctx):
-    await ctx.reply("this command is disable sorry...")
     return
-
     name = ctx.author.name
 
     if name in memories.keys():
