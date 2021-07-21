@@ -409,7 +409,7 @@ you can also use a link
 
 
 
-HELP-TOPIC th:
+HELP-TOPIC tg:
 Usage: !tg <text...
 
 Generates additional text using https://bellard.org/textsynth/
