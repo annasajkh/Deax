@@ -441,7 +441,6 @@ async def _c(ctx, *, text):
 
 @bot.command()
 async def forget(ctx):
-    return
     name = ctx.author.name
 
     if name in memories.keys():
@@ -454,7 +453,6 @@ async def forget(ctx):
 
 @bot.command()
 async def mem(ctx):
-    return
     name = ctx.author.name
 
     if name in memories.keys():
