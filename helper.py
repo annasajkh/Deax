@@ -93,6 +93,9 @@ async def response_talk(ctx, name, text, memory):
 
     result = await get_dialog_response("\n".join(memory), name)
 
+    while result in "\n".join(memory):
+        result = await get_dialog_response("\n".join(memory), name)
+
     memory.append(f"Bot: {result}")
 
     await ctx.reply(result)
