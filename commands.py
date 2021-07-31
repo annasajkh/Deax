@@ -205,8 +205,12 @@ async def tra(ctx, *args):
         lang = args.pop(0)
         text = " ".join(args)
 
+        try:
+            result = ctx,translator.translate(text,dest=lang)
+        except:
+            result = ctx,translator.translate(lang + " " + text,dest="en")
 
-        await send_chunked_embed("","",ctx,translator.translate(text,dest=lang).text, Color.blurple())
+        await send_chunked_embed("","",ctx,result.text, Color.blurple())
     except Exception as e:
         traceback.print_exc()
         await send_chunked_embed("","",ctx,str(e), Color.red())
