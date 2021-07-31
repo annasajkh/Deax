@@ -6,7 +6,7 @@ from PIL import Image, ImageFont, ImageDraw
 def get_font(image, caption):
     """Create font with dynamic size"""
     font_size = int(np.clip(image.width / 9 / (len(caption) / 16), 1, image.width / 8))
-    return ImageFont.truetype("impact.ttf", size=font_size)
+    return ImageFont.truetype("image_edit/impact.ttf", size=font_size)
 
 def draw_caption_text(x, y, border_size, caption, font, draw):
     """Draws the caption at the x and y, you need to initiate the draw first"""
