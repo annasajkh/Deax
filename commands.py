@@ -85,347 +85,256 @@ async def h(ctx, which="_generic"):
     iterable = HELP_TOPICS[which].split("\n")
     description = ["\n".join(i) for i in itertools.zip_longest(*([iter(iterable)] * NLINESPERPAGE), fillvalue="")]
     
-    try:
-        embed = discord.Embed(title="Cum Bot help (page %d/%d)" % (page_n + 1, len(description)), description=description[page_n], color=Color.dark_blue())
-        message = await ctx.reply(embed=embed)
+    embed = discord.Embed(title="Cum Bot help (page %d/%d)" % (page_n + 1, len(description)), description=description[page_n], color=Color.dark_blue())
+    message = await ctx.reply(embed=embed)
 
-        if len(description) > 1:
-            asyncio.Task(wait_for_arrow(ctx.message.author, message, "\N{LEFTWARDS BLACK ARROW}", -1))
-            asyncio.Task(wait_for_arrow(ctx.message.author, message, "\N{BLACK RIGHTWARDS ARROW}", 1))
-
-    except Exception as e:
-        traceback.print_exc()
-        await send_chunked_embed("","",ctx,str(e), Color.red())
+    if len(description) > 1:
+        asyncio.Task(wait_for_arrow(ctx.message.author, message, "\N{LEFTWARDS BLACK ARROW}", -1))
+        asyncio.Task(wait_for_arrow(ctx.message.author, message, "\N{BLACK RIGHTWARDS ARROW}", 1))
 
 
 @bot.command()
 async def yt(ctx, *, text):
-    try:
-        link = "http://www.youtube.com" + YoutubeSearch(text, max_results=1).to_dict()[0]["url_suffix"]
-        await ctx.reply(link)
-
-    except Exception as e:
-        traceback.print_exc()
-        await send_chunked_embed("","",ctx,str(e), Color.red())
+    link = "http://www.youtube.com" + YoutubeSearch(text, max_results=1).to_dict()[0]["url_suffix"]
+    await ctx.reply(link)
 
 
 @bot.command()
 async def fand(ctx, wiki, page):
+    fandom.set_wiki(wiki)
+    page = fandom.page(page)
+
+    embed = discord.Embed()
+    embed.title = page.title
+    embed.description = page.summary
+    embed.color = Color.from_rgb(0, 214, 217)
+
     try:
-        fandom.set_wiki(wiki)
-        page = fandom.page(page)
+        embed.set_image(url=page.images[0])
+    except:
+        pass
 
-        embed = discord.Embed()
-        embed.title = page.title
-        embed.description = page.summary
-        embed.color = Color.from_rgb(0, 214, 217)
-
-        try:
-            embed.set_image(url=page.images[0])
-        except:
-            pass
-
-        await ctx.send(embed=embed)
-
-    except Exception as e:
-        traceback.print_exc()
-        await send_chunked_embed("","",ctx,str(e), Color.red())
+    await ctx.send(embed=embed)
 
 
 @bot.command()
 async def wiki(ctx, *, text):
-    try:
-        page = wikipedia.page(text)
+    page = wikipedia.page(text)
 
-        await send_chunked_embed(page.title, "",ctx, page.summary, Color.gold())
-    except Exception as e:
-        await send_chunked_embed("","",ctx,str(e), Color.red())
+    await send_chunked_embed(page.title, "",ctx, page.summary, Color.gold())
 
 
 @bot.command()
 async def uds(ctx, *, text):
-    try:
-        tts = gTTS(get_urban_def(text))
-        tts.save("result.mp3")
+    tts = gTTS(get_urban_def(text))
+    tts.save("result.mp3")
 
-        await ctx.reply(file=discord.File("result.mp3"))
+    await ctx.reply(file=discord.File("result.mp3"))
 
-        os.remove("result.mp3")
-
-    except Exception as e:
-        traceback.print_exc()
-        await send_chunked_embed("","",ctx,str(e), Color.red())
+    os.remove("result.mp3")
 
 
 @bot.command()
 async def aff(ctx):
-    try:
-        embed = discord.Embed(description=get_affirmation(), color=0xFFFF00)
-        await ctx.reply(embed=embed)
-    except Exception as e:
-        traceback.print_exc()
-        await send_chunked_embed("","",ctx,str(e), Color.red())
+    embed = discord.Embed(description=get_affirmation(), color=0xFFFF00)
+    await ctx.reply(embed=embed)
 
 
 @bot.command()
 async def ask(ctx, *, text):
-    try:
-        async with ctx.typing():
-            text = f"""
+    async with ctx.typing():
+        text = f"""
 Q: {text}
 A: 
-            """.strip()
+        """.strip()
 
-            result = await get_gpt(text, 8)
-            result = result.replace(text, "")
-            result = re.split(".*?:",result)[0].strip()
+        result = await get_gpt(text, 8)
+        result = result.replace(text, "")
+        result = re.split(".*?:",result)[0].strip()
 
 
-        await send_chunked_embed("","",ctx, result, Color.purple())
-    except Exception as e:
-        traceback.print_exc()
-        await send_chunked_embed("","",ctx,str(e), Color.red())
+    await send_chunked_embed("","",ctx, result, Color.purple())
 
 
 @bot.command()
 async def quo(ctx):
-    try:
-        embed = discord.Embed(description=get_quote(), color=Color.green())
-        await ctx.reply(embed=embed)
-    except Exception as e:
-        traceback.print_exc()
-        await send_chunked_embed("","",ctx,str(e), Color.red())
+    embed = discord.Embed(description=get_quote(), color=Color.green())
+    await ctx.reply(embed=embed)
 
 
 @bot.command()
 async def tra(ctx, *args):
+    args = list(args)
+
+    lang = args.pop(0)
+    text = " ".join(args)
+
     try:
-        args = list(args)
+        result = translator.translate(text,dest=lang)
+    except:
+        result = translator.translate(lang + " " + text,dest="en")
 
-        lang = args.pop(0)
-        text = " ".join(args)
+    await send_chunked_embed("","",ctx,result.text, Color.blurple())
 
-        try:
-            result = ctx,translator.translate(text,dest=lang)
-        except:
-            result = ctx,translator.translate(lang + " " + text,dest="en")
-
-        await send_chunked_embed("","",ctx,result.text, Color.blurple())
-    except Exception as e:
-        traceback.print_exc()
-        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 @bot.command()
 async def trab(ctx):
-    try:
-        await send_chunked_embed("","",ctx,translator.translate(bot.previous_message).text, Color.blurple())
-    except Exception as e:
-        traceback.print_exc()
-        await send_chunked_embed("","",ctx,str(e), Color.red())
+    await send_chunked_embed("","",ctx,translator.translate(bot.previous_message).text, Color.blurple())
 
 
 @bot.command()
 async def adv(ctx):
-    try:
-        embed = discord.Embed(description=get_advice(), color=Color.blue())
-        await ctx.reply(embed=embed)
-    except Exception as e:
-        traceback.print_exc()
-        await send_chunked_embed("","",ctx,str(e), Color.red())
+    embed = discord.Embed(description=get_advice(), color=Color.blue())
+    await ctx.reply(embed=embed)
 
 
 @bot.command()
 async def nf(ctx, num):
-    try:
-        embed = discord.Embed(description=get_number_fact(num), color=Color.gold())
-        await ctx.reply(embed=embed)
-    except Exception as e:
-        traceback.print_exc()
-        await send_chunked_embed("","",ctx,str(e), Color.red())
+    embed = discord.Embed(description=get_number_fact(num), color=Color.gold())
+    await ctx.reply(embed=embed)
 
 
 @bot.command(name="search")
 async def _search(ctx, *, text):
-    try:
-        result = search(text, num_results=5)
-        string_result = ""
+    result = search(text, num_results=5)
+    string_result = ""
 
-        if not result:
-            raise Exception("can't find it sorry")
+    if not result:
+        raise Exception("can't find it sorry")
 
-        for i in result:
-            string_result += i +'\n'
-        
-        await ctx.reply(string_result)
-
-    except Exception as e:
-        traceback.print_exc()
-        await send_chunked_embed("","",ctx,str(e), Color.red())
+    for i in result:
+        string_result += i +'\n'
+    
+    await ctx.reply(string_result)
 
 
 @bot.command()
 async def ud(ctx, *, text):
-    try:
-        await send_chunked_embed(text,"",ctx, get_urban_def(text), Color.orange())
-    except Exception as e:
-        traceback.print_exc()
-        await send_chunked_embed("","",ctx,str(e), Color.red())
+    await send_chunked_embed(text,"",ctx, get_urban_def(text), Color.orange())
 
 
 @bot.command()
 async def udr(ctx):
-    try:
-        title, definition = get_rand_urban_def()
-        await send_chunked_embed(title,"" , ctx, definition, Color.orange())
-    except Exception as e:
-        traceback.print_exc()
-        await send_chunked_embed("","",ctx,str(e), Color.red())
+    title, definition = get_rand_urban_def()
+    await send_chunked_embed(title,"" , ctx, definition, Color.orange())
 
 
 @bot.command()
 async def say(ctx, *args):
-    try:
-        args = list(args)
+    args = list(args)
 
-        lang = args.pop(0)
-        text = " ".join(args)
-        
-        tts = gTTS(text, lang=lang)
-        tts.save("result.mp3")
+    lang = args.pop(0)
+    text = " ".join(args)
+    
+    tts = gTTS(text, lang=lang)
+    tts.save("result.mp3")
 
-        await ctx.reply(file=discord.File("result.mp3"))
+    await ctx.reply(file=discord.File("result.mp3"))
 
-        os.remove("result.mp3")
+    os.remove("result.mp3")
 
-    except Exception as e:
-        traceback.print_exc()
-        await send_chunked_embed("","",ctx,str(e), Color.red())
 
 
 @bot.command()
 async def ri(ctx):
-    try:
-        await ctx.reply(requests.get("https://picsum.photos/500").url)
-    except Exception as e:
-        traceback.print_exc()
-        await send_chunked_embed("","",ctx,str(e), Color.red())
+    await ctx.reply(requests.get("https://picsum.photos/500").url)
 
 
 @bot.command(name="def")
 async def _def(ctx, *, text):
-    try:
-        text = text.title()
+    text = text.title()
+    title, definition = get_rand_urban_def()
+
+    while title not in definition:
         title, definition = get_rand_urban_def()
 
-        while title not in definition:
-            title, definition = get_rand_urban_def()
+    definition = definition.replace('[','').replace(']','')
+    definition = replace_ignore_case(definition, title, text)
 
-        definition = definition.replace('[','').replace(']','')
-        definition = replace_ignore_case(definition, title, text)
+    #thanks mert
+    if text[0] in ['A','I','U','E','O']:
+        definition = definition.replace('a' + text, 'an' + text)
+        definition = definition.replace('A' + text, 'An' + text)
+    else:
+        definition = definition.replace('an' + text, 'a' + text)
+        definition = definition.replace('An' + text, 'A' + text)
 
-        #thanks mert
-        if text[0] in ['A','I','U','E','O']:
-            definition = definition.replace('a' + text, 'an' + text)
-            definition = definition.replace('A' + text, 'An' + text)
-        else:
-            definition = definition.replace('an' + text, 'a' + text)
-            definition = definition.replace('An' + text, 'A' + text)
-
-        await send_chunked_embed(text,"",ctx,definition, Color.orange())
-    except Exception as e:
-        traceback.print_exc()
-        await send_chunked_embed("","",ctx,str(e), Color.red())
+    await send_chunked_embed(text,"",ctx,definition, Color.orange())
 
 
 @bot.command()
 async def meme(ctx):
-    try:
-        name, url = get_rand_meme()
+    name, url = get_rand_meme()
 
-        embed = discord.Embed()
-        embed.title = name
-        embed.set_image(url=url)
+    embed = discord.Embed()
+    embed.title = name
+    embed.set_image(url=url)
 
-        await ctx.reply(embed=embed)
-    except Exception as e:
-        traceback.print_exc()
-        await send_chunked_embed("","",ctx,str(e), Color.red())
+    await ctx.reply(embed=embed)
 
 
 @bot.command()
 async def sup(ctx):
-    try:
-        title, definition = get_rand_urban_def()
-        def_list = definition.split(" ")
+    title, definition = get_rand_urban_def()
+    def_list = definition.split(" ")
 
-        message = ""
+    message = ""
 
-        for word in def_list:
-            message += f" || {word.strip()} || "
-        
-        await send_chunked_embed("","",ctx,str(message), Color.orange())
-    except Exception as e:
-        traceback.print_exc()
-        await send_chunked_embed("","",ctx,str(e), Color.red())
+    for word in def_list:
+        message += f" || {word.strip()} || "
+    
+    await send_chunked_embed("","",ctx,str(message), Color.orange())
 
 
 @bot.command()
 async def ns(ctx, img1_url="", img2_url=""):
-    try:
-        r = None
-        async with ctx.typing():
-            if img1_url == "" and img2_url == "":
-                r = requests.post(
-                    "https://api.deepai.org/api/neural-style",
-                    data={
-                        "content": f"{ctx.message.attachments[0].url}",
-                        "style": f"{ctx.message.attachments[1].url}",
-                    },
-                    headers={"api-key": os.environ["DEEP_DREAM_KEY"]}
-                )
-            else:
-                r = requests.post(
-                    "https://api.deepai.org/api/neural-style",
-                    data={
-                        "content": img1_url,
-                        "style": img2_url,
-                    },
-                    headers={"api-key": os.environ["DEEP_DREAM_KEY"]}
-                )
-            
-        await ctx.reply(r.json()["output_url"])
-    except Exception as e:
-        traceback.print_exc()
-        await send_chunked_embed("","",ctx,str(e), Color.red())
+    r = None
+    async with ctx.typing():
+        if img1_url == "" and img2_url == "":
+            r = requests.post(
+                "https://api.deepai.org/api/neural-style",
+                data={
+                    "content": f"{ctx.message.attachments[0].url}",
+                    "style": f"{ctx.message.attachments[1].url}",
+                },
+                headers={"api-key": os.environ["DEEP_DREAM_KEY"]}
+            )
+        else:
+            r = requests.post(
+                "https://api.deepai.org/api/neural-style",
+                data={
+                    "content": img1_url,
+                    "style": img2_url,
+                },
+                headers={"api-key": os.environ["DEEP_DREAM_KEY"]}
+            )
+        
+    await ctx.reply(r.json()["output_url"])
 
 
 @bot.command()
 async def nt(ctx, img_url=""):
-    try:
-        r = None
-        async with ctx.typing():
-            if img_url == "":
-                r = requests.post(
-                    "https://api.deepai.org/api/neuraltalk",
-                    data={
-                        "image": f"{ctx.message.attachments[0].url}"
-                    },
-                    headers={"api-key": os.environ["DEEP_DREAM_KEY"]}
-                )
-            else:
-                r = requests.post(
-                    "https://api.deepai.org/api/neuraltalk",
-                    data={
-                        "image": img_url
-                    },
-                    headers={"api-key": os.environ["DEEP_DREAM_KEY"]}
-                )
-            
-        await ctx.reply(r.json()["output"])
-    except Exception as e:
-        traceback.print_exc()
-        await send_chunked_embed("","",ctx,str(e), Color.red())
+    r = None
+    async with ctx.typing():
+        if img_url == "":
+            r = requests.post(
+                "https://api.deepai.org/api/neuraltalk",
+                data={
+                    "image": f"{ctx.message.attachments[0].url}"
+                },
+                headers={"api-key": os.environ["DEEP_DREAM_KEY"]}
+            )
+        else:
+            r = requests.post(
+                "https://api.deepai.org/api/neuraltalk",
+                data={
+                    "image": img_url
+                },
+                headers={"api-key": os.environ["DEEP_DREAM_KEY"]}
+            )
+        
+    await ctx.reply(r.json()["output"])
     
 
 @bot.command(name="c")
@@ -468,36 +377,22 @@ async def mem(ctx):
 
 @bot.command()
 async def tg(ctx, *, text):
-    try:
-        async with ctx.typing():
-            result = await get_gpt(text, 10)
-        await send_chunked_embed("", "" ,ctx, result, Color.blue())          
-
-    except Exception as e:
-        import traceback
-        traceback.print_exception()
-        await send_chunked_embed("","",ctx,str(e), Color.red())
+    async with ctx.typing():
+        result = await get_gpt(text, 10)
+    await send_chunked_embed("", "" ,ctx, result, Color.blue())          
 
 
 @bot.command()
 async def selever(ctx):
-    try:
-        embed = discord.Embed(color=Color.purple())
-        embed.set_image(url="https://static.wikia.nocookie.net/fridaynightfunking/images/2/2f/SeleverAnim.gif")
-        
-        await ctx.reply(embed=embed)
-    except Exception as e:
-        traceback.print_exc()
-        await send_chunked_embed("","",ctx,str(e), Color.red())
+    embed = discord.Embed(color=Color.purple())
+    embed.set_image(url="https://static.wikia.nocookie.net/fridaynightfunking/images/2/2f/SeleverAnim.gif")
+    
+    await ctx.reply(embed=embed)
 
 
 @bot.command()
 async def niko(ctx):
-    try:
-        embed = discord.Embed(color=Color.orange())
-        embed.set_image(url="https://media1.tenor.com/images/0e1c03b54935e214924ab40a8f945372/tenor.gif?itemid=17938358")
-        
-        await ctx.reply(embed=embed)
-    except Exception as e:
-        traceback.print_exc()
-        await send_chunked_embed("","",ctx,str(e), Color.red())
+    embed = discord.Embed(color=Color.orange())
+    embed.set_image(url="https://media1.tenor.com/images/0e1c03b54935e214924ab40a8f945372/tenor.gif?itemid=17938358")
+    
+    await ctx.reply(embed=embed)

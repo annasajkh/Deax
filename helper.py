@@ -31,10 +31,6 @@ async def send_chunked_embed(title, image, ctx, text, color):
 
 
 
-def replace_ignore_case(text, old_word, new_word):
-    return re.compile(re.escape(old_word),re.IGNORECASE).sub(new_word,text)
-
-
 async def get_elemets(page):
 	await page.waitForSelector("#input_text")
 
