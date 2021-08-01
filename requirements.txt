@@ -25,6 +25,9 @@ httpcore==0.9.1
 httpx==0.13.3
 hyperframe==5.2.0
 idna==2.10
+itsdangerous==2.0.1
+Jinja2==3.0.1
+MarkupSafe==2.0.1
 memeapi==0.2.3
 multidict==5.1.0
 numexpr==2.7.3
@@ -52,6 +55,7 @@ typing-extensions==3.10.0.0
 udpy==2.0.0
 urllib3==1.26.5
 websockets==8.1
+Werkzeug==2.0.1
 wikipedia==1.4.0
 yarl==1.6.3
 youtube-search==2.1.0
