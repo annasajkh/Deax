@@ -1,7 +1,5 @@
 import textwrap
 import discord
-import requests
-import os
 import re
 import asyncio
 from pyppeteer import launch
