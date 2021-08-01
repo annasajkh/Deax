@@ -2,8 +2,12 @@ from bot_client import BotClient
 from udpy import UrbanClient
 from googletrans import Translator
 from dotenv import load_dotenv
+from discord import Color
 
 import discord
+import traceback
+
+
 
 #Setup all variables
 
@@ -61,4 +65,5 @@ async def on_message(message : discord.Message):
         await bot.process_commands(message)
     except Exception as e:
         traceback.print_exc()
-        await send_chunked_embed("","",ctx,str(e), Color.red())
+        
+        await send_chunked_embed("","",message,str(e), Color.red())

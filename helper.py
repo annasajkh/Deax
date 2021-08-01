@@ -29,6 +29,8 @@ async def send_chunked_embed(title, image, ctx, text, color):
         embed = discord.Embed(description=text, color=color)
         await ctx.reply(embed=embed)
 
+def replace_ignore_case(text, old_word, new_word):
+    return re.compile(re.escape(old_word),re.IGNORECASE).sub(new_word,text)
 
 
 async def get_elemets(page):
