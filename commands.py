@@ -76,7 +76,7 @@ async def h(ctx, which="_generic"):
                 page_n = 0
             if page_n >= len(description):
                 page_n = len(description) - 1
-            await message.edit(embed=discord.Embed(title="Cum Bot help (page %d/%d)" % (page_n + 1, len(description)), description=description[page_n], color=Color.dark_blue()))
+            await message.edit(embed=discord.Embed(title="Deax help (page %d/%d)" % (page_n + 1, len(description)), description=description[page_n], color=Color.dark_blue()))
     
     if which not in HELP_TOPICS:
         await send_chunked_embed("", "", ctx, "Unknown help topic %r" % (which.replace("@", "@."), ), Color.red())
