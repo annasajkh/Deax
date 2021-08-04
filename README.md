@@ -1,2 +1,2 @@
-# Cum-Bot
+# Deax
 fun discord bot
