@@ -1,9 +1,11 @@
+from pyppeteer import browser, launch
+
 import textwrap
 import discord
 import re
 import asyncio
-from pyppeteer import launch
 
+browser = asyncio.get_event_loop().run_until_complete(launch({"args":["--no-sandbox","--disable-setuid-sandbox"]}))
 
 
 #if embed is larger than 2048 character use this!
@@ -42,14 +44,14 @@ async def get_elemets(page):
 
 
 async def setup_browser():
-    browser = await launch({"args":["--no-sandbox","--disable-setuid-sandbox"]})
+    
     page = await browser.newPage()
 
     await page.goto("https://bellard.org/textsynth/")
 
     input_text, submit_button = await get_elemets(page)
 
-    return browser, page, input_text, submit_button
+    return page, input_text, submit_button
 
 
 async def get_dialog_response(text, name):
@@ -67,7 +69,7 @@ async def get_dialog_response(text, name):
 async def get_gpt(text, delay):
     text = text + " "
 
-    browser, page, input_text, submit_button = await setup_browser()
+    page, input_text, submit_button = await setup_browser()
 
     await input_text.type(text)
     await submit_button.click()
@@ -78,7 +80,7 @@ async def get_gpt(text, delay):
 
     result = await page.evaluate("(element) => element.innerText",gtext)
         
-    await browser.close()
+    await page.close()
 
     return result
 

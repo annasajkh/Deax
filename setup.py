@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from discord import Color
 
 import discord
+import asyncio
 import traceback
 
 

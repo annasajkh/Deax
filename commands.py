@@ -1,9 +1,11 @@
 import traceback
 import itertools
+from discord import partial_emoji
 
 from googlesearch import search
 from discord.colour import Color
 from gtts import gTTS
+from pyppeteer.page import Page
 from youtube_search import YoutubeSearch
 
 from setup import *
@@ -285,6 +287,17 @@ async def sup(ctx):
         message += f" || {word.strip()} || "
     
     await send_chunked_embed("","",ctx,str(message), Color.orange())
+
+@bot.command()
+async def url(ctx, url):
+    page = await browser.newPage()
+
+    await page.goto("https://" + url, {"waitUntil": "networkidle2"})
+    await page.screenshot({"path": "result.png"})
+    await page.close()
+
+    await ctx.reply(file=discord.File("result.png"))
+
 
 
 @bot.command()
