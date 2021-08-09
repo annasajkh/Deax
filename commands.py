@@ -295,7 +295,7 @@ async def url(ctx, url):
     if "http" not in url:
         await page.goto("https://" + url, {"waitUntil": "networkidle2"})
     else:
-        await page.goto("https://" + url, {"waitUntil": "networkidle2"})
+        await page.goto(url, {"waitUntil": "networkidle2"})
     await page.screenshot({"path": "result.png"})
     await page.close()
 
