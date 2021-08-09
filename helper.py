@@ -6,7 +6,7 @@ import re
 import asyncio
 
 browser = asyncio.get_event_loop().run_until_complete(launch({"args":["--no-sandbox","--disable-setuid-sandbox"]}))
-
+page = asyncio.get_event_loop().run_until_complete(browser.newPage())
 
 #if embed is larger than 2048 character use this!
 async def send_chunked_embed(title, image, ctx, text, color):
@@ -44,8 +44,6 @@ async def get_elemets(page):
 
 
 async def setup_browser():
-    
-    page = await browser.newPage()
 
     await page.goto("https://bellard.org/textsynth/")
 

@@ -290,14 +290,12 @@ async def sup(ctx):
 
 @bot.command()
 async def url(ctx, url):
-    page = await browser.newPage()
 
     if "http" not in url:
         await page.goto("https://" + url, {"waitUntil": "networkidle2"})
     else:
         await page.goto(url, {"waitUntil": "networkidle2"})
     await page.screenshot({"path": "result.png"})
-    await page.close()
 
     await ctx.reply(file=discord.File("result.png"))
 
