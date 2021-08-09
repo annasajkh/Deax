@@ -292,7 +292,10 @@ async def sup(ctx):
 async def url(ctx, url):
     page = await browser.newPage()
 
-    await page.goto("https://" + url, {"waitUntil": "networkidle2"})
+    if "http" not in url:
+        await page.goto("https://" + url, {"waitUntil": "networkidle2"})
+    else:
+        await page.goto("https://" + url, {"waitUntil": "networkidle2"})
     await page.screenshot({"path": "result.png"})
     await page.close()
 
