@@ -290,17 +290,17 @@ async def sup(ctx):
 
 @bot.command()
 async def url(ctx, url):
+    async with ctx.typing():
+        page = await browser.newPage()
 
-    page = await browser.newPage()
+        if "http" not in url:
+            await page.goto("https://" + url, {"waitUntil": "networkidle2"})
+        else:
+            await page.goto(url, {"waitUntil": "networkidle2"})
+        await page.screenshot({"path": "result.png"})
+        await page.close()
 
-    if "http" not in url:
-        await page.goto("https://" + url, {"waitUntil": "networkidle2"})
-    else:
-        await page.goto(url, {"waitUntil": "networkidle2"})
-    await page.screenshot({"path": "result.png"})
-    await page.close()
-
-    await ctx.reply(file=discord.File("result.png"))
+        await ctx.reply(file=discord.File("result.png"))
 
 
 
