@@ -67,4 +67,4 @@ async def on_message(message : discord.Message):
     except Exception as e:
         traceback.print_exc()
         
-        await send_chunked_embed("","",message,str(e), Color.red())
+        await message.reply(str(e))
