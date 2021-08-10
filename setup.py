@@ -67,4 +67,4 @@ async def on_message(message : discord.Message):
     except Exception as e:
         traceback.print_exc()
         
-        await message.reply(str(e))
+        await message.channel.send(e)
