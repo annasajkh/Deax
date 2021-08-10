@@ -43,7 +43,7 @@ async def get_elemets(page):
 
 
 async def setup_browser():
-    page = asyncio.get_event_loop().run_until_complete(browser.newPage())
+    page = await browser.newPage()
     
     await page.goto("https://bellard.org/textsynth/")
 
