@@ -47,12 +47,15 @@ del _fill_help_topics
 
 from apis import *
 from helper import *
-
+import random
 
 @bot.event
 async def on_message(message : discord.Message):
-    bot.edit(nick:"Im starring at your soul")
     try:
+        if random.random() > 0.99:
+            message.channel.send(random.choice(["...", "ah", "mmmmmm", "hmmmm"]))
+
+
         if message.author == bot.user:
             return
 
