@@ -5,7 +5,7 @@ import discord
 import re
 import asyncio
 
-browser = asyncio.get_event_loop().run_until_complete(launch(options={'args': ['--no-sandbox']}))
+browser = asyncio.get_event_loop().run_until_complete(launch(options={"args": ["--no-sandbox"]}))
 
 #if embed is larger than 2048 character use this!
 async def send_chunked_embed(title, image, ctx, text, color):
