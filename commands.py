@@ -102,7 +102,7 @@ async def h(ctx, which="_generic"):
     iterable = HELP_TOPICS[which].split("\n")
     description = ["\n".join(i) for i in itertools.zip_longest(*([iter(iterable)] * NLINESPERPAGE), fillvalue="")]
     
-    embed = discord.Embed(title="Cum Bot help (page %d/%d)" % (page_n + 1, len(description)), description=description[page_n], color=Color.dark_blue())
+    embed = discord.Embed(title="Deax help (page %d/%d)" % (page_n + 1, len(description)), description=description[page_n], color=Color.dark_blue())
     message = await ctx.reply(embed=embed)
 
     if len(description) > 1:
