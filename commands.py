@@ -19,6 +19,7 @@ import wikipedia
 import fandom
 import requests
 import discord.utils 
+import requests
 from PIL import Image
 
 
@@ -58,6 +59,20 @@ async def e(ctx, *, args):
         
         image.save(filename)
         await ctx.reply(file=discord.File(filename))
+
+@bot.command()
+async def catrabbit(ctx):
+    if not ctx.message.attachments:
+        await ctx.reply("You need to attach an image!")
+    else:
+        image = ctx.message.attachments[0]
+        await image.save(image.filename)
+
+        file = {"file": open(image.filename ,"rb")}
+
+        resp = requests.post("https://cat-rabbit-doodle-classifier.annasvirtual.repl.co/predict", files=file)
+        await ctx.reply(resp.text)
+        os.remove(image.filename)
 
 
 @bot.command()
