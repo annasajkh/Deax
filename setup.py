@@ -51,6 +51,7 @@ from helper import *
 
 @bot.event
 async def on_message(message : discord.Message):
+    bot.edit(nick:"Im starring at your soul")
     try:
         if message.author == bot.user:
             return
