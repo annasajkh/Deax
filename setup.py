@@ -49,6 +49,7 @@ from apis import *
 from helper import *
 import random
 
+
 @bot.event
 async def on_message(message : discord.Message):
     try:
