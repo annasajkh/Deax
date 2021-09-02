@@ -94,4 +94,4 @@ async def response_talk(ctx, name, text, memory):
 
     memory.append(f"Bot: {result}")
 
-    await ctx.reply(result)
+    await ctx.reply("~" + result)

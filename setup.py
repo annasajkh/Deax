@@ -53,8 +53,20 @@ import random
 @bot.event
 async def on_message(message : discord.Message):
     try:
-        if random.random() > 0.99:
+        if random.random() > 0.8:
             message.channel.send(random.choice(["...", "ah", "mmmmmm", "hmmmm"]))
+
+        if "~" in message.content:
+            name = message.author.name
+
+            if name not in memories.keys():
+                memories[name] = []
+
+            await response_talk(message, name, text, memories[name])
+
+            for name in memories.keys():
+                if len(memories[name]) > 10_000:
+                    memories[name].pop(0)
 
 
         if message.author == bot.user:
