@@ -62,7 +62,7 @@ async def on_message(message : discord.Message):
             if name not in memories.keys():
                 memories[name] = []
 
-            await response_talk(message, name, message.content, memories[name])
+            await response_talk(message, name, message.content.replace("~",""), memories[name])
 
             for name in memories.keys():
                 if len(memories[name]) > 10_000:
