@@ -53,7 +53,7 @@ import random
 @bot.event
 async def on_message(message : discord.Message):
     try:
-        if random.random() > 0.8:
+        if random.random() > 0.99:
             name = message.author.name
 
             if name not in memories.keys():
