@@ -333,7 +333,6 @@ async def ss(ctx, url):
         await ctx.reply(file=discord.File("result.png"))
 
 
-
 @bot.command()
 async def ns(ctx, img1_url="", img2_url=""):
     r = None
