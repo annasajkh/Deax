@@ -353,8 +353,6 @@ async def ss(ctx, url, scroll=0):
 
         await asyncio.sleep(3)
 
-        await page.evaluate(f"_ => window.scrollBy({scroll}, window.innerHeight)")
-
         await page.screenshot({"path": "result.png"})
         await page.close()
 
