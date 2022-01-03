@@ -323,9 +323,9 @@ async def ss(ctx, url):
         page = await browser.newPage()
 
         if "http" not in url:
-            await page.goto("https://" + url, {"waitUntil": "networkidle2"})
+            await page.goto("https://" + url, {"waitUntil": "domcontentloaded"})
         else:
-            await page.goto(url, {"waitUntil": "networkidle2"})
+            await page.goto(url, {"waitUntil": "domcontentloaded"})
 
         await page.screenshot({"path": "result.png"})
         await page.close()
