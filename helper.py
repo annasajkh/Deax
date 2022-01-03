@@ -45,7 +45,7 @@ async def get_elemets(page):
 async def setup_browser():
     page = await browser.newPage()
     
-    await page.goto("https://bellard.org/textsynth/")
+    await page.goto("https://textsynth.com/playground.html")
 
     input_text, submit_button = await get_elemets(page)
 
