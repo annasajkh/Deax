@@ -83,13 +83,13 @@ you can also use a link
 generate text using https://bellard.org/textsynth/
 !tg <text>
 
-have a talk with the ai (disabled)
-!s <text>
+have a talk with the ai
+!c <text>
 
-delete ai memory talk about you so the ai will forget everything about you (disabled)
+delete ai memory talk about you so the ai will forget everything about you
 !forget
 
-see the bot memory of you (disabled)
+see the bot memory of you
 !mem
 
 
