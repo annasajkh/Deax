@@ -326,7 +326,9 @@ async def ss(ctx, url):
             await page.goto("https://" + url, {"waitUntil": "networkidle2"})
         else:
             await page.goto(url, {"waitUntil": "networkidle2"})
-        
+
+        await time.sleep(3)
+
         await page.screenshot({"path": "result.png"})
         await page.close()
 
