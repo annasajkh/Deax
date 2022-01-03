@@ -323,14 +323,15 @@ async def ss(ctx, url):
         page = await browser.newPage()
 
         if "http" not in url:
-            await page.goto("https://" + url, {"waitUntil": "domcontentloaded"})
+            await page.goto("https://" + url, {"waitUntil": "*"})
         else:
-            await page.goto(url, {"waitUntil": "domcontentloaded"})
+            await page.goto(url, {"waitUntil": "*"})
 
         await page.screenshot({"path": "result.png"})
         await page.close()
 
         await ctx.reply(file=discord.File("result.png"))
+
 
 
 @bot.command()
