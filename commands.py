@@ -25,6 +25,7 @@ from PIL import Image
 
 # By @tdxf20, ily annas!
 @bot.command()
+@ignore_errors
 async def e(ctx, *, args):
     if not ctx.message.attachments:
         await ctx.reply("You need to attach an image!")
@@ -61,6 +62,7 @@ async def e(ctx, *, args):
         await ctx.reply(file=discord.File(filename))
 
 @bot.command()
+@ignore_errors
 async def catrabbit(ctx):
     if not ctx.message.attachments:
         await ctx.reply("You need to attach an image!")
@@ -76,6 +78,7 @@ async def catrabbit(ctx):
 
 
 @bot.command()
+@ignore_errors
 async def h(ctx):#, which="_generic"):
     # NLINESPERPAGE = 20
     
@@ -116,12 +119,14 @@ async def h(ctx):#, which="_generic"):
     await ctx.reply(file=discord.File("help.txt"))
 
 @bot.command()
+@ignore_errors
 async def yt(ctx, *, text):
     link = "http://www.youtube.com" + YoutubeSearch(text, max_results=1).to_dict()[0]["url_suffix"]
     await ctx.reply(link)
 
 
 @bot.command()
+@ignore_errors
 async def fand(ctx, wiki, page):
     fandom.set_wiki(wiki)
     page = fandom.page(page)
@@ -140,6 +145,7 @@ async def fand(ctx, wiki, page):
 
 
 @bot.command()
+@ignore_errors
 async def wiki(ctx, *, text):
     page = wikipedia.page(text)
 
@@ -147,6 +153,7 @@ async def wiki(ctx, *, text):
 
 
 @bot.command()
+@ignore_errors
 async def uds(ctx, *, text):
     tts = gTTS(get_urban_def(text))
     tts.save("result.mp3")
@@ -157,12 +164,14 @@ async def uds(ctx, *, text):
 
 
 @bot.command()
+@ignore_errors
 async def aff(ctx):
     embed = discord.Embed(description=get_affirmation(), color=0xFFFF00)
     await ctx.reply(embed=embed)
 
 
 @bot.command()
+@ignore_errors
 async def ask(ctx, *, text):
     async with ctx.typing():
         text = f"""
@@ -179,12 +188,14 @@ A:
 
 
 @bot.command()
+@ignore_errors
 async def quo(ctx):
     embed = discord.Embed(description=get_quote(), color=Color.green())
     await ctx.reply(embed=embed)
 
 
 @bot.command()
+@ignore_errors
 async def tra(ctx, *args):
     args = list(args)
 
@@ -201,23 +212,27 @@ async def tra(ctx, *args):
 
 
 @bot.command()
+@ignore_errors
 async def trab(ctx):
     await send_chunked_embed("","",ctx,translator.translate(bot.previous_message).text, Color.blurple())
 
 
 @bot.command()
+@ignore_errors
 async def adv(ctx):
     embed = discord.Embed(description=get_advice(), color=Color.blue())
     await ctx.reply(embed=embed)
 
 
 @bot.command()
+@ignore_errors
 async def nf(ctx, num):
     embed = discord.Embed(description=get_number_fact(num), color=Color.gold())
     await ctx.reply(embed=embed)
 
 
 @bot.command(name="search")
+@ignore_errors
 async def _search(ctx, *, text):
     result = search(text, num_results=5)
     string_result = ""
@@ -231,6 +246,7 @@ async def _search(ctx, *, text):
     await ctx.reply(string_result)
 
 @bot.command(name="sss")
+@ignore_errors
 async def sss(ctx, *, text):
     result = search(text, num_results=1)
 
@@ -241,17 +257,20 @@ async def sss(ctx, *, text):
 
 
 @bot.command()
+@ignore_errors
 async def ud(ctx, *, text):
     await send_chunked_embed(text,"",ctx, get_urban_def(text), Color.orange())
 
 
 @bot.command()
+@ignore_errors
 async def udr(ctx):
     title, definition = get_rand_urban_def()
     await send_chunked_embed(title,"" , ctx, definition, Color.orange())
 
 
 @bot.command()
+@ignore_errors
 async def say(ctx, *args):
     args = list(args)
 
@@ -268,11 +287,13 @@ async def say(ctx, *args):
 
 
 @bot.command()
+@ignore_errors
 async def ri(ctx):
     await ctx.reply(requests.get("https://picsum.photos/500").url)
 
 
 @bot.command(name="def")
+@ignore_errors
 async def _def(ctx, *, text):
     text = text.title()
     title, definition = get_rand_urban_def()
@@ -295,6 +316,7 @@ async def _def(ctx, *, text):
 
 
 @bot.command()
+@ignore_errors
 async def meme(ctx):
     name, url = get_rand_meme()
 
@@ -306,6 +328,7 @@ async def meme(ctx):
 
 
 @bot.command()
+@ignore_errors
 async def sup(ctx):
     title, definition = get_rand_urban_def()
     def_list = definition.split(" ")
@@ -318,6 +341,7 @@ async def sup(ctx):
     await send_chunked_embed("","",ctx,str(message), Color.orange())
 
 @bot.command()
+@ignore_errors
 async def ss(ctx, url):
     async with ctx.typing():
         page = await browser.newPage()
@@ -337,6 +361,7 @@ async def ss(ctx, url):
 
 
 @bot.command()
+@ignore_errors
 async def ns(ctx, img1_url="", img2_url=""):
     r = None
     async with ctx.typing():
@@ -363,6 +388,7 @@ async def ns(ctx, img1_url="", img2_url=""):
 
 
 @bot.command()
+@ignore_errors
 async def nt(ctx, img_url=""):
     r = None
     async with ctx.typing():
@@ -387,6 +413,7 @@ async def nt(ctx, img_url=""):
     
 
 @bot.command(name="c")
+@ignore_errors
 async def _c(ctx, *, text):
     async with ctx.typing():
         name = ctx.author.name
@@ -402,6 +429,7 @@ async def _c(ctx, *, text):
 
 
 @bot.command()
+@ignore_errors
 async def forget(ctx):
     name = ctx.author.name
 
@@ -414,6 +442,7 @@ async def forget(ctx):
 
 
 @bot.command()
+@ignore_errors
 async def mem(ctx):
     name = ctx.author.name
 
@@ -425,6 +454,7 @@ async def mem(ctx):
 
 
 @bot.command()
+@ignore_errors
 async def tg(ctx, *, text):
     async with ctx.typing():
         result = await get_gpt(text, 10)
@@ -432,6 +462,7 @@ async def tg(ctx, *, text):
 
 
 @bot.command()
+@ignore_errors
 async def selever(ctx):
     embed = discord.Embed(color=Color.purple())
     embed.set_image(url="https://static.wikia.nocookie.net/fridaynightfunking/images/2/2f/SeleverAnim.gif")
@@ -440,6 +471,7 @@ async def selever(ctx):
 
 
 @bot.command()
+@ignore_errors
 async def niko(ctx):
     embed = discord.Embed(color=Color.orange())
     embed.set_image(url="https://media1.tenor.com/images/0e1c03b54935e214924ab40a8f945372/tenor.gif?itemid=17938358")
