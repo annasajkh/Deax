@@ -113,7 +113,7 @@ async def h(ctx):#, which="_generic"):
     #     asyncio.Task(wait_for_arrow(ctx.message.author, message, "\N{LEFTWARDS BLACK ARROW}", -1))
     #     asyncio.Task(wait_for_arrow(ctx.message.author, message, "\N{BLACK RIGHTWARDS ARROW}", 1))
 
-    ctx.send(file=discord.File("help.txt"))
+    await ctx.reply(file=discord.File("help.txt"))
 
 @bot.command()
 async def yt(ctx, *, text):
