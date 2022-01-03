@@ -64,5 +64,10 @@ async def on_message(message : discord.Message):
     except Exception as e:
         await message.channel.send(e)
     
-    # since we override on_message we have to call this
-    await bot.process_commands(message)
+    try:
+        # since we override on_message we have to call this
+        await bot.process_commands(message)
+
+    except Exception as e:
+        await message.channel.send(e)
+    
