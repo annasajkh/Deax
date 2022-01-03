@@ -175,6 +175,12 @@ async def aff(ctx):
 async def ask(ctx, *, text):
     async with ctx.typing():
         text = f"""
+Q: what is the meaning of life?
+A: you need to find it yourself
+
+Q: why the human cross the road?
+A: cause they can
+
 Q: {text}
 A: 
         """.strip()
