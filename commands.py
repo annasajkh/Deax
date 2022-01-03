@@ -247,13 +247,13 @@ async def _search(ctx, *, text):
 
 @bot.command(name="sss")
 @ignore_errors
-async def sss(ctx, *, text):
+async def sss(ctx, *, text, scroll=0):
     result = search(text, num_results=5)
 
     if not result:
         raise Exception("can't find it sorry")
 
-    await ss(ctx, result[0])
+    await ss(ctx, result[0], scroll)
 
 
 @bot.command()
@@ -342,7 +342,7 @@ async def sup(ctx):
 
 @bot.command()
 @ignore_errors
-async def ss(ctx, url):
+async def ss(ctx, url, scroll=0):
     async with ctx.typing():
         page = await browser.newPage()
 
@@ -352,6 +352,8 @@ async def ss(ctx, url):
             await page.goto(url, {"waitUntil": "networkidle2"})
 
         await asyncio.sleep(3)
+
+        await page.evaluate(f"_ => window.scrollBy({scroll}, window.innerHeight)")
 
         await page.screenshot({"path": "result.png"})
         await page.close()
