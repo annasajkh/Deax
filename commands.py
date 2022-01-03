@@ -82,19 +82,23 @@ async def h(ctx, which="_generic"):
     page_n = 0
     
     async def wait_for_arrow(user, message, emoji, page_delta):
-        nonlocal page_n, description
-        
-        await message.add_reaction(emoji)
-        while 1:
-            reaction, user = await bot.wait_for("reaction_add", check=lambda reaction, ruser: str(reaction.emoji) == emoji and reaction.message == message and ruser == user)
-            await reaction.remove(user)
-            page_n += page_delta
-            if page_n < 0:
-                page_n = 0
-            if page_n >= len(description):
-                page_n = len(description) - 1
-            await message.edit(embed=discord.Embed(title="Deax help (page %d/%d)" % (page_n + 1, len(description)), description=description[page_n], color=Color.dark_blue()))
-    
+        try:
+            nonlocal page_n, description
+            
+            await message.add_reaction(emoji)
+
+            while 1:
+                reaction, user = await bot.wait_for("reaction_add", check=lambda reaction, ruser: str(reaction.emoji) == emoji and reaction.message == message and ruser == user)
+                await reaction.remove(user)
+                page_n += page_delta
+                if page_n < 0:
+                    page_n = 0
+                if page_n >= len(description):
+                    page_n = len(description) - 1
+                await message.edit(embed=discord.Embed(title="Deax help (page %d/%d)" % (page_n + 1, len(description)), description=description[page_n], color=Color.dark_blue()))
+        except Exception as e:
+            ctx.reply(e)
+
     if which not in HELP_TOPICS:
         await send_chunked_embed("", "", ctx, "Unknown help topic %r" % (which.replace("@", "@."), ), Color.red())
         return
@@ -108,7 +112,6 @@ async def h(ctx, which="_generic"):
     if len(description) > 1:
         asyncio.Task(wait_for_arrow(ctx.message.author, message, "\N{LEFTWARDS BLACK ARROW}", -1))
         asyncio.Task(wait_for_arrow(ctx.message.author, message, "\N{BLACK RIGHTWARDS ARROW}", 1))
-
 
 @bot.command()
 async def yt(ctx, *, text):
