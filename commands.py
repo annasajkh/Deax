@@ -323,13 +323,13 @@ async def ss(ctx, url):
         page = await browser.newPage()
 
         if "http" not in url:
-            await page.goto("https://" + url, {"waitUntil": "networkidle0"})
+            await page.goto("https://" + url, {"waitUntil": "networkidle2"})
         else:
-            await page.goto(url, {"waitUntil": "networkidle0"})
+            await page.goto(url, {"waitUntil": "networkidle2"})
 
-        # await page.waitForNavigation({
-        #     waitUntil: "networkidle0"
-        # })
+        await page.waitForNavigation({
+            waitUntil: "networkidle0"
+        })
 
         await page.screenshot({"path": "result.png"})
         await page.close()
