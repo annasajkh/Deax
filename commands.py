@@ -185,7 +185,7 @@ Q: {text}
 A: 
         """.strip()
 
-        result = await get_gpt(text, 8)
+        result = await get_gpt(text, 3)
         result = result.replace(text, "")
         result = re.split(".*?:",result)[0].strip()
 
