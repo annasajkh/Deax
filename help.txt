@@ -92,6 +92,8 @@ delete ai memory talk about you so the ai will forget everything about you
 see the bot memory of you
 !mem
 
+visit the url and then screenshot it
+!url <url>
 
 
 
