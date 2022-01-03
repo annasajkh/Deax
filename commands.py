@@ -230,6 +230,15 @@ async def _search(ctx, *, text):
     
     await ctx.reply(string_result)
 
+@bot.command(name="sss")
+async def sss(ctx, *, text):
+    result = search(text, num_results=1)
+
+    if not result:
+        raise Exception("can't find it sorry")
+
+    await ss(ctx, result[0])
+
 
 @bot.command()
 async def ud(ctx, *, text):
@@ -309,7 +318,7 @@ async def sup(ctx):
     await send_chunked_embed("","",ctx,str(message), Color.orange())
 
 @bot.command()
-async def url(ctx, url):
+async def ss(ctx, url):
     async with ctx.typing():
         page = await browser.newPage()
 
@@ -317,6 +326,7 @@ async def url(ctx, url):
             await page.goto("https://" + url, {"waitUntil": "networkidle2"})
         else:
             await page.goto(url, {"waitUntil": "networkidle2"})
+        
         await page.screenshot({"path": "result.png"})
         await page.close()
 
