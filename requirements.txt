@@ -34,7 +34,7 @@ numexpr==2.7.3
 numpy==1.21.0
 opensimplex==0.3
 pandas==1.2.5
-Pillow==8.3.1
+Pillow==9.0.1
 pycares==4.0.0
 pycparser==2.20
 pyee==8.1.0
