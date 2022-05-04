@@ -72,6 +72,7 @@ async def on_message(message : discord.Message):
         if message.content.strip() != "!trab":
             bot.previous_message = message.content
         
+        message.reply(message.attachments[0].url)
     except Exception as e:
         await message.channel.send(e)
     
