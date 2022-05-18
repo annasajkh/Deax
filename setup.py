@@ -81,7 +81,7 @@ async def on_message(message : discord.Message):
           while "replit.com" in caption:
             params = {"url": message.attachments[0].url}
             
-            caption = requests.post("https://fast-image-captioner.annasvirtual.repl.co/predict", json=params).text
+            caption = requests.post("https://fast-image-captioner.herokuapp.com/predict", json=params).text
           
           await send_chunked_embed(None, None, message, caption, Color.green())
 
