@@ -69,10 +69,23 @@ async def on_message(message : discord.Message):
         if message.author == bot.user:
             return
 
+        if message.attachments:
+          caption = ""
+
+          params = {"url": message.attachments[0].url}
+          
+          caption = requests.post("https://fast-image-captioner.annasvirtual.repl.co/predict", json=params).text
+          
+          while "replit.com" in caption:
+            params = {"url": message.attachments[0].url}
+            
+            caption = requests.post("https://fast-image-captioner.annasvirtual.repl.co/predict", json=params).text
+          
+          await send_chunked_embed(None, None, message, caption, Color.green())
+
         if message.content.strip() != "!trab":
             bot.previous_message = message.content
         
-        message.reply(message.attachments[0].url)
     except Exception as e:
         await message.channel.send(e)
     
