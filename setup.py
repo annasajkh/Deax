@@ -76,7 +76,7 @@ async def on_message(message : discord.Message):
 
           params = {"url": message.attachments[0].url}
           
-          caption = requests.post("https://fast-image-captioner.annasvirtual.repl.co/predict", json=params).text
+          caption = requests.post("https://fast-image-captioner.herokuapp.com/predict", json=params).text
           
           while "replit.com" in caption:
             params = {"url": message.attachments[0].url}
@@ -88,8 +88,7 @@ async def on_message(message : discord.Message):
         if message.content.strip() != "!trab":
             bot.previous_message = message.content
         
+        await bot.process_commands(message)
     except Exception as e:
-        await message.channel.send(e)
-    
-    await bot.process_commands(message)
+        await send_chunked_embed("Error", None, message, str(e), Color.red())
     
