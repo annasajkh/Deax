@@ -69,8 +69,6 @@ async def on_message(message : discord.Message):
         if message.author == bot.user:
             return
 
-        print(message.content)
-
         if message.attachments:
           caption = ""
 
