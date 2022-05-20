@@ -27,11 +27,11 @@ captions = open("cc_captions.txt", "r").read().split("\n")
 
 encoded = None
 
-for batch in batching(captions, 10_000):
-  if encoded is None:
-    encoded = client.encode([Document(text=caption) for caption in batch], show_progress=True)
-  else:
-    encoded = encoded + client.encode([Document(text=caption) for caption in batch], show_progress=True)
+# for batch in batching(captions, 10_000):
+#   if encoded is None:
+#     encoded = client.encode([Document(text=caption) for caption in batch], show_progress=True)
+#   else:
+#     encoded = encoded + client.encode([Document(text=caption) for caption in batch], show_progress=True)
 
 del captions
 
