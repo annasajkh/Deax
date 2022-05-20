@@ -7,7 +7,32 @@ from discord import Color
 import discord
 import asyncio
 import traceback
+import os
+from os.path import exists 
+from clip_client import Client
+from docarray import Document
 
+def batching(iterable, n=1):
+    l = len(iterable)
+    for ndx in range(0, l, n):
+        yield iterable[ndx:min(ndx + n, l)]
+
+if not exists("cc_captions.txt"):
+  os.system("python -m wget https://raw.githubusercontent.com/annasajkh/30k-cc-captions/main/cc_captions.txt")
+
+
+client = Client("https://demo-cas.jina.ai:8443")
+captions = open("cc_captions.txt", "r").read().split("\n")
+
+encoded = None
+
+for batch in batching(captions, 10_000):
+  if encoded is None:
+    encoded = client.encode([Document(text=caption) for caption in batch], show_progress=True)
+  else:
+    encoded = encoded + client.encode([Document(text=caption) for caption in batch], show_progress=True)
+
+del captions
 
 
 #Setup all variables
@@ -70,11 +95,8 @@ async def on_message(message : discord.Message):
             return
 
         if message.attachments:
-          caption = ""
-
-          params = {"url": message.attachments[0].url}
-          
-          caption = requests.post("https://fast-image-captioner.herokuapp.com/predict", json=params).text
+          img = client.encode([message.attachments[0].url])
+          caption = random.choice(encoded.find(query=img, limit=3)[0].texts)
 
           await send_chunked_embed(None, None, message, caption, Color.green())
 
