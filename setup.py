@@ -96,7 +96,7 @@ async def on_message(message : discord.Message):
             return
 
         if message.attachments:
-          img = client.encode([message.attachments[0].url])
+          img = await client.aencode([message.attachments[0].url])
           caption = random.choice(encoded.find(query=img, limit=3)[0].texts)
 
           await send_chunked_embed(None, None, message, caption, Color.green())
