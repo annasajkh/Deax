@@ -19,7 +19,7 @@ def batching(iterable, n=1):
         yield iterable[ndx:min(ndx + n, l)]
 
 if not exists("cc_captions.txt"):
-  os.system("python -m wget https://raw.githubusercontent.com/annasajkh/30k-cc-captions/main/cc_captions.txt")
+  os.system("python3 -m wget https://raw.githubusercontent.com/annasajkh/30k-cc-captions/main/cc_captions.txt")
 
 
 client = Client("https://demo-cas.jina.ai:8443")
