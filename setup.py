@@ -26,7 +26,7 @@ if not exists("google-10000-english.txt"):
 
 
 client = Client("https://demo-cas.jina.ai:8443")
-captions = open("cc_captions.txt", "r").read().split("\n") + open("google-10000-english.txt","r").read().split("\n")[:5000]
+captions =  open("others.txt", "r").read().split("\n") + open("cc_captions.txt", "r").read().split("\n") + open("google-10000-english.txt","r").read().split("\n")[:1000]
 
 encoded = None
 
