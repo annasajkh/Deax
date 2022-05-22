@@ -95,12 +95,6 @@ async def on_message(message : discord.Message):
         if message.author == bot.user:
             return
 
-        if message.attachments:
-          img = await client.aencode([message.attachments[0].url])
-          caption = random.choice(encoded.find(query=img, limit=3)[0].texts)
-
-          await send_chunked_embed(None, None, message, caption, Color.green())
-
         if message.content.strip() != "!trab":
             bot.previous_message = message.content
         

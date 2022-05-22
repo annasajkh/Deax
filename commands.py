@@ -61,6 +61,18 @@ from PIL import Image
 #         image.save(filename)
 #         await ctx.reply(file=discord.File(filename))
 
+
+@bot.command()
+@ignore_errors
+async def desc(ctx):
+    if not ctx.message.attachments:
+        await ctx.reply("You need to attach an image!")
+    else:
+        img = await client.aencode([message.attachments[0].url])
+        caption = random.choice(encoded.find(query=img, limit=3)[0].texts)
+
+        await send_chunked_embed(None, None, message, caption, Color.green())
+
 @bot.command()
 @ignore_errors
 async def catrabbit(ctx):
