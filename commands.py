@@ -504,6 +504,14 @@ async def selever(ctx):
         
         await ctx.reply(embed=embed)
 
+@bot.command()
+@ignore_errors
+async def kapi(ctx):
+    async with ctx.typing():
+        embed = discord.Embed(color=Color.purple())
+        embed.set_image(url="https://static.wikia.nocookie.net/debatesjungle/images/5/53/KapiAnim.gif/revision/latest/scale-to-width-down/400?cb=20210425063519")
+        
+        await ctx.reply(embed=embed)
 
 @bot.command()
 @ignore_errors
