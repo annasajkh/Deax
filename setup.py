@@ -21,9 +21,12 @@ def batching(iterable, n=1):
 if not exists("cc_captions.txt"):
   os.system("python3 -m wget https://raw.githubusercontent.com/annasajkh/30k-cc-captions/main/cc_captions.txt")
 
+if not exists("google-10000-english.txt"):
+  os.system("python3 -m wget https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english.txt")
+
 
 client = Client("https://demo-cas.jina.ai:8443")
-captions = open("cc_captions.txt", "r").read().split("\n")
+captions = open("cc_captions.txt", "r").read().split("\n") + open("google-10000-english.txt","r").read().split("\n")[:5000]
 
 encoded = None
 
