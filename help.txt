@@ -6,7 +6,7 @@ SELEVER!!!!
 NIKOOOO!!!!
 !niko
 
-describe an image you need to attact the image
+describe an image you need to attach the image
 !desc [image]
 
 get random affirmation, this command uses Affirmations API
@@ -67,7 +67,7 @@ hidden suprize
 !sup
 
 change style of an image using Fast Style Transfer API from https://deepai.org/apis
-attact 2 images first one is the content and the seconds one is the style
+attach 2 images first one is the content and the seconds one is the style
 !ns 
 [image1]
 [image2]
@@ -76,7 +76,7 @@ you can also use a link
 !ns <link1> <link2>
 
 image to text using Neuro Talk API from https://deepai.org/apis
-attact one image to be process
+attach one image to be process
 !nt
 [image]
 
