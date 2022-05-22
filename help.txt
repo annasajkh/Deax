@@ -6,6 +6,9 @@ SELEVER!!!!
 NIKOOOO!!!!
 !niko
 
+describe an image you need to attact the image
+!desc [image]
+
 get random affirmation, this command uses Affirmations API
 !aff
 
@@ -73,7 +76,7 @@ you can also use a link
 !ns <link1> <link2>
 
 image to text using Neuro Talk API from https://deepai.org/apis
-attact one image to be process 
+attact one image to be process
 !nt
 [image]
 
