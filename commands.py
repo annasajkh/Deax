@@ -65,28 +65,30 @@ from PIL import Image
 @bot.command()
 @ignore_errors
 async def desc(ctx):
-    if not ctx.message.attachments:
-        await ctx.reply("You need to attach an image!")
-    else:
-        img = await client.aencode([message.attachments[0].url])
-        caption = random.choice(encoded.find(query=img, limit=3)[0].texts)
+    async with ctx.typing():
+        if not ctx.message.attachments:
+            await ctx.reply("You need to attach an image!")
+        else:
+            img = await client.aencode([message.attachments[0].url])
+            caption = random.choice(encoded.find(query=img, limit=3)[0].texts)
 
-        await send_chunked_embed(None, None, message, caption, Color.green())
+            await send_chunked_embed(None, None, message, caption, Color.green())
 
 @bot.command()
 @ignore_errors
 async def catrabbit(ctx):
-    if not ctx.message.attachments:
-        await ctx.reply("You need to attach an image!")
-    else:
-        image = ctx.message.attachments[0]
-        await image.save(image.filename)
+    async with ctx.typing():
+        if not ctx.message.attachments:
+            await ctx.reply("You need to attach an image!")
+        else:
+            image = ctx.message.attachments[0]
+            await image.save(image.filename)
 
-        file = {"file": open(image.filename ,"rb")}
+            file = {"file": open(image.filename ,"rb")}
 
-        resp = requests.post("https://cat-rabbit-doodle-classifier.annasvirtual.repl.co/predict", files=file)
-        await ctx.reply(resp.text)
-        os.remove(image.filename)
+            resp = requests.post("https://cat-rabbit-doodle-classifier.annasvirtual.repl.co/predict", files=file)
+            await ctx.reply(resp.text)
+            os.remove(image.filename)
 
 
 @bot.command()
@@ -127,59 +129,64 @@ async def h(ctx):#, which="_generic"):
     # if len(description) > 1:
     #     asyncio.Task(wait_for_arrow(ctx.message.author, message, "\N{LEFTWARDS BLACK ARROW}", -1))
     #     asyncio.Task(wait_for_arrow(ctx.message.author, message, "\N{BLACK RIGHTWARDS ARROW}", 1))
-
-    await ctx.reply(file=discord.File("help.txt"))
+    async with ctx.typing():
+        await ctx.reply(file=discord.File("help.txt"))
 
 @bot.command()
 @ignore_errors
 async def yt(ctx, *, text):
-    link = "http://www.youtube.com" + YoutubeSearch(text, max_results=1).to_dict()[0]["url_suffix"]
-    await ctx.reply(link)
+    async with ctx.typing():
+        link = "http://www.youtube.com" + YoutubeSearch(text, max_results=1).to_dict()[0]["url_suffix"]
+        await ctx.reply(link)
 
 
 @bot.command()
 @ignore_errors
 async def fand(ctx, wiki, page):
-    fandom.set_wiki(wiki)
-    page = fandom.page(page)
+    async with ctx.typing():
+        fandom.set_wiki(wiki)
+        page = fandom.page(page)
 
-    embed = discord.Embed()
-    embed.title = page.title
-    embed.description = page.summary
-    embed.color = Color.from_rgb(0, 214, 217)
+        embed = discord.Embed()
+        embed.title = page.title
+        embed.description = page.summary
+        embed.color = Color.from_rgb(0, 214, 217)
 
-    try:
-        embed.set_image(url=page.images[0])
-    except:
-        pass
+        try:
+            embed.set_image(url=page.images[0])
+        except:
+            pass
 
-    await ctx.send(embed=embed)
+        await ctx.send(embed=embed)
 
 
 @bot.command()
 @ignore_errors
 async def wiki(ctx, *, text):
-    page = wikipedia.page(text)
+    async with ctx.typing():
+        page = wikipedia.page(text)
 
-    await send_chunked_embed(page.title, "",ctx, page.summary, Color.gold())
+        await send_chunked_embed(page.title, "",ctx, page.summary, Color.gold())
 
 
 @bot.command()
 @ignore_errors
 async def uds(ctx, *, text):
-    tts = gTTS(get_urban_def(text))
-    tts.save("result.mp3")
+    async with ctx.typing():
+        tts = gTTS(get_urban_def(text))
+        tts.save("result.mp3")
 
-    await ctx.reply(file=discord.File("result.mp3"))
+        await ctx.reply(file=discord.File("result.mp3"))
 
-    os.remove("result.mp3")
+        os.remove("result.mp3")
 
 
 @bot.command()
 @ignore_errors
 async def aff(ctx):
-    embed = discord.Embed(description=get_affirmation(), color=0xFFFF00)
-    await ctx.reply(embed=embed)
+    async with ctx.typing():
+        embed = discord.Embed(description=get_affirmation(), color=0xFFFF00)
+        await ctx.reply(embed=embed)
 
 
 @bot.command()
@@ -202,155 +209,169 @@ A:
 @bot.command()
 @ignore_errors
 async def quo(ctx):
-    embed = discord.Embed(description=get_quote(), color=Color.green())
-    await ctx.reply(embed=embed)
+    async with ctx.typing():
+        embed = discord.Embed(description=get_quote(), color=Color.green())
+        await ctx.reply(embed=embed)
 
 
 @bot.command()
 @ignore_errors
 async def tra(ctx, *args):
-    args = list(args)
+    async with ctx.typing():
+        args = list(args)
 
-    lang = args.pop(0)
-    text = " ".join(args)
+        lang = args.pop(0)
+        text = " ".join(args)
 
-    try:
-        result = translator.translate(text,dest=lang)
-    except:
-        result = translator.translate(lang + " " + text,dest="en")
+        try:
+            result = translator.translate(text,dest=lang)
+        except:
+            result = translator.translate(lang + " " + text,dest="en")
 
-    await send_chunked_embed("","",ctx,result.text, Color.blurple())
+        await send_chunked_embed("","",ctx,result.text, Color.blurple())
 
 
 
 @bot.command()
 @ignore_errors
 async def trab(ctx):
-    await send_chunked_embed("","",ctx,translator.translate(bot.previous_message).text, Color.blurple())
+    async with ctx.typing():
+        await send_chunked_embed("","",ctx,translator.translate(bot.previous_message).text, Color.blurple())
 
 
 @bot.command()
 @ignore_errors
 async def adv(ctx):
-    embed = discord.Embed(description=get_advice(), color=Color.blue())
-    await ctx.reply(embed=embed)
+    async with ctx.typing():
+        embed = discord.Embed(description=get_advice(), color=Color.blue())
+        await ctx.reply(embed=embed)
 
 
 @bot.command()
 @ignore_errors
 async def nf(ctx, num):
-    embed = discord.Embed(description=get_number_fact(num), color=Color.gold())
-    await ctx.reply(embed=embed)
+    async with ctx.typing():
+        embed = discord.Embed(description=get_number_fact(num), color=Color.gold())
+        await ctx.reply(embed=embed)
 
 
 @bot.command(name="search")
 @ignore_errors
 async def _search(ctx, *, text):
-    result = search(text, num_results=5)
-    string_result = ""
+    async with ctx.typing():
+        result = search(text, num_results=5)
+        string_result = ""
 
-    if not result:
-        raise Exception("can't find it sorry")
+        if not result:
+            raise Exception("can't find it sorry")
 
-    for i in result:
-        string_result += i +'\n'
-    
-    await ctx.reply(string_result)
+        for i in result:
+            string_result += i +'\n'
+        
+        await ctx.reply(string_result)
 
 @bot.command(name="sss")
 @ignore_errors
 async def sss(ctx, *, text, scroll=0):
-    result = search(text, num_results=5)
+    async with ctx.typing():
+        result = search(text, num_results=5)
 
-    if not result:
-        raise Exception("can't find it sorry")
+        if not result:
+            raise Exception("can't find it sorry")
 
-    await ss(ctx, result[0], scroll)
+        await ss(ctx, result[0], scroll)
 
 
 @bot.command()
 @ignore_errors
 async def ud(ctx, *, text):
-    await send_chunked_embed(text,"",ctx, get_urban_def(text), Color.orange())
+    async with ctx.typing():
+        await send_chunked_embed(text,"",ctx, get_urban_def(text), Color.orange())
 
 
 @bot.command()
 @ignore_errors
 async def udr(ctx):
-    title, definition = get_rand_urban_def()
-    await send_chunked_embed(title,"" , ctx, definition, Color.orange())
+    async with ctx.typing():
+        title, definition = get_rand_urban_def()
+        await send_chunked_embed(title,"" , ctx, definition, Color.orange())
 
 
 @bot.command()
 @ignore_errors
 async def say(ctx, *args):
-    args = list(args)
+    async with ctx.typing():
+        args = list(args)
 
-    lang = args.pop(0)
-    text = " ".join(args)
-    
-    tts = gTTS(text, lang=lang)
-    tts.save("result.mp3")
+        lang = args.pop(0)
+        text = " ".join(args)
+        
+        tts = gTTS(text, lang=lang)
+        tts.save("result.mp3")
 
-    await ctx.reply(file=discord.File("result.mp3"))
+        await ctx.reply(file=discord.File("result.mp3"))
 
-    os.remove("result.mp3")
+        os.remove("result.mp3")
 
 
 
 @bot.command()
 @ignore_errors
 async def ri(ctx):
-    await ctx.reply(requests.get("https://picsum.photos/500").url)
+    async with ctx.typing():
+        await ctx.reply(requests.get("https://picsum.photos/500").url)
 
 
 @bot.command(name="def")
 @ignore_errors
 async def _def(ctx, *, text):
-    text = text.title()
-    title, definition = get_rand_urban_def()
-
-    while title not in definition:
+    async with ctx.typing():
+        text = text.title()
         title, definition = get_rand_urban_def()
 
-    definition = definition.replace('[','').replace(']','')
-    definition = replace_ignore_case(definition, title, text)
+        while title not in definition:
+            title, definition = get_rand_urban_def()
 
-    #thanks mert
-    if text[0] in ['A','I','U','E','O']:
-        definition = definition.replace('a' + text, 'an' + text)
-        definition = definition.replace('A' + text, 'An' + text)
-    else:
-        definition = definition.replace('an' + text, 'a' + text)
-        definition = definition.replace('An' + text, 'A' + text)
+        definition = definition.replace('[','').replace(']','')
+        definition = replace_ignore_case(definition, title, text)
 
-    await send_chunked_embed(text,"",ctx,definition, Color.orange())
+        #thanks mert
+        if text[0] in ['A','I','U','E','O']:
+            definition = definition.replace('a' + text, 'an' + text)
+            definition = definition.replace('A' + text, 'An' + text)
+        else:
+            definition = definition.replace('an' + text, 'a' + text)
+            definition = definition.replace('An' + text, 'A' + text)
+
+        await send_chunked_embed(text,"",ctx,definition, Color.orange())
 
 
 @bot.command()
 @ignore_errors
 async def meme(ctx):
-    name, url = get_rand_meme()
+    async with ctx.typing():
+        name, url = get_rand_meme()
 
-    embed = discord.Embed()
-    embed.title = name
-    embed.set_image(url=url)
+        embed = discord.Embed()
+        embed.title = name
+        embed.set_image(url=url)
 
-    await ctx.reply(embed=embed)
+        await ctx.reply(embed=embed)
 
 
 @bot.command()
 @ignore_errors
 async def sup(ctx):
-    title, definition = get_rand_urban_def()
-    def_list = definition.split(" ")
+    async with ctx.typing():
+        title, definition = get_rand_urban_def()
+        def_list = definition.split(" ")
 
-    message = ""
+        message = ""
 
-    for word in def_list:
-        message += f" || {word.strip()} || "
-    
-    await send_chunked_embed("","",ctx,str(message), Color.orange())
+        for word in def_list:
+            message += f" || {word.strip()} || "
+        
+        await send_chunked_embed("","",ctx,str(message), Color.orange())
 
 @bot.command()
 @ignore_errors
@@ -443,26 +464,28 @@ async def _c(ctx, *, text):
 @bot.command()
 @ignore_errors
 async def forget(ctx):
-    name = ctx.author.name
+    async with ctx.typing():
+        name = ctx.author.name
 
-    if name in memories.keys():
-        await ctx.reply("okay i will forget you " + name)
-        del memories[name]
-        
-    else:
-        await send_chunked_embed("", "", ctx, "you don't have any memory with the bot use !s to start talking", Color.red())
+        if name in memories.keys():
+            await ctx.reply("okay i will forget you " + name)
+            del memories[name]
+            
+        else:
+            await send_chunked_embed("", "", ctx, "you don't have any memory with the bot use !s to start talking", Color.red())
 
 
 @bot.command()
 @ignore_errors
 async def mem(ctx):
-    name = ctx.author.name
+    async with ctx.typing():
+        name = ctx.author.name
 
-    if name in memories.keys():
-        await send_chunked_embed(name + " Memory", "", ctx, "\n".join(memories[name]), Color.green())
-        
-    else:
-        await send_chunked_embed("", "", ctx, "you don't have any memory with the bot use !s to start talking", Color.red())
+        if name in memories.keys():
+            await send_chunked_embed(name + " Memory", "", ctx, "\n".join(memories[name]), Color.green())
+            
+        else:
+            await send_chunked_embed("", "", ctx, "you don't have any memory with the bot use !s to start talking", Color.red())
 
 
 @bot.command()
@@ -476,16 +499,18 @@ async def tg(ctx, *, text):
 @bot.command()
 @ignore_errors
 async def selever(ctx):
-    embed = discord.Embed(color=Color.purple())
-    embed.set_image(url="https://static.wikia.nocookie.net/fridaynightfunking/images/2/2f/SeleverAnim.gif")
-    
-    await ctx.reply(embed=embed)
+    async with ctx.typing():
+        embed = discord.Embed(color=Color.purple())
+        embed.set_image(url="https://static.wikia.nocookie.net/fridaynightfunking/images/2/2f/SeleverAnim.gif")
+        
+        await ctx.reply(embed=embed)
 
 
 @bot.command()
 @ignore_errors
 async def niko(ctx):
-    embed = discord.Embed(color=Color.orange())
-    embed.set_image(url="https://media1.tenor.com/images/0e1c03b54935e214924ab40a8f945372/tenor.gif?itemid=17938358")
-    
-    await ctx.reply(embed=embed)
+    async with ctx.typing():
+        embed = discord.Embed(color=Color.orange())
+        embed.set_image(url="https://media1.tenor.com/images/0e1c03b54935e214924ab40a8f945372/tenor.gif?itemid=17938358")
+        
+        await ctx.reply(embed=embed)
