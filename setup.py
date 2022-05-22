@@ -23,7 +23,7 @@ if not exists("cc_captions.txt"):
 
 
 client = Client("https://demo-cas.jina.ai:8443")
-captions =  open("others.txt", "r").read().split("\n") + open("cc_captions.txt", "r").read().split("\n")
+captions = open("others.txt", "r").read().split("\n") + open("cc_captions.txt", "r").read().split("\n")
 
 encoded = None
 
