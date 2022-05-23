@@ -273,7 +273,7 @@ async def _search(ctx, *, text):
 @bot.command(name="sss")
 @ignore_errors
 async def sss(ctx, *, text, scroll=0):
-    result = search(text, num_results=5)
+    result = list(search(text, num_results=5))
 
     if not result:
         raise Exception("can't find it sorry")

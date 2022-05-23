@@ -53,7 +53,7 @@ async def setup_browser():
 
 
 async def get_dialog_response(text, name):
-    text += "\nBot:"
+    text += "\nDeax:"
 
     print(text)
     print("-" * 20)
@@ -92,6 +92,6 @@ async def response_talk(ctx, name, text, memory):
     while result in "\n".join(memory):
         result = await get_dialog_response("\n".join(memory), name)
 
-    memory.append(f"Bot: {result}")
+    memory.append(f"Deax: {result}")
 
     await ctx.reply(result)
