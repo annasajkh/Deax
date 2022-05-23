@@ -265,20 +265,25 @@ async def _search(ctx, *, text):
         if not result:
             raise Exception("can't find it sorry")
 
-        for i in result:
-            string_result += i +'\n'
+        for link in result:
+            string_result += link +'\n'
         
         await ctx.reply(string_result)
 
 @bot.command(name="sss")
 @ignore_errors
 async def sss(ctx, *, text, scroll=0):
-    result = list(search(text, num_results=5))
+    result = search(text, num_results=5)
+
+    result_final = []
 
     if not result:
         raise Exception("can't find it sorry")
 
-    await ss(ctx, result[0], scroll)
+    for link in result:
+        result_final.append(i)
+
+    await ss(ctx, result_final[0], scroll)
 
 
 @bot.command()
