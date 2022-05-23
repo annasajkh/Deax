@@ -282,7 +282,7 @@ async def sss(ctx, *, text, scroll=0):
             raise Exception("can't find it sorry")
 
         for link in result:
-            result_final.append(i)
+            result_final.append(link)
 
         await ss(ctx, result_final[0], scroll)
 
