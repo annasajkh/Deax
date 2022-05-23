@@ -273,17 +273,18 @@ async def _search(ctx, *, text):
 @bot.command(name="sss")
 @ignore_errors
 async def sss(ctx, *, text, scroll=0):
-    result = search(text, num_results=5)
+    async with ctx.typing():
+        result = search(text, num_results=5)
 
-    result_final = []
+        result_final = []
 
-    if not result:
-        raise Exception("can't find it sorry")
+        if not result:
+            raise Exception("can't find it sorry")
 
-    for link in result:
-        result_final.append(i)
+        for link in result:
+            result_final.append(i)
 
-    await ss(ctx, result_final[0], scroll)
+        await ss(ctx, result_final[0], scroll)
 
 
 @bot.command()
