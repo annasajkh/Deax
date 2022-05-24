@@ -9,6 +9,9 @@ NIKOOOO!!!!
 !KAPI!!!!
 !kapi
 
+generate images from text using the lastest opensource AI hosted by jina ai
+!dalleflow <text>
+
 describe an image you need to attach the image
 !desc [image]
 

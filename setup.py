@@ -12,6 +12,7 @@ from os.path import exists
 from clip_client import Client
 from docarray import Document
 import random
+from docarray import Document
 
 def batching(iterable, n=1):
     l = len(iterable)
