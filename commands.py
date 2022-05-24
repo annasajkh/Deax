@@ -404,7 +404,7 @@ async def dalleflow(ctx, prompt):
         loop = asyncio.get_event_loop()
 
         await loop.run_in_executor(None, generate_dalleflow, prompt)
-        await ctx.reply(file=discord.File("result.png"))
+        await ctx.reply(file=discord.File("image.png"))
 
 
 @bot.command()
