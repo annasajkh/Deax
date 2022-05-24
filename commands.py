@@ -401,12 +401,10 @@ async def ss(ctx, url, scroll=0):
 @ignore_errors
 async def dalleflow(ctx, prompt):
     async with ctx.typing():
-        da = Document(text=prompt).post("grpc://dalle-flow.jina.ai:51005", parameters={"num_images": 4})
-        da = await client.arank(da)
-
-        da = da[0].post("grpc://dalle-flow.jina.ai:51005", parameters={"skip_rate": 0.6, "num_images": 4}, target_executor="diffusion").matches
-        da = da[0].post("grpc://dalle-flow.jina.ai:51005/upscale")
-        da.save_uri_to_file("result.png")
+        loop = asyncio.get_event_loop()
+        loop.set_default_executor(ProcessPoolExecutor())
+        
+        await loop.run_in_executor(None, generate_dalleflow, prompt)
 
         await ctx.reply(file=discord.File("result.png"))
 
