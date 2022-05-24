@@ -15,7 +15,6 @@ import random
 from docarray import Document
 import nest_asyncio
 nest_asyncio.apply()
-__import__('IPython').embed()
 
 def batching(iterable, n=1):
     l = len(iterable)
