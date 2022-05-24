@@ -88,10 +88,8 @@ def ignore_errors(f):
   return wrap
 
 def generate_dalleflow(prompt):
-    da = Document(text=prompt).post("grpc://dalle-flow.jina.ai:51005", parameters={"num_images": 8})
-    da = client.rank(da)
-    da = da[0].post("grpc://dalle-flow.jina.ai:51005", parameters={"skip_rate": 0.6, "num_images": 8}, target_executor="diffusion")
-    da = client.rank(da)
+    da = Document(text=prompt).post("grpc://dalle-flow.jina.ai:51005", parameters={"num_images": 8}).matches
+    da = da[0].post("grpc://dalle-flow.jina.ai:51005", parameters={"skip_rate": 0.6, "num_images": 8}, target_executor="diffusion").matches
     da = da[0].post("grpc://dalle-flow.jina.ai:51005/upscale")
     da.save_uri_to_file("result.png")
 
