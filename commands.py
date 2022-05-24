@@ -402,10 +402,8 @@ async def ss(ctx, url, scroll=0):
 async def dalleflow(ctx, prompt):
     async with ctx.typing():
         loop = asyncio.get_event_loop()
-        loop.set_default_executor(ProcessPoolExecutor())
-        
-        await loop.run_in_executor(None, generate_dalleflow, prompt)
 
+        await loop.run_in_executor(None, generate_dalleflow, prompt)
         await ctx.reply(file=discord.File("result.png"))
 
 

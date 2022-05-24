@@ -42,6 +42,7 @@ kiwisolver==1.4.2
 lz4==3.1.1
 matplotlib==3.5.2
 multidict==6.0.2
+nest-asyncio==1.5.5
 numexpr==2.8.1
 numpy==1.22.3
 opensimplex==0.4.2
