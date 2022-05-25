@@ -399,7 +399,7 @@ async def ss(ctx, url, scroll=0):
 
 @bot.command()
 @ignore_errors
-async def dalleflow(ctx, prompt):
+async def dalleflow(ctx, *, prompt):
     async with ctx.typing():
         loop = asyncio.get_event_loop()
 
