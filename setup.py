@@ -16,6 +16,7 @@ from docarray import Document
 import nest_asyncio
 nest_asyncio.apply()
 
+
 def batching(iterable, n=1):
     l = len(iterable)
     for ndx in range(0, l, n):
