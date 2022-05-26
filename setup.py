@@ -26,7 +26,7 @@ if not exists("cc_captions.txt"):
 
 
 client = Client("https://demo-cas.jina.ai:8443")
-captions = open("others.txt", "r").read().split("\n") + open("cc_captions.txt", "r").read().split("\n")
+captions = open("others.txt", "r").read().split("\n") + open("cc_captions.txt", "r").read().split("\n")[20_000]
 
 encoded = None
 
@@ -88,8 +88,8 @@ def ignore_errors(f):
   return wrap
 
 def generate_dalleflow(prompt):
-    da = Document(text=prompt).post("grpc://dalle-flow.jina.ai:51005", parameters={"num_images": 1}).matches
-    da = da[0].post("grpc://dalle-flow.jina.ai:51005", parameters={"skip_rate": 0.6, "num_images": 1}, target_executor="diffusion").matches
+    da = Document(text=prompt).post("grpc://dalle-flow.jina.ai:51005", parameters={"num_images": 4}).matches
+    da = da[0].post("grpc://dalle-flow.jina.ai:51005", parameters={"skip_rate": 0.6, "num_images": 4}, target_executor="diffusion").matches
     da = da[0].post("grpc://dalle-flow.jina.ai:51005/upscale")
     da.save_uri_to_file("image.png")
 
