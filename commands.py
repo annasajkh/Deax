@@ -406,6 +406,18 @@ async def dalleflow(ctx, *, prompt):
         await loop.run_in_executor(None, generate_dalleflow, prompt)
         await ctx.reply(file=discord.File("image.png"))
 
+@bot.command()
+@ignore_errors
+async def reimagine(ctx, *, prompt):
+    async with ctx.typing():
+        f not ctx.message.attachments:
+            await ctx.reply("You need to attach an image!")
+        else:
+            loop = asyncio.get_event_loop()
+
+            await loop.run_in_executor(None, reimagine, prompt, ctx.message.attachments[0].url)
+            await ctx.reply(file=discord.File("image.png"))
+
 
 @bot.command()
 @ignore_errors
