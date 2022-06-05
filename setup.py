@@ -96,7 +96,7 @@ def generate_dalleflow(prompt):
 
 
 def generate_reimagine(prompt, url):
-    da = Document(text=prompt, uri=url).post("grpc://dalle-flow.jina.ai:51005", parameters={"skip_rate": 0.6, "num_images": 1}, target_executor="diffusion")[0]
+    da = Document(text=prompt, uri=url).post("grpc://dalle-flow.jina.ai:51005", parameters={"skip_rate": 0.6, "num_images": 1}, target_executor="diffusion")
     da.save_uri_to_file("image.png")
 
 
