@@ -415,7 +415,7 @@ async def reimagine(ctx, *, prompt):
         else:
             loop = asyncio.get_event_loop()
 
-            await loop.run_in_executor(None, reimagine, prompt, ctx.message.attachments[0].url)
+            await loop.run_in_executor(None, generate_reimagine, prompt, ctx.message.attachments[0].url)
             await ctx.reply(file=discord.File("image.png"))
 
 
