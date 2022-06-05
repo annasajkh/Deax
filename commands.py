@@ -410,7 +410,7 @@ async def dalleflow(ctx, *, prompt):
 @ignore_errors
 async def reimagine(ctx, *, prompt):
     async with ctx.typing():
-        f not ctx.message.attachments:
+        if not ctx.message.attachments:
             await ctx.reply("You need to attach an image!")
         else:
             loop = asyncio.get_event_loop()
