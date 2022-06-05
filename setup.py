@@ -94,9 +94,8 @@ def generate_dalleflow(prompt):
     da = da[0].post("grpc://dalle-flow.jina.ai:51005/upscale")
     da.save_uri_to_file("image.png")
 
-
 def generate_reimagine(prompt, url):
-    da = Document(text=prompt, uri=url).post("grpc://dalle-flow.jina.ai:51005", parameters={"skip_rate": 0.6, "num_images": 1}, target_executor="diffusion")
+    da = Document(text=prompt, uri=url).post("grpc://dalle-flow.jina.ai:51005", parameters={"skip_rate": 0.6, "num_images": 1}, target_executor="diffusion").matches[0]
     da.save_uri_to_file("image.png")
 
 
