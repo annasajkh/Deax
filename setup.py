@@ -90,12 +90,12 @@ def ignore_errors(f):
 
 def generate_dalleflow(prompt):
     da = Document(text=prompt).post("grpc://dalle-flow.jina.ai:51005", parameters={"num_images": 1}).matches
-    da = da[0].post("grpc://dalle-flow.jina.ai:51005", parameters={"skip_rate": 0.6, "num_images": 1}, target_executor="diffusion").matches
+    da = da[0].post("grpc://dalle-flow.jina.ai:51005", parameters={"skip_rate": 0.8, "num_images": 1}, target_executor="diffusion").matches
     da = da[0].post("grpc://dalle-flow.jina.ai:51005/upscale")
     da.save_uri_to_file("image.png")
 
 def generate_reimagine(prompt, url):
-    da = Document(text=prompt, uri=url).post("grpc://dalle-flow.jina.ai:51005", parameters={"skip_rate": 0.5, "num_images": 1}, target_executor="diffusion").matches[0]
+    da = Document(text=prompt, uri=url).post("grpc://dalle-flow.jina.ai:51005", parameters={"skip_rate": 0.25, "num_images": 1}, target_executor="diffusion").matches[0]
     da.save_uri_to_file("image.png")
 
 
