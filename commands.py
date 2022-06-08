@@ -23,43 +23,43 @@ import requests
 from PIL import Image
 
 
-# # By @tdxf20, ily annas!
-# @bot.command()
-# @ignore_errors
-# async def e(ctx, *, args):
-#     if not ctx.message.attachments:
-#         await ctx.reply("You need to attach an image!")
+# By @tdxf20, ily annas!
+@bot.command()
+@ignore_errors
+async def e(ctx, *, args):
+    if not ctx.message.attachments:
+        await ctx.reply("You need to attach an image!")
 
-#     else:
-#         # Get the image
-#         image = ctx.message.attachments[0]
+    else:
+        # Get the image
+        image = ctx.message.attachments[0]
 
-#         # Get the image name for saving
-#         # Second part is getting the extension
-#         filename = "image." + image.filename.split('.')[-1]
+        # Get the image name for saving
+        # Second part is getting the extension
+        filename = "image." + image.filename.split('.')[-1]
 
-#         # Save the image
-#         await image.save(filename)
+        # Save the image
+        await image.save(filename)
 
-#         #
-#         # PIL and editing
-#         #
+        #
+        # PIL and editing
+        #
 
-#         # Open the image in PIL
-#         image = Image.open(filename)
+        # Open the image in PIL
+        image = Image.open(filename)
 
-#         # Multiple effects are separated with newlines
-#         for i in args.splitlines():
-#             i = i.strip().split('=')
+        # Multiple effects are separated with newlines
+        for i in args.splitlines():
+            i = i.strip().split('=')
 
-#             command = i[0]
-#             value = i[1]
+            command = i[0]
+            value = i[1]
 
-#             # Apply the effect and save
-#             image = image_edit.cmds.commands_list[command](value, image)
+            # Apply the effect and save
+            image = image_edit.cmds.commands_list[command](value, image)
         
-#         image.save(filename)
-#         await ctx.reply(file=discord.File(filename))
+        image.save(filename)
+        await ctx.reply(file=discord.File(filename))
 
 
 @bot.command()
