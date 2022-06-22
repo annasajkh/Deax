@@ -31,7 +31,7 @@ MarkupSafe==2.0.1
 memeapi==0.2.3
 multidict==5.1.0
 numexpr==2.7.3
-numpy==1.21.0
+numpy==1.22.0
 opensimplex==0.3
 pandas==1.2.5
 Pillow==8.3.1
