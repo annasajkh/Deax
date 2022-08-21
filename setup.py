@@ -89,7 +89,7 @@ def ignore_errors(f):
   return wrap
 
 def generate_dalleflow(prompt):
-    da = Document(text=prompt).post("grpc://dalle-flow.jina.ai:51005", parameters={"num_images": 1}).matches
+    da = Document(text=prompt).post("grpc://dalle-flow.dev.jina.ai", parameters={"num_images": 1}).matches
     da = da[0].post("grpc://dalle-flow.jina.ai:51005", parameters={"skip_rate": 0.8, "num_images": 1}, target_executor="diffusion").matches
     da = da[0].post("grpc://dalle-flow.jina.ai:51005/upscale")
     da.save_uri_to_file("image.png")
