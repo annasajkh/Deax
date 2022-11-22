@@ -48,7 +48,7 @@ numpy==1.22.3
 opensimplex==0.4.2
 packaging==21.3
 pathspec==0.9.0
-Pillow==9.1.1
+Pillow==9.3.0
 prometheus-client==0.14.1
 protobuf==3.20.1
 pycparser==2.21
